@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0b0e">
+  <meta name="description" content="HORDE — сервер Minecraft 1.20.1 в мире зомби-апокалипсиса. Оружие, разрушенные города, данжи, транспорт, PvP-арена и автоматические обновления.">
+  <meta property="og:title" content="HORDE — сервер зомби-апокалипсиса">
+  <meta property="og:description" content="Скачай лаунчер HORDE и выживи в мире, захваченном ордой.">
+  <meta property="og:image" content="https://deniswww127-lab.github.io/HORDE/assets/horde-hero-survivors.png">
+  <meta property="og:url" content="https://deniswww127-lab.github.io/HORDE/">
+  <meta property="og:type" content="website">
+  <title>HORDE — сервер зомби-апокалипсиса</title>
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="preload" as="image" href="assets/horde-hero-survivors.png" media="(min-width: 701px)">
+  <link rel="preload" as="image" href="assets/horde-hero-mobile.png" media="(max-width: 700px)">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="Основная навигация">
+      <a class="brand" href="#top" aria-label="HORDE — на главную">
+        <img src="assets/horde-avatar.png" alt="" width="42" height="42">
+        <span>HORDE</span>
+      </a>
+      <div class="nav-links">
+        <a href="#about">О сервере</a>
+        <a href="#world">Мир HORDE</a>
+        <a href="#start">Как начать</a>
+      </div>
+      <a class="nav-download" href="https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe">
+        <i data-lucide="download" aria-hidden="true"></i>
+        <span>Скачать</span>
+      </a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <p class="eyebrow">MINECRAFT 1.20.1 · FORGE</p>
+        <h1 id="hero-title">HORDE</h1>
+        <p class="hero-kicker">Сервер зомби-апокалипсиса</p>
+        <p class="hero-copy">Трое могут убежать. Выживет тот, кто найдёт оружие, укрепит базу и не останется один после заката.</p>
+        <div class="hero-actions">
+          <a class="download-button" href="https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe">
+            <i data-lucide="download" aria-hidden="true"></i>
+            <span>СКАЧАТЬ ЛАУНЧЕР</span>
+          </a>
+          <a class="secondary-button" href="#about">
+            <i data-lucide="crosshair" aria-hidden="true"></i>
+            <span>УЗНАТЬ О СЕРВЕРЕ</span>
+          </a>
+        </div>
+        <div class="hero-meta">
+          <button class="server-copy" type="button" data-copy-ip title="Скопировать адрес сервера">
+            <i data-lucide="server" aria-hidden="true"></i>
+            <span>213.152.43.80:25855</span>
+            <i data-lucide="copy" aria-hidden="true"></i>
+          </button>
+          <span class="auto-update"><i data-lucide="refresh-cw" aria-hidden="true"></i> Автообновление</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro-band" id="about">
+      <div class="section-shell intro-grid">
+        <div>
+          <p class="section-label">МИР ПОСЛЕ КАТАСТРОФЫ</p>
+          <h2>Здесь нет безопасных дорог</h2>
+        </div>
+        <p class="intro-copy">Исследуйте разрушенные города, больницы, лаборатории и военные объекты. Ищите патроны и лекарства, стройте защищённую базу, заводите транспорт и держитесь вместе, когда начинается ночная орда.</p>
+      </div>
+    </section>
+
+    <section class="features-section">
+      <div class="section-shell">
+        <div class="feature-grid">
+          <article class="feature">
+            <i data-lucide="crosshair" aria-hidden="true"></i>
+            <h3>Огнестрельное оружие</h3>
+            <p>Пистолеты, автоматы, дробовики, пулемёты, прицелы и десятки типов патронов.</p>
+          </article>
+          <article class="feature">
+            <i data-lucide="skull" aria-hidden="true"></i>
+            <h3>Орды и мутанты</h3>
+            <p>Военные, заражённые, учёные и редкие опасные виды зомби с разным поведением.</p>
+          </article>
+          <article class="feature">
+            <i data-lucide="building-2" aria-hidden="true"></i>
+            <h3>Постройки и данжи</h3>
+            <p>Развалины, школы, заводы, бункеры, лаборатории и лутаемые останки выживших.</p>
+          </article>
+          <article class="feature">
+            <i data-lucide="shield" aria-hidden="true"></i>
+            <h3>Базы и приваты</h3>
+            <p>Закрепляйте территорию, объединяйтесь с игроками и защищайте накопленные ресурсы.</p>
+          </article>
+          <article class="feature">
+            <i data-lucide="train-front" aria-hidden="true"></i>
+            <h3>Техника и механизмы</h3>
+            <p>Поезда, автомобили, мотоциклы, самолёты, вертолёты и механизмы Create.</p>
+          </article>
+          <article class="feature">
+            <i data-lucide="swords" aria-hidden="true"></i>
+            <h3>Отдельная PvP-арена</h3>
+            <p>PvP в обычном мире отключён. Для честного боя используйте команду <code>/arena</code>.</p>
+          </article>
+          <article class="feature">
+            <i data-lucide="mic" aria-hidden="true"></i>
+            <h3>Голосовой чат</h3>
+            <p>Слышимость зависит от расстояния. Договаривайтесь тихо — заражённые рядом.</p>
+          </article>
+          <article class="feature">
+            <i data-lucide="refresh-cw" aria-hidden="true"></i>
+            <h3>Автоматические обновления</h3>
+            <p>Лаунчер сам проверяет сборку, скачивает новые моды и удаляет устаревшие файлы.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="world-section" id="world">
+      <div class="section-shell">
+        <div class="section-heading">
+          <p class="section-label">ИСТОРИИ ВЫЖИВШИХ</p>
+          <h2>Каждый выход за стену — риск</h2>
+        </div>
+        <div class="scene-grid">
+          <figure class="scene-card">
+            <img src="assets/zombie-close.png" alt="Зомби в разрушенном городе HORDE" loading="lazy">
+            <figcaption><strong>Орда рядом</strong><span>Шум привлекает заражённых быстрее, чем вы успеете перезарядиться.</span></figcaption>
+          </figure>
+          <figure class="scene-card">
+            <img src="assets/knife-fight.png" alt="Выживший с ножом сражается с зомби" loading="lazy">
+            <figcaption><strong>Патроны заканчиваются</strong><span>Иногда между вами и заражённым остаётся только нож.</span></figcaption>
+          </figure>
+          <figure class="scene-card">
+            <img src="assets/lab-explore.png" alt="Игрок исследует заброшенную лабораторию" loading="lazy">
+            <figcaption><strong>Лаборатории хранят ответы</strong><span>И редкий лут, за которым придётся спуститься в темноту.</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="start-section" id="start">
+      <div class="section-shell">
+        <div class="section-heading">
+          <p class="section-label">ПЕРВЫЙ ЗАПУСК</p>
+          <h2>До входа в HORDE — три шага</h2>
+        </div>
+        <ol class="steps">
+          <li>
+            <span class="step-number">01</span>
+            <div><h3>Скачайте лаунчер</h3><p>Один EXE для Windows. Java и Forge отдельно устанавливать не нужно.</p></div>
+          </li>
+          <li>
+            <span class="step-number">02</span>
+            <div><h3>Введите ник</h3><p>Выберите PNG-скин при желании и запустите игру без лицензии или через официальный аккаунт.</p></div>
+          </li>
+          <li>
+            <span class="step-number">03</span>
+            <div><h3>Зарегистрируйтесь</h3><p>Используйте <code>/register пароль пароль</code>. При следующих входах — <code>/login пароль</code>.</p></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="download-section">
+      <div class="section-shell download-layout">
+        <div>
+          <p class="section-label">ГОТОВЫ ВЫЖИВАТЬ?</p>
+          <h2>Скачайте HORDE</h2>
+          <p>Лаунчер установит Minecraft 1.20.1, Forge, моды и русские ресурсы. Следующие обновления придут автоматически.</p>
+        </div>
+        <div class="download-panel">
+          <a class="download-button large" href="https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe">
+            <i data-lucide="download" aria-hidden="true"></i>
+            <span>СКАЧАТЬ HORDE.EXE</span>
+          </a>
+          <a class="vk-link" href="https://vk.com/hordeminecraft" target="_blank" rel="noopener noreferrer">
+            <i data-lucide="messages-square" aria-hidden="true"></i>
+            <span>Группа HORDE во ВКонтакте</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="section-shell footer-layout">
+      <div class="footer-brand"><img src="assets/horde-avatar.png" alt="" width="36" height="36"><strong>HORDE</strong></div>
+      <p>213.152.43.80:25855 · Minecraft Forge 1.20.1</p>
+      <p>© <span data-year></span> HORDE</p>
+    </div>
+  </footer>
+
+  <div class="copy-toast" role="status" aria-live="polite" data-copy-toast>IP сервера скопирован</div>
+</body>
+</html>
