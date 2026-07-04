@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "channel": "stable",
+  "published_at": "2026-07-04T04:47:43.756086+00:00",
+  "launcher": {
+    "version": "1.2.0",
+    "required": true,
+    "url": "https://hordeminecraft.ru/HORDE.exe",
+    "urls": [
+      "https://hordeminecraft.ru/HORDE.exe",
+      "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
+      "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
+    ],
+    "size": 20250204,
+    "sha256": "4395f94246d3472f31d20f6fa7e67128ddd3100a5bd6f8e6e2686a5269b90cdc"
+  },
+  "pack": {
+    "version": "4.6.1",
+    "required": true,
+    "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
+    "urls": [
+      "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
+      "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack.zip"
+    ],
+    "size": 268790750,
+    "sha256": "8a11d7868041009400641e5bdba98e59f327c73c69f13ab6e6b606caafb9f431"
+  }
+}
