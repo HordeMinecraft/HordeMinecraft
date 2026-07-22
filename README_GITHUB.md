@@ -9,9 +9,9 @@
 
 `https://hordeminecraft.ru/`
 
-Кнопка скачивания уже ведёт на:
+Кнопка скачивания уже ведёт на официальный релиз:
 
-`https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe`
+`https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe`
 
 После публикации добавьте в Яндекс Вебмастер файл:
 
