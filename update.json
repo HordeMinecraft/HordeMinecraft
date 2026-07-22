@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-07-12T18:56:04.858744+00:00",
+  "published_at": "2026-07-22T15:33:28.819190+00:00",
   "launcher": {
     "version": "1.2.2",
     "required": true,
@@ -14,14 +14,14 @@
     "sha256": "01099f60542b00e7edfd78be52d1010aaccab8576cc89e7afa101e828dfdeac3"
   },
   "pack": {
-    "version": "5.0.3",
+    "version": "5.0.4",
     "required": true,
     "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
     "urls": [
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack.zip"
     ],
-    "size": 318527612,
-    "sha256": "7c8200badbd5e53688e2593add2e46f2e363b1e21c50ebd6f5dcc9615a153d76"
+    "size": 321045244,
+    "sha256": "69a351a933934f592c1d9d0e72cbbb3ec78b88f839aef8d9b80c9478789b36b5"
   }
 }
