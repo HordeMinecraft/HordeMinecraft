@@ -1,0 +1,1 @@
+﻿Для сайта Horde-Lending загружать только update.json. HORDE.exe на сайт не грузим: он больше 25 MB. В update.json уже прописаны ссылки на GitHub Release для HORDE.exe и HORDE-pack.zip. Порядок: сначала обновить HORDE-pack.zip в GitHub Release minecraft, затем залить update.json на сайт последним.
