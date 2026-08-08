@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-07T23:16:39.673841+00:00",
+  "published_at": "2026-08-08T21:06:00.203802+00:00",
   "launcher": {
     "version": "1.2.4",
     "required": true,
@@ -14,14 +14,14 @@
     "sha256": "88890fcf17d814c44c7ff21e68834762c0626610b9b6a1ba15b961bddcf51e35"
   },
   "pack": {
-    "version": "5.0.8",
+    "version": "5.0.9",
     "required": true,
-    "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
+    "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.9.zip",
     "urls": [
-      "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
-      "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack.zip"
+      "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.9.zip",
+      "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack-5.0.9.zip"
     ],
-    "size": 327794836,
-    "sha256": "17697bc84638e94df13445c9e471d31fd958d5dfcf27ed0847ea55d23bdbf67d"
+    "size": 338999739,
+    "sha256": "0a4e009cbe488180c55bfc3d94e37b27eeb0c91ccc604c7493c9b4bc6308dcf5"
   }
 }
