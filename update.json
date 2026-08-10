@@ -1,20 +1,20 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-09T21:30:15.690767+00:00",
+  "published_at": "2026-08-10T00:52:00+00:00",
   "launcher": {
-    "version": "1.3.1",
+    "version": "1.3.2",
     "required": true,
     "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
     "urls": [
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 21063767,
-    "sha256": "09a72b0e538c27819f151222e82ca2ae030cd35628729ba404e54eb22d45452e"
+    "size": 20225586,
+    "sha256": "b6b6a42ae1fa7128ec39ff674e5c7949875db46947fae64c90cb28e3dcaf1f97"
   },
   "pack": {
-    "version": "5.0.13",
+    "version": "5.0.14",
     "required": true,
     "mode": "overlay",
     "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
@@ -22,8 +22,8 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack.zip"
     ],
-    "size": 11914866,
-    "sha256": "5ddadee1268d9da367697994cc82d162d521da038cfdd427253335a61d544c2b",
+    "size": 13199403,
+    "sha256": "29e4bee2c9b2a251314c196d0ddcab239b332fb05054c2ee81dbc0b349e88467",
     "base": {
       "version": "5.0.11",
       "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.11.zip",
