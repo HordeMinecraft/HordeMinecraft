@@ -35,6 +35,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  const community = document.querySelector(".nav-community");
+  const communityButton = document.querySelector(".nav-community-button");
+  communityButton?.addEventListener("click", () => {
+    const opened = community?.classList.toggle("open");
+    communityButton.setAttribute("aria-expanded", opened ? "true" : "false");
+  });
+  document.addEventListener("click", (event) => {
+    if (!community || community.contains(event.target)) return;
+    community.classList.remove("open");
+    communityButton?.setAttribute("aria-expanded", "false");
+  });
+
   const year = document.querySelector("[data-year]");
   if (year) year.textContent = String(new Date().getFullYear());
 });

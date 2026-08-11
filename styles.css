@@ -111,6 +111,107 @@ code {
   color: var(--cyan);
 }
 
+.nav-community {
+  position: relative;
+}
+
+.nav-community-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 38px;
+  padding: 0;
+  color: #c9cbd0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.nav-community-button svg {
+  width: 15px;
+  height: 15px;
+  color: var(--cyan);
+  transition: transform 160ms ease;
+}
+
+.nav-community:hover .nav-community-button,
+.nav-community:focus-within .nav-community-button {
+  color: var(--cyan);
+}
+
+.nav-community:hover .nav-community-button svg,
+.nav-community:focus-within .nav-community-button svg,
+.nav-community.open .nav-community-button svg {
+  transform: rotate(180deg);
+}
+
+.community-menu {
+  position: absolute;
+  top: calc(100% + 13px);
+  left: 50%;
+  width: 390px;
+  padding: 22px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -8px);
+  background: rgba(12, 13, 17, 0.98);
+  border: 1px solid #20232b;
+  border-radius: 10px;
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+  transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
+}
+
+.nav-community:hover .community-menu,
+.nav-community:focus-within .community-menu,
+.nav-community.open .community-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.community-tile {
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  color: #eff2f5;
+  background: #151720;
+  border: 1px solid #20232b;
+  border-radius: 6px;
+}
+
+.community-tile span {
+  width: 30px;
+  height: 30px;
+  display: inline-grid;
+  place-items: center;
+  color: #fff;
+  background: var(--red);
+  border-radius: 7px;
+  font-family: Consolas, monospace;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.community-tile:nth-child(1) span { background: #5865f2; }
+.community-tile:nth-child(2) span { background: #2688eb; }
+.community-tile:nth-child(3) span { background: var(--yellow); color: #111318; }
+.community-tile:nth-child(4) span { background: var(--cyan); color: #111318; }
+
+.community-tile:hover,
+.community-tile:focus-visible {
+  border-color: var(--cyan);
+  background: #1a1d27;
+  transform: translateY(-1px);
+}
+
 .nav-download,
 .download-button,
 .secondary-button {
@@ -342,6 +443,168 @@ h2 {
 .features-section {
   padding: 34px 0 90px;
   background: var(--bg-raised);
+}
+
+.launcher-showcase {
+  padding: 90px 0;
+  background:
+    radial-gradient(circle at 72% 20%, rgba(213, 31, 49, 0.18), transparent 34%),
+    linear-gradient(180deg, #090a0d 0%, #0c0d11 100%);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.launcher-showcase-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.78fr) minmax(520px, 1.22fr);
+  gap: 56px;
+  align-items: center;
+}
+
+.launcher-copy p:not(.section-label) {
+  max-width: 560px;
+  color: #c7c9ce;
+  font-size: 17px;
+}
+
+.launcher-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 22px;
+}
+
+.launcher-pills span {
+  padding: 9px 12px;
+  color: var(--cyan);
+  background: #111318;
+  border: 1px solid #30333a;
+  border-radius: 4px;
+  font-family: Consolas, monospace;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.launcher-mockup {
+  min-height: 390px;
+  display: grid;
+  grid-template-columns: 0.42fr 0.58fr;
+  overflow: hidden;
+  background: #06070a;
+  border: 1px solid #30333a;
+  border-radius: 8px;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.46);
+}
+
+.mockup-panel {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: rgba(8, 10, 14, 0.96);
+  border-right: 1px solid #30333a;
+}
+
+.mockup-panel strong {
+  font-size: 18px;
+}
+
+.mockup-panel span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.mock-input,
+.mock-row,
+.mock-status {
+  padding: 12px 13px;
+  color: #fff;
+  background: #17191f;
+  border: 1px solid #30333a;
+  border-radius: 4px;
+  font-family: Consolas, monospace;
+}
+
+.mock-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mock-row em {
+  color: var(--muted);
+  font-style: normal;
+  font-size: 12px;
+}
+
+.mock-status {
+  color: var(--cyan);
+  font-size: 12px;
+}
+
+.mock-play {
+  margin-top: auto;
+  min-height: 54px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--red);
+  border-radius: 4px;
+  font-weight: 900;
+}
+
+.mockup-scene {
+  position: relative;
+  padding: 34px;
+  display: flex;
+  align-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  background:
+    linear-gradient(90deg, rgba(5, 6, 9, 0.25), rgba(5, 6, 9, 0.02)),
+    url("assets/horde-hero-survivors.webp") center / cover;
+}
+
+.mockup-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 35%, rgba(4, 5, 8, 0.75));
+}
+
+.mockup-scene span,
+.mockup-scene strong,
+.mockup-scene small {
+  position: relative;
+  z-index: 1;
+}
+
+.mockup-scene span {
+  padding: 6px 10px;
+  background: rgba(7, 8, 10, 0.78);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.mockup-scene strong {
+  width: 100%;
+  margin-top: auto;
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: clamp(54px, 7vw, 90px);
+  line-height: 0.9;
+  text-shadow: 3px 3px 0 #07080a;
+}
+
+.mockup-scene small {
+  max-width: 360px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 900;
+  text-shadow: 2px 2px 0 #07080a;
 }
 
 .feature-grid {
@@ -1060,6 +1323,24 @@ footer {
 @media (max-width: 980px) {
   .nav-links {
     display: none;
+  }
+
+  .launcher-showcase-grid,
+  .launcher-mockup {
+    grid-template-columns: 1fr;
+  }
+
+  .launcher-mockup {
+    min-height: 0;
+  }
+
+  .mockup-panel {
+    border-right: 0;
+    border-bottom: 1px solid #30333a;
+  }
+
+  .mockup-scene {
+    min-height: 310px;
   }
 
   .feature-grid {

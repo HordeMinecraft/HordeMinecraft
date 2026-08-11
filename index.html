@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0a0b0e">
-    <meta name="description" content="Русский Minecraft сервер с модами: зомби-апокалипсис, оружие, данжи, танки, командные квесты, First Aid, аномалии и автообновление через лаунчер HORDE. Сборка 5.0.14.">
+    <meta name="description" content="Русский Minecraft сервер с модами: зомби-апокалипсис, оружие, данжи, танки, командные квесты, First Aid, sethome, аномалии и автообновление через лаунчер HORDE. Сборка 5.0.19.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta property="og:title" content="HORDE — сервер Minecraft с модами, лаунчером и зомби-апокалипсисом">
   <meta property="og:description" content="Русский сервер Minecraft Java 1.20.1: оружие, орды зомби, данжи, танки, рынок игроков, события и автоматические обновления через лаунчер HORDE.">
@@ -36,7 +36,7 @@
         "name": "HORDE Minecraft",
         "url": "https://hordeminecraft.ru/",
         "logo": "https://hordeminecraft.ru/assets/horde-avatar.png",
-        "sameAs": ["https://vk.com/hordeminecraft"]
+        "sameAs": ["https://vk.com/hordeminecraft", "https://discord.gg/TmmK8BR9YH"]
       },
       {
         "@type": "WebSite",
@@ -78,8 +78,8 @@
       {
         "@type": "NewsArticle",
         "@id": "https://hordeminecraft.ru/#update-5-0-12",
-        "headline": "Обновление HORDE 5.0.14: First Aid и совместимость TacZ",
-        "description": "Сборка HORDE 5.0.14 заменяет жажду на First Aid, добавляет TacZ FirstAid Compat и оставляет ванильный HUD сердец.",
+        "headline": "Обновление HORDE 5.0.19: новый лаунчер, sethome и баланс First Aid",
+        "description": "Сборка HORDE 5.0.19 обновляет дизайн лаунчера, добавляет /sethome и исправляет баланс First Aid против мутантов Infectious.",
         "datePublished": "2026-08-09",
         "dateModified": "2026-08-07",
         "inLanguage": "ru-RU",
@@ -147,6 +147,18 @@
         <a href="/launcher/">Лаунчер</a>
         <a href="/mods/">Моды</a>
         <a href="/zombie-apocalypse/">Зомби</a>
+        <div class="nav-community">
+          <button class="nav-community-button" type="button" aria-expanded="false">
+            <span>Сообщество</span>
+            <i data-lucide="chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="community-menu" aria-label="Ссылки сообщества">
+            <a class="community-tile" href="https://discord.gg/TmmK8BR9YH" target="_blank" rel="noopener noreferrer"><span>DS</span><strong>Discord</strong></a>
+            <a class="community-tile" href="https://vk.com/hordeminecraft" target="_blank" rel="noopener noreferrer"><span>VK</span><strong>ВКонтакте</strong></a>
+            <a class="community-tile" href="/updates/"><span>UP</span><strong>Обновления</strong></a>
+            <a class="community-tile" href="/guides/"><span>?</span><strong>Гайды</strong></a>
+          </div>
+        </div>
         <a href="/updates/">Обновления</a>
         <a href="#market">Рынок</a>
         <a href="#start">Как начать</a>
@@ -183,7 +195,7 @@
             <i data-lucide="copy" aria-hidden="true"></i>
           </button>
           <span class="auto-update"><i data-lucide="refresh-cw" aria-hidden="true"></i> Автообновление</span>
-          <span class="auto-update"><i data-lucide="package-check" aria-hidden="true"></i> Сборка 5.0.14</span>
+          <span class="auto-update"><i data-lucide="package-check" aria-hidden="true"></i> Сборка 5.0.19</span>
         </div>
       </div>
     </section>
@@ -195,6 +207,38 @@
           <h2>Сервер Minecraft с модами и настоящим выживанием</h2>
         </div>
         <p class="intro-copy">HORDE превращает Minecraft Java 1.20.1 в мир зомби-апокалипсиса. Исследуйте разрушенные города, больницы, лаборатории и военные объекты, добывайте патроны и лекарства, стройте защищённую базу и держитесь вместе во время ночной орды.</p>
+      </div>
+    </section>
+
+    <section class="launcher-showcase" id="launcher-design">
+      <div class="section-shell launcher-showcase-grid">
+        <div class="launcher-copy">
+          <p class="section-label">HORDE LAUNCHER</p>
+          <h2>Лаунчер как штаб выжившего</h2>
+          <p>Без регистрации и лишних аккаунтов: ник, память, скин, проверка обновлений и запуск в одном окне. Справа — атмосферные кадры сервера, слева — всё управление сборкой.</p>
+          <div class="launcher-pills">
+            <span>Автообновление</span>
+            <span>Discord и VK</span>
+            <span>Выбор RAM</span>
+            <span>Скин игрока</span>
+          </div>
+        </div>
+        <div class="launcher-mockup" aria-label="Макет лаунчера HORDE">
+          <div class="mockup-panel">
+            <strong>ЦЕНТР УПРАВЛЕНИЯ</strong>
+            <span>Ник игрока</span>
+            <div class="mock-input">Survivor</div>
+            <span>Память для игры</span>
+            <div class="mock-row"><b>8 ГБ</b><em>рекомендуется</em></div>
+            <div class="mock-status">● Сборка актуальна · 5.0.19</div>
+            <div class="mock-play">ИГРАТЬ ПО НИКУ</div>
+          </div>
+          <div class="mockup-scene">
+            <span>ВЫЖИВАНИЕ</span><span>ОРДЫ</span><span>КВЕСТЫ</span>
+            <strong>HORDE</strong>
+            <small>ВЫЖИВИ. УКРЕПИСЬ. ПЕРЕЖИВИ НОЧЬ.</small>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -248,9 +292,9 @@
     <section class="updates-section" id="updates">
       <div class="section-shell updates-layout">
         <div class="section-heading">
-          <p class="section-label">ОБНОВЛЕНИЕ 5.0.14 ДОСТУПНО · 10 АВГУСТА 2026</p>
-          <h2>Новый лаунчер HORDE и удобные рецепты</h2>
-          <p class="updates-lead">Лаунчер получил единый дизайн с сайтом, отдельную ручную проверку обновлений и ссылку на Discord. Polymorph помогает выбирать нужный результат конфликтующего рецепта, а Configured упрощает безопасную настройку модов.</p>
+          <p class="section-label">ОБНОВЛЕНИЕ 5.0.19 ДОСТУПНО · 11 АВГУСТА 2026</p>
+          <h2>Новый лаунчер HORDE, sethome и баланс выживания</h2>
+          <p class="updates-lead">Лаунчер получил более удобную панель управления, меняющиеся атмосферные кадры и спокойный перезапуск после самообновления. В сборке появился /sethome, а First Aid настроен так, чтобы броня снова спасала от мутантов Infectious.</p>
         </div>
         <div class="updates-grid">
           <article class="update-card update-card-main">
