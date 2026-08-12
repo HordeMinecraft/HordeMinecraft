@@ -11,7 +11,7 @@
 
 Кнопка скачивания уже ведёт на официальный релиз:
 
-`https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe`
+`https://hordeminecraft.ru/HORDE.exe`
 
 После публикации добавьте в Яндекс Вебмастер файл:
 
