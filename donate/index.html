@@ -28,10 +28,10 @@
           <div class="breadcrumbs"><a href="/">Главная</a><span>/</span><span>Донат</span></div>
           <p class="eyebrow">HORDE SUPPORT · TECH PREVIEW</p>
           <h1>Поддержка штаба HORDE</h1>
-          <p class="page-lead">Донат будет работать по нику игрока: без регистрации на сайте и без лишнего входа. Сейчас открыта только тестовая PRO-оплата за 1 ₽ через DonationAlerts, чтобы проверить цепочку до серверной выдачи.</p>
+          <p class="page-lead">Донат работает по нику игрока: без регистрации на сайте и без лишнего входа. Сейчас открыта только тестовая PRO-оплата за 1 ₽ через DonationAlerts, чтобы проверить цепочку до автоматической серверной выдачи.</p>
           <div class="donate-status" role="note">
             <i data-lucide="construction" aria-hidden="true"></i>
-            <span>Технический режим: активна только тестовая подписка PRO за 1 ₽. Боевые тарифы пока выключены.</span>
+            <span>Технический режим: активна только тестовая подписка PRO за 1 ₽. Серверная авто-выдача подключена в тестовом режиме, боевые тарифы пока выключены.</span>
           </div>
         </div>
         <aside class="donate-console" aria-label="Тестовая оплата DonationAlerts">
@@ -119,8 +119,8 @@
           <div class="donate-steps">
             <div><span>01</span><p>Игрок вводит свой точный ник Minecraft.</p></div>
             <div><span>02</span><p>На время теста выбирает только PRO TEST за 1 ₽.</p></div>
-            <div><span>03</span><p>Оплата уходит через DonationAlerts, а обработчик сверяет сумму и сообщение.</p></div>
-            <div><span>04</span><p>После успешного теста включим боевые тарифы и выдачу LuckPerms-группы на 30 дней.</p></div>
+            <div><span>03</span><p>Оплата уходит через DonationAlerts, а серверный обработчик сверяет сумму, ник и сообщение.</p></div>
+            <div><span>04</span><p>В тесте сервер выдаёт временную группу LuckPerms. После проверки включим боевые тарифы на 30 дней.</p></div>
           </div>
         </div>
         <aside class="fairplay-card">
@@ -144,7 +144,7 @@
           <article class="content-card"><h3>1. Финальный список бонусов</h3><p>Нужно утвердить предметы, SoulBound-экипировку, ресурсы и лимиты китов, чтобы не было дюпа и pay-to-win.</p></article>
           <article class="content-card"><h3>2. Персональные предметы</h3><p>Ценные вещи из донат-китов должны быть <code>SoulBound + OwnerBound</code>: привязаны к владельцу по нику/UUID. Другой игрок не сможет подобрать их, забрать из сундука или использовать как свою экипировку.</p></article>
           <article class="content-card"><h3>3. Выдача на сервере</h3><p>Тарифы привязываются к LuckPerms-группам <code>donate_pro</code>, <code>donate_elite</code>, <code>donate_prime</code> и <code>donate_emperor</code>. Кит выдаётся один раз за активный месяц.</p></article>
-          <article class="content-card"><h3>4. DonationAlerts</h3><p>Открыта только тестовая кнопка PRO за 1 ₽. Боевые тарифы останутся выключены, пока не проверим DonationAlerts → сервер → LuckPerms.</p></article>
+          <article class="content-card"><h3>4. DonationAlerts</h3><p>Открыта только тестовая кнопка PRO за 1 ₽. Серверная часть уже подключена: она проверяет последние оплаты и выдаёт тестовую LuckPerms-группу автоматически.</p></article>
         </div>
       </div>
     </section>
