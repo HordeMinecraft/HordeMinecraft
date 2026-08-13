@@ -37,13 +37,18 @@
         <aside class="donate-console" aria-label="Тестовая оплата DonationAlerts">
           <div class="console-head"><span></span><strong>DONATE TERMINAL</strong><em>test</em></div>
           <label for="donate-nick">Ник игрока</label>
-          <input id="donate-nick" type="text" value="" placeholder="Введите ник Minecraft" aria-describedby="donate-help" disabled>
-          <p id="donate-help">В DonationAlerts укажи сумму <code>1 ₽</code> и сообщение: <code>HORDETEST Ник PRO</code>. Например: <code>HORDETEST Weaketot PRO</code>.</p>
+          <input id="donate-nick" type="text" value="" placeholder="Введите ник Minecraft" aria-describedby="donate-help" maxlength="16" autocomplete="nickname" data-donate-nick>
+          <p id="donate-help">Введи ник — сайт соберёт точное сообщение для DonationAlerts.</p>
+          <div class="donate-message-box" aria-live="polite">
+            <span>Сообщение для оплаты</span>
+            <button type="button" data-copy-donate-message><code data-donate-message>HORDETEST Ник PRO</code></button>
+          </div>
+          <p class="donate-hint" data-donate-hint>В DonationAlerts укажи сумму <code>1 ₽</code> и вставь это сообщение.</p>
           <div class="console-summary">
             <span>Статус</span>
             <strong>PRO TEST · 1 ₽</strong>
           </div>
-          <a class="donate-active" href="https://www.donationalerts.com/r/TechnoDean" target="_blank" rel="noopener">Открыть DonationAlerts</a>
+          <a class="donate-active" href="https://www.donationalerts.com/r/TechnoDean" target="_blank" rel="noopener" data-donate-link>Открыть DonationAlerts</a>
         </aside>
       </div>
     </section>

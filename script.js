@@ -49,4 +49,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const year = document.querySelector("[data-year]");
   if (year) year.textContent = String(new Date().getFullYear());
+
+  const donateNick = document.querySelector("[data-donate-nick]");
+  const donateMessage = document.querySelector("[data-donate-message]");
+  const donateCopyButton = document.querySelector("[data-copy-donate-message]");
+  const donateHint = document.querySelector("[data-donate-hint]");
+  const donateLink = document.querySelector("[data-donate-link]");
+  const buildDonateMessage = () => {
+    if (!donateNick || !donateMessage) return "";
+    const cleanNick = donateNick.value.replace(/[^A-Za-z0-9_]/g, "").slice(0, 16);
+    if (donateNick.value !== cleanNick) donateNick.value = cleanNick;
+    const message = cleanNick.length >= 3 ? `HORDETEST ${cleanNick} PRO` : "HORDETEST Ник PRO";
+    donateMessage.textContent = message;
+    if (donateHint) {
+      donateHint.innerHTML = cleanNick.length >= 3
+        ? `В DonationAlerts укажи сумму <code>1 ₽</code> и вставь сообщение <code>${message}</code>.`
+        : "Введите ник от 3 до 16 символов: латиница, цифры и _.";
+    }
+    donateLink?.classList.toggle("disabled", cleanNick.length < 3);
+    donateLink?.setAttribute("aria-disabled", cleanNick.length < 3 ? "true" : "false");
+    return message;
+  };
+  donateNick?.addEventListener("input", buildDonateMessage);
+  donateCopyButton?.addEventListener("click", async () => {
+    const message = buildDonateMessage();
+    if (!message || message.includes("Ник")) return;
+    try {
+      if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(message);
+      else fallbackCopy(message);
+      if (donateHint) donateHint.innerHTML = `Скопировано: <code>${message}</code>. Теперь вставь это в сообщение DonationAlerts.`;
+    } catch {
+      fallbackCopy(message);
+      if (donateHint) donateHint.innerHTML = `Скопировано: <code>${message}</code>. Теперь вставь это в сообщение DonationAlerts.`;
+    }
+  });
+  donateLink?.addEventListener("click", (event) => {
+    const message = buildDonateMessage();
+    if (!message || message.includes("Ник")) {
+      event.preventDefault();
+      donateNick?.focus();
+    }
+  });
+  buildDonateMessage();
 });
