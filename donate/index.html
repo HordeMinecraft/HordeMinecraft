@@ -28,22 +28,22 @@
           <div class="breadcrumbs"><a href="/">Главная</a><span>/</span><span>Донат</span></div>
           <p class="eyebrow">HORDE SUPPORT · TECH PREVIEW</p>
           <h1>Поддержка штаба HORDE</h1>
-          <p class="page-lead">Донат будет работать по нику игрока: без регистрации на сайте и без лишнего входа. Деньги планируем принимать через DonationAlerts, а сервер будет выдавать месячную привилегию, отдельный префикс и одноразовый кит.</p>
+          <p class="page-lead">Донат будет работать по нику игрока: без регистрации на сайте и без лишнего входа. Сейчас открыта только тестовая PRO-оплата за 1 ₽ через DonationAlerts, чтобы проверить цепочку до серверной выдачи.</p>
           <div class="donate-status" role="note">
             <i data-lucide="construction" aria-hidden="true"></i>
-            <span>Технический режим: оплата пока не подключена, выдача привилегий и китов тестируется.</span>
+            <span>Технический режим: активна только тестовая подписка PRO за 1 ₽. Боевые тарифы пока выключены.</span>
           </div>
         </div>
-        <aside class="donate-console" aria-label="Форма доната в разработке">
-          <div class="console-head"><span></span><strong>DONATE TERMINAL</strong><em>offline</em></div>
+        <aside class="donate-console" aria-label="Тестовая оплата DonationAlerts">
+          <div class="console-head"><span></span><strong>DONATE TERMINAL</strong><em>test</em></div>
           <label for="donate-nick">Ник игрока</label>
           <input id="donate-nick" type="text" value="" placeholder="Введите ник Minecraft" aria-describedby="donate-help" disabled>
-          <p id="donate-help">Позже сюда будет вводиться ник, на который сервер выдаст месячную привилегию.</p>
+          <p id="donate-help">В DonationAlerts укажи сообщение: <code>HORDETEST Ник PRO</code>. Например: <code>HORDETEST Weaketot PRO</code>.</p>
           <div class="console-summary">
             <span>Статус</span>
-            <strong>В разработке</strong>
+            <strong>PRO TEST · 1 ₽</strong>
           </div>
-          <button class="donate-disabled" disabled>Оплата скоро</button>
+          <a class="donate-active" href="https://www.donationalerts.com/r/TechnoDean" target="_blank" rel="noopener">Открыть DonationAlerts</a>
         </aside>
       </div>
     </section>
@@ -52,18 +52,19 @@
       <div class="section-shell">
         <p class="section-label">ТАРИФЫ · ЧЕРНОВИК БАЛАНСА</p>
         <h2>Привилегии без продажи победы</h2>
-        <p class="donate-intro">Мы не хотим превращать зомби-апокалипсис в магазин имбы. Поэтому донат должен давать статус, удобство, косметику и приятные одноразовые наборы поддержки, но не бесконечные ресурсы, топовое оружие или преимущество, которое ломает выживание. Каждая привилегия рассчитана на 30 дней.</p>
+        <p class="donate-intro">Мы не хотим превращать зомби-апокалипсис в магазин имбы. Поэтому донат должен давать статус, удобство, косметику и приятные одноразовые наборы поддержки, но не бесконечные ресурсы, топовое оружие или преимущество, которое ломает выживание. Каждая боевая привилегия рассчитана на 30 дней; сейчас для проверки активен только тест PRO за 1 ₽.</p>
         <div class="donate-grid">
           <article class="donate-tier">
-            <div class="tier-top"><span class="tier-badge pro">PRO</span><strong>150 ₽</strong></div>
-            <h3>Сталкерская метка</h3>
-            <p>Первый уровень поддержки для игроков, которые хотят помочь серверу и получить аккуратный статус.</p>
+            <div class="tier-top"><span class="tier-badge pro">PRO TEST</span><strong>1 ₽</strong></div>
+            <h3>Тестовая метка</h3>
+            <p>Временная подписка для проверки DonationAlerts и серверной выдачи. После теста вернём боевую цену PRO — 150 ₽.</p>
             <ul>
-              <li>Префикс <code>[PRO]</code> в чате.</li>
-              <li>Цвет ника в спокойной зелёной гамме.</li>
-              <li>Группа <code>donate_pro</code> на 30 дней.</li>
-              <li>Одноразовый месячный кит: лёгкая одежда SoulBound, аптечки, еда и немного ресурсов.</li>
+              <li>Тестовая проверка тарифа <code>[PRO]</code>.</li>
+              <li>Сумма в DonationAlerts: <code>1 ₽</code>.</li>
+              <li>Сообщение: <code>HORDETEST Ник PRO</code>.</li>
+              <li>На тесте кит не выдаётся, чтобы не было дюпа.</li>
             </ul>
+            <a class="tier-action" href="https://www.donationalerts.com/r/TechnoDean" target="_blank" rel="noopener">Тест PRO за 1 ₽</a>
           </article>
           <article class="donate-tier">
             <div class="tier-top"><span class="tier-badge elite">ELITE</span><strong>250 ₽</strong></div>
@@ -75,6 +76,7 @@
               <li>Группа <code>donate_elite</code> на 30 дней.</li>
               <li>Одноразовый кит: комплект выжившего SoulBound, медикаменты, патроны и полезный сундук.</li>
             </ul>
+            <span class="tier-action tier-action-disabled">Скоро</span>
           </article>
           <article class="donate-tier featured">
             <div class="tier-top"><span class="tier-badge prime">PRIME</span><strong>380 ₽</strong></div>
@@ -86,6 +88,7 @@
               <li>Группа <code>donate_prime</code> на 30 дней.</li>
               <li>Одноразовый кит: броня/одежда SoulBound, умеренное TacZ-снаряжение и ресурсы без фарма экономики.</li>
             </ul>
+            <span class="tier-action tier-action-disabled">Скоро</span>
           </article>
           <article class="donate-tier emperor">
             <div class="tier-top"><span class="tier-badge emperor">EMPEROR</span><strong>700 ₽</strong></div>
@@ -97,6 +100,7 @@
               <li>Группа <code>donate_emperor</code> на 30 дней.</li>
               <li>Одноразовый кит спонсора: редкая экипировка SoulBound, контейнер и коллекционный предмет без PvP-имбаланса.</li>
             </ul>
+            <span class="tier-action tier-action-disabled">Скоро</span>
           </article>
         </div>
       </div>
@@ -109,9 +113,9 @@
           <h2>Оплата по нику, выдача через сервер</h2>
           <div class="donate-steps">
             <div><span>01</span><p>Игрок вводит свой точный ник Minecraft.</p></div>
-            <div><span>02</span><p>Выбирает тариф: PRO, ELITE, PRIME или EMPEROR.</p></div>
+            <div><span>02</span><p>На время теста выбирает только PRO TEST за 1 ₽.</p></div>
             <div><span>03</span><p>Оплата уходит через DonationAlerts, а обработчик сверяет сумму и сообщение.</p></div>
-            <div><span>04</span><p>Сервер выдаёт LuckPerms-группу на 30 дней и ставит метку, что кит месяца уже получен.</p></div>
+            <div><span>04</span><p>После успешного теста включим боевые тарифы и выдачу LuckPerms-группы на 30 дней.</p></div>
           </div>
         </div>
         <aside class="fairplay-card">
@@ -133,8 +137,9 @@
         <h2>Что ещё нужно перед включением оплаты</h2>
         <div class="content-grid">
           <article class="content-card"><h3>1. Финальный список бонусов</h3><p>Нужно утвердить предметы, SoulBound-экипировку, ресурсы и лимиты китов, чтобы не было дюпа и pay-to-win.</p></article>
-          <article class="content-card"><h3>2. Выдача на сервере</h3><p>Тарифы привязываются к LuckPerms-группам <code>donate_pro</code>, <code>donate_elite</code>, <code>donate_prime</code> и <code>donate_emperor</code>. Кит выдаётся один раз за активный месяц.</p></article>
-          <article class="content-card"><h3>3. DonationAlerts</h3><p>После подключения DonationAlerts кнопка оплаты станет активной. До этого страница не принимает деньги и ничего не продаёт.</p></article>
+          <article class="content-card"><h3>2. Персональные предметы</h3><p>Ценные вещи из донат-китов должны быть привязаны к владельцу по нику/UUID. Другой игрок не сможет подобрать их, забрать из сундука или использовать как свою экипировку.</p></article>
+          <article class="content-card"><h3>3. Выдача на сервере</h3><p>Тарифы привязываются к LuckPerms-группам <code>donate_pro</code>, <code>donate_elite</code>, <code>donate_prime</code> и <code>donate_emperor</code>. Кит выдаётся один раз за активный месяц.</p></article>
+          <article class="content-card"><h3>4. DonationAlerts</h3><p>Открыта только тестовая кнопка PRO за 1 ₽. Боевые тарифы останутся выключены, пока не проверим DonationAlerts → сервер → LuckPerms.</p></article>
         </div>
       </div>
     </section>

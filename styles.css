@@ -1395,6 +1395,51 @@ h2 {
   cursor: not-allowed;
 }
 
+.donate-active,
+.tier-action {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: var(--red);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.16s ease, background 0.16s ease, border-color 0.16s ease;
+}
+
+.donate-active:hover,
+.tier-action:hover {
+  color: #fff;
+  background: var(--red-bright);
+  border-color: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
+}
+
+.tier-action {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  width: auto;
+  min-height: 46px;
+  font-size: 13px;
+}
+
+.tier-action-disabled,
+.tier-action-disabled:hover {
+  color: #6f7480;
+  background: #191c23;
+  border-color: #30333a;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .donate-intro {
   max-width: 900px;
   color: #c7c9ce;
