@@ -1,9 +1,32 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-14T12:24:09.835933+00:00",
+  "published_at": "2026-08-14T13:05:46.382252+00:00",
+  "news": [
+    {
+      "tag": "ЛАУНЧЕР",
+      "title": "HORDE Launcher 1.4.1",
+      "text": "Свежий интерфейс, рабочие панели уведомлений, помощь и настройки внутри лаунчера.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#f02b3e"
+    },
+    {
+      "tag": "СБОРКА",
+      "title": "Pack 5.0.26",
+      "text": "Лаунчер проверяет manifest, показывает новости обновления и докачивает актуальную сборку.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#b9f1ef"
+    },
+    {
+      "tag": "ДОНАТ",
+      "title": "DonationAlerts и подписки",
+      "text": "Донат работает по нику игрока, а описание привилегий и китов доступно на сайте.",
+      "url": "https://hordeminecraft.ru/donate/",
+      "color": "#f0c66d"
+    }
+  ],
   "launcher": {
-    "version": "1.4.0",
+    "version": "1.4.1",
     "required": true,
     "url": "https://hordeminecraft.ru/HORDE.exe",
     "urls": [
@@ -12,8 +35,8 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 45110272,
-    "sha256": "ba6fa5e58d31bc0a1e081f4b2dbc91aff91a0aa650878f5f0509ab3494e8ffbe"
+    "size": 45113673,
+    "sha256": "5089a0993f302988b9fcef72b8bd747c1e54446f1939d190438d7a565bcc44f8"
   },
   "pack": {
     "version": "5.0.26",
