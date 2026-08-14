@@ -293,11 +293,16 @@
       <div class="section-shell updates-layout">
         <div class="section-heading">
           <p class="section-label">ОБНОВЛЕНИЕ · 14 АВГУСТА 2026</p>
-          <h2>Лаунчер 1.4.1 и донат по нику</h2>
-          <p class="updates-lead">Довели UX лаунчера HORDE: главный баннер стал читаемым, настройки убраны с главной в левую шестерёнку, боковые кнопки открывают внутренние выезжающие панели, а уведомления теперь подтягиваются из update.json вместе с обновлениями. Донат через DonationAlerts работает по нику игрока.</p>
+          <h2>Серверный hotfix, лаунчер 1.4.1 и донат по нику</h2>
+          <p class="updates-lead">Выпустили серверный hotfix против лишней фоновой нагрузки: убрали битые datapack-команды после перехода с EasyNPC на CustomNPCs, почистили ошибку MineTraps и снизили частоту фонового автоспавна Infectious, из-за которого сервер мог проседать по тикам и выкидывать игроков. Параллельно довели UX лаунчера HORDE и донат через DonationAlerts по нику игрока.</p>
         </div>
         <div class="updates-grid">
           <article class="update-card update-card-main">
+            <i data-lucide="activity" aria-hidden="true"></i>
+            <h3>Стабильность сервера</h3>
+            <p>Фоновый спавн Infectious стал спокойнее: меньше пачек вокруг игроков, реже проверки и меньше риск массовых таймаутов при просадке TPS.</p>
+          </article>
+          <article class="update-card">
             <i data-lucide="badge-check" aria-hidden="true"></i>
             <h3>Донат-терминал</h3>
             <p>Раздел <a href="/donate/">Донат</a> принимает ник игрока и открывает DonationAlerts с подсказкой формата сообщения. Тестовая выдача PRO уже проверена на сервере.</p>
