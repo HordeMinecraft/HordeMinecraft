@@ -1,11 +1,11 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-14T13:05:46.382252+00:00",
+  "published_at": "2026-08-14T15:34:46.492248+00:00",
   "news": [
     {
       "tag": "ЛАУНЧЕР",
-      "title": "HORDE Launcher 1.4.1",
+      "title": "HORDE Launcher 1.4.3",
       "text": "Свежий интерфейс, рабочие панели уведомлений, помощь и настройки внутри лаунчера.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#f02b3e"
@@ -26,7 +26,7 @@
     }
   ],
   "launcher": {
-    "version": "1.4.1",
+    "version": "1.4.3",
     "required": true,
     "url": "https://hordeminecraft.ru/HORDE.exe",
     "urls": [
@@ -35,8 +35,8 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 45113673,
-    "sha256": "5089a0993f302988b9fcef72b8bd747c1e54446f1939d190438d7a565bcc44f8"
+    "size": 46178566,
+    "sha256": "50f4982bb09527f52d501641a86e4e4c65712381f833e9450e09e927f0fc3fd4"
   },
   "pack": {
     "version": "5.0.26",
@@ -47,8 +47,8 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack.zip"
     ],
-    "size": 363710911,
-    "sha256": "1bc42aa56865a559258ac5440e63fff60a7ada559a1422dd0bb94e08df129457",
+    "size": 333192544,
+    "sha256": "dbf7fe7f33c8776c485df04656ff7947459e2507c3ebd255caf70762d86d0553",
     "base": {
       "version": "5.0.11",
       "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.11.zip",
