@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const donateLink = document.querySelector("[data-donate-link]");
   const donateSummary = document.querySelector("[data-donate-summary]");
   const donateTierButtons = Array.from(document.querySelectorAll("[data-donate-tier]"));
+  const donateConsole = document.querySelector(".donate-console");
   let selectedDonateTier = "PRO";
   let selectedDonateAmount = "150";
 
@@ -67,7 +68,12 @@ document.addEventListener("DOMContentLoaded", () => {
       button.classList.toggle("active", button.dataset.donateTier === selectedDonateTier);
     });
     buildDonateMessage();
-    donateNick?.focus();
+    if (donateConsole && window.matchMedia("(max-width: 700px)").matches) {
+      donateConsole.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.setTimeout(() => donateNick?.focus(), 260);
+    } else {
+      donateNick?.focus();
+    }
   };
 
   const buildDonateMessage = () => {

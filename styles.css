@@ -1303,6 +1303,11 @@ h2 {
   box-shadow: 0 22px 70px rgba(0, 0, 0, 0.4);
 }
 
+.donate-hero .donate-console {
+  position: sticky;
+  top: 92px;
+}
+
 .console-head,
 .console-summary,
 .tier-top {
@@ -1504,12 +1509,10 @@ h2 {
 }
 
 .tier-action {
-  position: absolute;
-  left: 24px;
-  right: 24px;
-  bottom: 24px;
-  width: auto;
+  position: static;
+  width: 100%;
   min-height: 46px;
+  margin-top: auto;
   font-size: 13px;
 }
 
@@ -1530,16 +1533,18 @@ h2 {
 
 .donate-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
   margin-top: 30px;
 }
 
 .donate-tier {
   position: relative;
   overflow: hidden;
-  min-height: 430px;
+  min-height: 0;
   padding: 24px;
+  display: flex;
+  flex-direction: column;
   background:
     radial-gradient(circle at 100% 0, rgba(185, 241, 239, 0.07), transparent 35%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent),
@@ -1559,7 +1564,7 @@ h2 {
 
 .donate-tier.featured {
   border-color: rgba(240, 198, 109, 0.72);
-  transform: translateY(-8px);
+  transform: none;
 }
 
 .donate-tier.emperor {
@@ -1597,6 +1602,38 @@ h2 {
   color: var(--muted);
 }
 
+.tier-highlights {
+  flex: 0 0 auto;
+}
+
+.tier-kit {
+  margin: 14px 0 18px;
+  padding: 12px 13px;
+  color: #d4d7de;
+  background: rgba(7, 8, 10, 0.42);
+  border: 1px solid rgba(185, 241, 239, 0.18);
+  border-radius: 6px;
+}
+
+.tier-kit summary {
+  color: var(--cyan);
+  cursor: pointer;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+
+.tier-kit summary:hover,
+.tier-kit summary:focus-visible {
+  color: #fff;
+  outline: none;
+}
+
+.tier-kit ul {
+  margin-top: 12px;
+}
+
 .donate-tier ul,
 .donate-steps,
 .fairplay-card ul {
@@ -1608,7 +1645,7 @@ h2 {
 .donate-tier li,
 .fairplay-card li {
   position: relative;
-  margin: 12px 0;
+  margin: 10px 0;
   padding-left: 20px;
   color: #d4d7de;
 }
@@ -1992,8 +2029,26 @@ footer {
   }
 
   .donate-console {
-    max-width: 340px;
+    position: relative;
+    top: auto;
+    max-width: none;
+    width: 100%;
     padding: 22px;
+  }
+
+  .donate-hero .donate-console {
+    position: relative;
+    top: auto;
+  }
+
+  .donate-tier-pills {
+    grid-template-columns: 1fr;
+  }
+
+  .donate-tier-pills button,
+  .donate-active,
+  .tier-action {
+    min-height: 54px;
   }
 
   .donate-grid {
@@ -2003,6 +2058,10 @@ footer {
   .donate-tier {
     min-height: 0;
     padding: 22px;
+  }
+
+  .tier-kit {
+    padding: 12px;
   }
 
   .tier-top {

@@ -39,7 +39,7 @@
         <aside class="donate-console" aria-label="Оплата DonationAlerts">
           <div class="console-head"><span></span><strong>DONATE TERMINAL</strong><em>live</em></div>
           <label for="donate-nick">Ник игрока</label>
-          <input id="donate-nick" type="text" value="" placeholder="Введите ник Minecraft" aria-describedby="donate-help" maxlength="16" autocomplete="nickname" data-donate-nick>
+          <input id="donate-nick" type="text" value="" placeholder="Введите ник Minecraft" aria-describedby="donate-help" maxlength="16" minlength="3" pattern="[A-Za-z0-9_]{3,16}" autocomplete="nickname" autocapitalize="none" spellcheck="false" inputmode="text" data-donate-nick>
           <p id="donate-help">Введи ник и выбери тариф — сайт соберёт точное сообщение для DonationAlerts.</p>
           <div class="donate-tier-pills" aria-label="Выбор тарифа">
             <button type="button" class="active" data-donate-tier="PRO" data-donate-amount="150">PRO · 150 ₽</button>
@@ -72,13 +72,20 @@
             <div class="tier-top"><span class="tier-badge pro">PRO</span><strong>150 ₽</strong></div>
             <h3>Выживший снабженец</h3>
             <p>Стартовая поддержка проекта: красивый префикс, небольшой набор ресурсов и расходников без сильного преимущества.</p>
-            <ul>
+            <ul class="tier-highlights">
               <li>Префикс <code>[PRO]</code> в чате на 30 дней.</li>
-              <li>Кит: scout-комплект LesRaisins Armor с обычными чарами I уровня.</li>
-              <li>2 ящика SuperbWarfare, 4 аптечки, медный сундук Iron Chests и базовые материалы.</li>
-              <li>Еда, 1 золотое яблоко, болты для аномалий и небольшой запас пороха.</li>
-              <li>Донатные вещи сохраняются при смерти только пока подписка активна.</li>
+              <li>Scout-комплект LesRaisins Armor с чарами I уровня.</li>
+              <li>Базовые ящики, аптечки, еда и материалы для старта.</li>
             </ul>
+            <details class="tier-kit">
+              <summary>Полный состав кита</summary>
+              <ul>
+                <li>2 ящика SuperbWarfare и 4 аптечки.</li>
+                <li>Медный сундук Iron Chests и базовые материалы.</li>
+                <li>Еда, 1 золотое яблоко, болты для аномалий и небольшой запас пороха.</li>
+                <li>Донатные вещи сохраняются при смерти только пока подписка активна.</li>
+              </ul>
+            </details>
             <button type="button" class="tier-action" data-donate-tier="PRO" data-donate-amount="150">Выбрать PRO</button>
           </article>
 
@@ -86,13 +93,20 @@
             <div class="tier-top"><span class="tier-badge elite">ELITE</span><strong>250 ₽</strong></div>
             <h3>Снабженец убежища</h3>
             <p>Больше материалов для базы и вылазок: полезно активным игрокам, но без продажи готовой победы.</p>
-            <ul>
+            <ul class="tier-highlights">
               <li>Префикс <code>[ELITE]</code> выше PRO на 30 дней.</li>
-              <li>Кит: attacker-комплект LesRaisins Armor с обычными чарами II уровня.</li>
-              <li>3 ящика SuperbWarfare, 8 аптечек, железный сундук Iron Chests и усиленный набор материалов.</li>
-              <li>2 золотых яблока, 32 болта для аномалий, стержни, алмазы и порох.</li>
-              <li>Подходит для базы и вылазок, но не даёт бесконечный фарм.</li>
+              <li>Attacker-комплект LesRaisins Armor с чарами II уровня.</li>
+              <li>Усиленный набор для базы, вылазок и ремонта.</li>
             </ul>
+            <details class="tier-kit">
+              <summary>Полный состав кита</summary>
+              <ul>
+                <li>3 ящика SuperbWarfare и 8 аптечек.</li>
+                <li>Железный сундук Iron Chests и усиленный набор материалов.</li>
+                <li>2 золотых яблока, 32 болта для аномалий, стержни, алмазы и порох.</li>
+                <li>Подходит для базы и вылазок, но не даёт бесконечный фарм.</li>
+              </ul>
+            </details>
             <button type="button" class="tier-action" data-donate-tier="ELITE" data-donate-amount="250">Выбрать ELITE</button>
           </article>
 
@@ -100,13 +114,20 @@
             <div class="tier-top"><span class="tier-badge prime">PRIME</span><strong>380 ₽</strong></div>
             <h3>Оператор Зоны</h3>
             <p>Оптимальная подписка для активной игры: заметный статус и усиленный набор ресурсов для экспедиций.</p>
-            <ul>
+            <ul class="tier-highlights">
               <li>Префикс <code>[PRIME]</code> на 30 дней.</li>
-              <li>Кит: FBI Armed-комплект LesRaisins Armor с чарами III уровня и починкой.</li>
-              <li>4 ящика SuperbWarfare, 12 аптечек, золотой сундук Iron Chests и детектор аномалий.</li>
-              <li>4 золотых яблока, 48 болтов, аметист, 5 алмазов и редкие ресурсы.</li>
-              <li>Сильный набор для экспедиций, но без продажи топового оружия и админ-преимуществ.</li>
+              <li>FBI Armed-комплект LesRaisins Armor с чарами III уровня и починкой.</li>
+              <li>Детектор аномалий, редкие ресурсы и запас для экспедиций.</li>
             </ul>
+            <details class="tier-kit">
+              <summary>Полный состав кита</summary>
+              <ul>
+                <li>4 ящика SuperbWarfare и 12 аптечек.</li>
+                <li>Золотой сундук Iron Chests и детектор аномалий.</li>
+                <li>4 золотых яблока, 48 болтов, аметист, 5 алмазов и редкие ресурсы.</li>
+                <li>Сильный набор для экспедиций, но без продажи топового оружия и админ-преимуществ.</li>
+              </ul>
+            </details>
             <button type="button" class="tier-action" data-donate-tier="PRIME" data-donate-amount="380">Выбрать PRIME</button>
           </article>
 
@@ -114,13 +135,20 @@
             <div class="tier-top"><span class="tier-badge emperor">EMPEROR</span><strong>700 ₽</strong></div>
             <h3>Спонсор штаба</h3>
             <p>Максимальная поддержка HORDE: самый заметный статус и редкий, но всё ещё ограниченный набор.</p>
-            <ul>
+            <ul class="tier-highlights">
               <li>Префикс <code>[EMPEROR]</code> на 30 дней.</li>
-              <li>Кит: DEA Armed-комплект LesRaisins Armor с чарами IV уровня и починкой.</li>
-              <li>6 ящиков SuperbWarfare, 16 аптечек, алмазный сундук Iron Chests, детектор и полный набор болтов.</li>
-              <li>6 золотых яблок, незерит, 8 алмазов, много редких ресурсов и инструменты высокого уровня.</li>
-              <li>Максимальная поддержка проекта, но без админки, чужих приватов и бесконечных ресурсов.</li>
+              <li>DEA Armed-комплект LesRaisins Armor с чарами IV уровня и починкой.</li>
+              <li>Самый заметный статус, детектор и редкие ресурсы.</li>
             </ul>
+            <details class="tier-kit">
+              <summary>Полный состав кита</summary>
+              <ul>
+                <li>6 ящиков SuperbWarfare и 16 аптечек.</li>
+                <li>Алмазный сундук Iron Chests, детектор и полный набор болтов.</li>
+                <li>6 золотых яблок, незерит, 8 алмазов, много редких ресурсов и инструменты высокого уровня.</li>
+                <li>Максимальная поддержка проекта, но без админки, чужих приватов и бесконечных ресурсов.</li>
+              </ul>
+            </details>
             <button type="button" class="tier-action" data-donate-tier="EMPEROR" data-donate-amount="700">Выбрать EMPEROR</button>
           </article>
         </div>
@@ -131,7 +159,7 @@
       <div class="section-shell donate-layout">
         <div>
           <p class="section-label">КАК ОПЛАТИТЬ</p>
-          <h2>DonationAlerts проверяет оплата, сервер выдаёт сам</h2>
+          <h2>DonationAlerts проверяет оплату, сервер выдаёт сам</h2>
           <div class="donate-steps">
             <div><span>01</span><p>Введи ник Minecraft на этой странице и выбери тариф.</p></div>
             <div><span>02</span><p>Скопируй сообщение вида <code>HORDE Nick PRO</code>.</p></div>
