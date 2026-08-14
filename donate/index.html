@@ -4,49 +4,57 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0a0b0e">
-  <meta name="description" content="Донат HORDE Minecraft — поддержка сервера по нику игрока. Тарифы PRO, ELITE, PRIME и EMPEROR находятся в технической разработке.">
+  <meta name="description" content="Донат HORDE Minecraft: подписки PRO, ELITE, PRIME и EMPEROR на 30 дней, префиксы, одноразовые киты и автоматическая выдача через DonationAlerts по нику игрока.">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta property="og:title" content="Донат HORDE — поддержка сервера Minecraft">
-  <meta property="og:description" content="Поддержка HORDE по нику: PRO, ELITE, PRIME и EMPEROR. Страница находится в технической разработке.">
+  <meta property="og:title" content="Донат HORDE — поддержка Minecraft сервера">
+  <meta property="og:description" content="Поддержи HORDE: PRO, ELITE, PRIME и EMPEROR. Авто-выдача по нику через DonationAlerts, префиксы и сбалансированные одноразовые киты.">
   <meta property="og:image" content="https://hordeminecraft.ru/assets/horde-hero-survivors.png">
   <meta property="og:url" content="https://hordeminecraft.ru/donate/">
   <meta property="og:type" content="website">
-  <title>Донат HORDE — поддержка Minecraft сервера</title>
+  <title>Донат HORDE — подписки, префиксы и киты</title>
   <link rel="canonical" href="https://hordeminecraft.ru/donate/">
   <link rel="icon" href="../assets/favicon.ico">
   <link rel="stylesheet" href="../styles.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"Донат HORDE","url":"https://hordeminecraft.ru/donate/","description":"Техническая страница доната HORDE Minecraft по нику игрока."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"HORDE","item":"https://hordeminecraft.ru/"},{"@type":"ListItem","position":2,"name":"Донат","item":"https://hordeminecraft.ru/donate/"}]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"Донат HORDE","url":"https://hordeminecraft.ru/donate/","description":"Донат HORDE Minecraft по нику игрока через DonationAlerts."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"HORDE","item":"https://hordeminecraft.ru/"},{"@type":"ListItem","position":2,"name":"Донат","item":"https://hordeminecraft.ru/donate/"}]}]}</script>
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
   <script src="../script.js" defer></script>
 </head>
 <body>
   <header class="site-header"><nav class="nav-shell" aria-label="Основная навигация"><a class="brand" href="/"><img src="../assets/horde-avatar.webp" alt="" width="42" height="42"><span>HORDE</span></a><div class="nav-links"><a href="/launcher/">Лаунчер</a><a href="/mods/">Моды</a><a href="/zombie-apocalypse/">Зомби</a><a href="/guns/">Оружие</a><a href="/tanks/">Танки</a><a href="/quests-npc/">NPC</a><a href="/donate/">Донат</a></div><a class="nav-download" href="https://hordeminecraft.ru/HORDE.exe"><i data-lucide="download" aria-hidden="true"></i><span>Скачать</span></a></nav></header>
+
   <main>
     <section class="page-hero donate-hero">
       <div class="section-shell">
         <div>
           <div class="breadcrumbs"><a href="/">Главная</a><span>/</span><span>Донат</span></div>
-          <p class="eyebrow">HORDE SUPPORT · TECH PREVIEW</p>
+          <p class="eyebrow">HORDE SUPPORT · DONATIONALERTS</p>
           <h1>Поддержка штаба HORDE</h1>
-          <p class="page-lead">Донат работает по нику игрока: без регистрации на сайте и без лишнего входа. Сейчас открыта только тестовая PRO-оплата за 1 ₽ через DonationAlerts, чтобы проверить цепочку до автоматической серверной выдачи.</p>
+          <p class="page-lead">Донат работает по нику игрока: без регистрации на сайте и без входа в личный кабинет. Выбираешь тариф, вводишь ник, копируешь сообщение и оплачиваешь через DonationAlerts. Сервер сам проверяет оплату и выдаёт группу LuckPerms на 30 дней.</p>
           <div class="donate-status" role="note">
-            <i data-lucide="construction" aria-hidden="true"></i>
-            <span>Технический режим: активна только тестовая подписка PRO за 1 ₽. Серверная авто-выдача подключена в тестовом режиме, боевые тарифы пока выключены.</span>
+            <i data-lucide="shield-check" aria-hidden="true"></i>
+            <span>Боевой режим включён. Киты выдаются один раз за оплату командой <code>/hordedonate kit</code>. Ценные вещи помечаются владельцем и не предназначены для передачи другим игрокам.</span>
           </div>
         </div>
-        <aside class="donate-console" aria-label="Тестовая оплата DonationAlerts">
-          <div class="console-head"><span></span><strong>DONATE TERMINAL</strong><em>test</em></div>
+
+        <aside class="donate-console" aria-label="Оплата DonationAlerts">
+          <div class="console-head"><span></span><strong>DONATE TERMINAL</strong><em>live</em></div>
           <label for="donate-nick">Ник игрока</label>
           <input id="donate-nick" type="text" value="" placeholder="Введите ник Minecraft" aria-describedby="donate-help" maxlength="16" autocomplete="nickname" data-donate-nick>
-          <p id="donate-help">Введи ник — сайт соберёт точное сообщение для DonationAlerts.</p>
+          <p id="donate-help">Введи ник и выбери тариф — сайт соберёт точное сообщение для DonationAlerts.</p>
+          <div class="donate-tier-pills" aria-label="Выбор тарифа">
+            <button type="button" class="active" data-donate-tier="PRO" data-donate-amount="150">PRO · 150 ₽</button>
+            <button type="button" data-donate-tier="ELITE" data-donate-amount="250">ELITE · 250 ₽</button>
+            <button type="button" data-donate-tier="PRIME" data-donate-amount="380">PRIME · 380 ₽</button>
+            <button type="button" data-donate-tier="EMPEROR" data-donate-amount="700">EMPEROR · 700 ₽</button>
+          </div>
           <div class="donate-message-box" aria-live="polite">
             <span>Сообщение для оплаты</span>
-            <button type="button" data-copy-donate-message><code data-donate-message>HORDETEST Ник PRO</code></button>
+            <button type="button" data-copy-donate-message><code data-donate-message>HORDE Ник PRO</code></button>
           </div>
-          <p class="donate-hint" data-donate-hint>В DonationAlerts укажи сумму <code>1 ₽</code> и вставь это сообщение.</p>
+          <p class="donate-hint" data-donate-hint>В DonationAlerts укажи сумму <code>150 ₽</code> и вставь сообщение.</p>
           <div class="console-summary">
-            <span>Статус</span>
-            <strong>PRO TEST · 1 ₽</strong>
+            <span>Выбран тариф</span>
+            <strong data-donate-summary>PRO · 150 ₽ · 30 дней</strong>
           </div>
           <a class="donate-active" href="https://www.donationalerts.com/r/TechnoDean" target="_blank" rel="noopener" data-donate-link>Открыть DonationAlerts</a>
         </aside>
@@ -55,57 +63,65 @@
 
     <section class="content-section">
       <div class="section-shell">
-        <p class="section-label">ТАРИФЫ · ЧЕРНОВИК БАЛАНСА</p>
+        <p class="section-label">ТАРИФЫ · 30 ДНЕЙ</p>
         <h2>Привилегии без продажи победы</h2>
-        <p class="donate-intro">Мы не хотим превращать зомби-апокалипсис в магазин имбы. Поэтому донат должен давать статус, удобство, косметику и приятные одноразовые наборы поддержки, но не бесконечные ресурсы, топовое оружие или преимущество, которое ломает выживание. Каждая боевая привилегия рассчитана на 30 дней; сейчас для проверки активен только тест PRO за 1 ₽.</p>
+        <p class="donate-intro">Мы держим баланс вокруг survival: донат даёт статус, удобство и одноразовый набор поддержки, но не бесконечные ресурсы и не топовое оружие. Каждый тариф активируется на 30 дней. Если у игрока есть кит, он увидит подсказку и сможет забрать его командой <code>/hordedonate kit</code>.</p>
+
         <div class="donate-grid">
           <article class="donate-tier">
-            <div class="tier-top"><span class="tier-badge pro">PRO TEST</span><strong>1 ₽</strong></div>
-            <h3>Тестовая метка</h3>
-            <p>Временная подписка для проверки DonationAlerts и серверной выдачи. После теста вернём боевую цену PRO — 150 ₽.</p>
+            <div class="tier-top"><span class="tier-badge pro">PRO</span><strong>150 ₽</strong></div>
+            <h3>Выживший снабженец</h3>
+            <p>Стартовая поддержка проекта: красивый префикс, небольшой набор ресурсов и расходников без сильного преимущества.</p>
             <ul>
-              <li>Тестовая проверка тарифа <code>[PRO]</code>.</li>
-              <li>Сумма в DonationAlerts: <code>1 ₽</code>.</li>
-              <li>Сообщение: <code>HORDETEST Ник PRO</code>.</li>
-              <li>На тесте кит не выдаётся, чтобы не было дюпа.</li>
+              <li>Префикс <code>[PRO]</code> в чате на 30 дней.</li>
+              <li>Кит: scout-комплект LesRaisins Armor с обычными чарами I уровня.</li>
+              <li>2 ящика SuperbWarfare, 4 аптечки, медный сундук Iron Chests и базовые материалы.</li>
+              <li>Еда, 1 золотое яблоко, болты для аномалий и небольшой запас пороха.</li>
+              <li>Донатные вещи сохраняются при смерти только пока подписка активна.</li>
             </ul>
-            <a class="tier-action" href="https://www.donationalerts.com/r/TechnoDean" target="_blank" rel="noopener">Тест PRO за 1 ₽</a>
+            <button type="button" class="tier-action" data-donate-tier="PRO" data-donate-amount="150">Выбрать PRO</button>
           </article>
+
           <article class="donate-tier">
             <div class="tier-top"><span class="tier-badge elite">ELITE</span><strong>250 ₽</strong></div>
             <h3>Снабженец убежища</h3>
-            <p>Больше визуального статуса и удобства, но без превращения игрока в бессмертный танк.</p>
+            <p>Больше материалов для базы и вылазок: полезно активным игрокам, но без продажи готовой победы.</p>
             <ul>
-              <li>Префикс <code>[ELITE]</code> выше PRO.</li>
-              <li>Расширенный цветной формат чата.</li>
-              <li>Группа <code>donate_elite</code> на 30 дней.</li>
-              <li>Одноразовый кит: комплект выжившего SoulBound, медикаменты, патроны и полезный сундук.</li>
+              <li>Префикс <code>[ELITE]</code> выше PRO на 30 дней.</li>
+              <li>Кит: attacker-комплект LesRaisins Armor с обычными чарами II уровня.</li>
+              <li>3 ящика SuperbWarfare, 8 аптечек, железный сундук Iron Chests и усиленный набор материалов.</li>
+              <li>2 золотых яблока, 32 болта для аномалий, стержни, алмазы и порох.</li>
+              <li>Подходит для базы и вылазок, но не даёт бесконечный фарм.</li>
             </ul>
-            <span class="tier-action tier-action-disabled">Скоро</span>
+            <button type="button" class="tier-action" data-donate-tier="ELITE" data-donate-amount="250">Выбрать ELITE</button>
           </article>
+
           <article class="donate-tier featured">
             <div class="tier-top"><span class="tier-badge prime">PRIME</span><strong>380 ₽</strong></div>
             <h3>Оператор Зоны</h3>
-            <p>Оптимальный тариф для активных игроков: заметный статус, больше косметики и редкие сервисные бонусы.</p>
+            <p>Оптимальная подписка для активной игры: заметный статус и усиленный набор ресурсов для экспедиций.</p>
             <ul>
-              <li>Префикс <code>[PRIME]</code> с ярким цветом.</li>
-              <li>Косметика профиля и Discord-роль.</li>
-              <li>Группа <code>donate_prime</code> на 30 дней.</li>
-              <li>Одноразовый кит: броня/одежда SoulBound, умеренное TacZ-снаряжение и ресурсы без фарма экономики.</li>
+              <li>Префикс <code>[PRIME]</code> на 30 дней.</li>
+              <li>Кит: FBI Armed-комплект LesRaisins Armor с чарами III уровня и починкой.</li>
+              <li>4 ящика SuperbWarfare, 12 аптечек, золотой сундук Iron Chests и детектор аномалий.</li>
+              <li>4 золотых яблока, 48 болтов, аметист, 5 алмазов и редкие ресурсы.</li>
+              <li>Сильный набор для экспедиций, но без продажи топового оружия и админ-преимуществ.</li>
             </ul>
-            <span class="tier-action tier-action-disabled">Скоро</span>
+            <button type="button" class="tier-action" data-donate-tier="PRIME" data-donate-amount="380">Выбрать PRIME</button>
           </article>
+
           <article class="donate-tier emperor">
             <div class="tier-top"><span class="tier-badge emperor">EMPEROR</span><strong>700 ₽</strong></div>
             <h3>Спонсор штаба</h3>
-            <p>Максимальная поддержка проекта: самый заметный статус и редкие коллекционные бонусы.</p>
+            <p>Максимальная поддержка HORDE: самый заметный статус и редкий, но всё ещё ограниченный набор.</p>
             <ul>
-              <li>Префикс <code>[EMPEROR]</code> выше обычных донат-статусов.</li>
-              <li>Особый цвет ника и выделение в Discord.</li>
-              <li>Группа <code>donate_emperor</code> на 30 дней.</li>
-              <li>Одноразовый кит спонсора: редкая экипировка SoulBound, контейнер и коллекционный предмет без PvP-имбаланса.</li>
+              <li>Префикс <code>[EMPEROR]</code> на 30 дней.</li>
+              <li>Кит: DEA Armed-комплект LesRaisins Armor с чарами IV уровня и починкой.</li>
+              <li>6 ящиков SuperbWarfare, 16 аптечек, алмазный сундук Iron Chests, детектор и полный набор болтов.</li>
+              <li>6 золотых яблок, незерит, 8 алмазов, много редких ресурсов и инструменты высокого уровня.</li>
+              <li>Максимальная поддержка проекта, но без админки, чужих приватов и бесконечных ресурсов.</li>
             </ul>
-            <span class="tier-action tier-action-disabled">Скоро</span>
+            <button type="button" class="tier-action" data-donate-tier="EMPEROR" data-donate-amount="700">Выбрать EMPEROR</button>
           </article>
         </div>
       </div>
@@ -114,41 +130,32 @@
     <section class="content-section alt">
       <div class="section-shell donate-layout">
         <div>
-          <p class="section-label">КАК ЭТО БУДЕТ РАБОТАТЬ</p>
-          <h2>Оплата по нику, выдача через сервер</h2>
+          <p class="section-label">КАК ОПЛАТИТЬ</p>
+          <h2>DonationAlerts проверяет оплата, сервер выдаёт сам</h2>
           <div class="donate-steps">
-            <div><span>01</span><p>Игрок вводит свой точный ник Minecraft.</p></div>
-            <div><span>02</span><p>На время теста выбирает только PRO TEST за 1 ₽.</p></div>
-            <div><span>03</span><p>Оплата уходит через DonationAlerts, а серверный обработчик сверяет сумму, ник и сообщение.</p></div>
-            <div><span>04</span><p>В тесте сервер выдаёт временную группу LuckPerms. После проверки включим боевые тарифы на 30 дней.</p></div>
+            <div><span>01</span><p>Введи ник Minecraft на этой странице и выбери тариф.</p></div>
+            <div><span>02</span><p>Скопируй сообщение вида <code>HORDE Nick PRO</code>.</p></div>
+            <div><span>03</span><p>В DonationAlerts укажи ровно сумму тарифа и вставь сообщение.</p></div>
+            <div><span>04</span><p>Сервер проверит оплату, выдаст группу на 30 дней и поставит кит в очередь.</p></div>
           </div>
         </div>
         <aside class="fairplay-card">
-          <h3>Что точно не продаём</h3>
+          <h3>Что защищено</h3>
           <ul>
-            <li>админские права и доступ к чужим приватам;</li>
-            <li>топовое оружие, которое ломает экономику;</li>
-            <li>бесконечные ресурсы, деньги или патроны;</li>
-            <li>преимущество, из-за которого survival теряет смысл.</li>
+            <li>каждый DonationAlerts ID обрабатывается только один раз;</li>
+            <li>кит выдаётся один раз за оплату, а не бесконечной командой;</li>
+            <li>ценные предметы получают метку владельца и обычные чары по уровню тарифа;</li>
+            <li>пока подписка активна, донатные вещи владельца сохраняются при смерти;</li>
+            <li>после окончания подписки вещи остаются у игрока, но при смерти выпадают как обычный лут;</li>
+            <li>команда <code>/rank</code> показывает остаток подписки;</li>
+            <li>безопасные миры spawn, market, tanks и run защищены от жары и холода.</li>
           </ul>
-          <p>Донат должен помогать серверу жить, а не убивать интерес игроков. Это мой любимый тип баланса: красиво, честно, без продажи кнопки “победить”.</p>
+          <p>Если после оплаты префикс не появился сразу, подожди до минуты или попроси администратора выполнить проверку. Если инвентарь полный — освободи слоты и используй <code>/hordedonate kit</code>.</p>
         </aside>
       </div>
     </section>
-
-    <section class="content-section">
-      <div class="section-shell">
-        <p class="section-label">ПЛАН ЗАПУСКА</p>
-        <h2>Что ещё нужно перед включением оплаты</h2>
-        <div class="content-grid">
-          <article class="content-card"><h3>1. Финальный список бонусов</h3><p>Нужно утвердить предметы, SoulBound-экипировку, ресурсы и лимиты китов, чтобы не было дюпа и pay-to-win.</p></article>
-          <article class="content-card"><h3>2. Персональные предметы</h3><p>Ценные вещи из донат-китов должны быть <code>SoulBound + OwnerBound</code>: привязаны к владельцу по нику/UUID. Другой игрок не сможет подобрать их, забрать из сундука или использовать как свою экипировку.</p></article>
-          <article class="content-card"><h3>3. Выдача на сервере</h3><p>Тарифы привязываются к LuckPerms-группам <code>donate_pro</code>, <code>donate_elite</code>, <code>donate_prime</code> и <code>donate_emperor</code>. Кит выдаётся один раз за активный месяц.</p></article>
-          <article class="content-card"><h3>4. DonationAlerts</h3><p>Открыта только тестовая кнопка PRO за 1 ₽. Серверная часть уже подключена: она проверяет последние оплаты и выдаёт тестовую LuckPerms-группу автоматически.</p></article>
-        </div>
-      </div>
-    </section>
   </main>
+
   <footer><div class="section-shell footer-layout"><a class="footer-brand" href="/"><img src="../assets/horde-avatar.webp" alt="" width="32" height="32"><span>HORDE</span></a><p>213.152.43.80:25855 · Minecraft Forge 1.20.1</p><p>© <span data-year></span> HORDE</p></div><p class="section-shell legal-note">HORDE — независимый проект сообщества Minecraft и не связан с Mojang Studios или Microsoft.</p></footer>
 </body>
 </html>

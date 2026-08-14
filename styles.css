@@ -1365,6 +1365,39 @@ h2 {
   font-size: 14px;
 }
 
+.donate-tier-pills {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.donate-tier-pills button {
+  min-height: 40px;
+  padding: 8px 10px;
+  color: #dfe2e8;
+  background: rgba(17, 19, 24, 0.9);
+  border: 1px solid #30333a;
+  border-radius: 4px;
+  font: 900 12px/1.2 Consolas, monospace;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.16s ease, background 0.16s ease, color 0.16s ease, transform 0.16s ease;
+}
+
+.donate-tier-pills button:hover,
+.donate-tier-pills button:focus-visible,
+.donate-tier-pills button.active {
+  color: #fff;
+  background: rgba(213, 31, 49, 0.22);
+  border-color: var(--red-bright);
+  outline: none;
+}
+
+.donate-tier-pills button.active {
+  box-shadow: inset 0 0 0 1px rgba(240, 198, 109, 0.35);
+}
+
 .donate-message-box {
   margin-top: 14px;
   padding: 13px;
