@@ -1,9 +1,9 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-14T11:49:27.945286+00:00",
+  "published_at": "2026-08-14T12:24:09.835933+00:00",
   "launcher": {
-    "version": "1.3.9",
+    "version": "1.4.0",
     "required": true,
     "url": "https://hordeminecraft.ru/HORDE.exe",
     "urls": [
@@ -12,8 +12,8 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 45094544,
-    "sha256": "fef7286aa85c3fe12206296c01e60f9ad0f2123226ffdd5c5695d6216cf26d3e"
+    "size": 45110272,
+    "sha256": "ba6fa5e58d31bc0a1e081f4b2dbc91aff91a0aa650878f5f0509ab3494e8ffbe"
   },
   "pack": {
     "version": "5.0.26",
