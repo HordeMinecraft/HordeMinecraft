@@ -1,11 +1,11 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-14T15:34:46.492248+00:00",
+  "published_at": "2026-08-15T01:37:14.401503+00:00",
   "news": [
     {
       "tag": "ЛАУНЧЕР",
-      "title": "HORDE Launcher 1.4.3",
+      "title": "HORDE Launcher 1.4.4",
       "text": "Свежий интерфейс, рабочие панели уведомлений, помощь и настройки внутри лаунчера.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#f02b3e"
@@ -26,7 +26,7 @@
     }
   ],
   "launcher": {
-    "version": "1.4.3",
+    "version": "1.4.4",
     "required": true,
     "url": "https://hordeminecraft.ru/HORDE.exe",
     "urls": [
@@ -35,8 +35,8 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 46178566,
-    "sha256": "50f4982bb09527f52d501641a86e4e4c65712381f833e9450e09e927f0fc3fd4"
+    "size": 46177807,
+    "sha256": "9d60575456cfb70c3d25dbe33a54c2856234d9661b3785507725eb03e82313f6"
   },
   "pack": {
     "version": "5.0.26",
@@ -47,17 +47,7 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack.zip"
     ],
-    "size": 333192544,
-    "sha256": "dbf7fe7f33c8776c485df04656ff7947459e2507c3ebd255caf70762d86d0553",
-    "base": {
-      "version": "5.0.11",
-      "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.11.zip",
-      "urls": [
-        "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.11.zip",
-        "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack-5.0.11.zip"
-      ],
-      "size": 311940361,
-      "sha256": "cd8b163717fe8471c7358b715e4fae0831cbea55f6ba5eb2c68877d1ea298452"
-    }
+    "size": 363710911,
+    "sha256": "1bc42aa56865a559258ac5440e63fff60a7ada559a1422dd0bb94e08df129457"
   }
 }

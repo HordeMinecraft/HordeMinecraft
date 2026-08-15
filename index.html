@@ -78,10 +78,10 @@
       {
         "@type": "NewsArticle",
         "@id": "https://hordeminecraft.ru/#update-5-0-25",
-        "headline": "Обновление HORDE: лаунчер 1.4.1 с улучшенным UX",
-        "description": "HORDE обновляет лаунчер до 1.4.1: читаемый главный экран, рабочие боковые панели, выезжающие уведомления, настройки внутри лаунчера и новости из manifest.",
-        "datePublished": "2026-08-13",
-        "dateModified": "2026-08-13",
+        "headline": "Аварийное обновление HORDE: лаунчер 1.4.4",
+        "description": "HORDE обновляет лаунчер до 1.4.4: исправлены дубли окон, недокачанные файлы, SHA-ошибки и конфликт занятого файла при обновлении.",
+        "datePublished": "2026-08-15",
+        "dateModified": "2026-08-15",
         "inLanguage": "ru-RU",
         "mainEntityOfPage": "https://hordeminecraft.ru/#updates",
         "image": "https://hordeminecraft.ru/assets/horde-hero-survivors.png",
@@ -110,7 +110,7 @@
           {
             "@type": "Question",
             "name": "Что нового в HORDE сейчас?",
-            "acceptedAnswer": {"@type": "Answer", "text": "Лаунчер обновлён до 1.4.1: главный экран стал читаемее, боковые кнопки открывают внутренние панели, уведомления подтягиваются из update.json, а настройки вынесены в левую шестерёнку. Также сохранены исправления minecraft-launcher-lib и самообновления."}
+            "acceptedAnswer": {"@type": "Answer", "text": "Лаунчер обновлён до 1.4.4: исправлены дубли окон, недокачанные файлы, SHA-ошибки и конфликт занятого файла при обновлении. Также сохранены обновлённый дизайн, внутренние панели, уведомления и настройки."}
           },
           {
             "@type": "Question",
@@ -293,8 +293,8 @@
       <div class="section-shell updates-layout">
         <div class="section-heading">
           <p class="section-label">ОБНОВЛЕНИЕ · 14 АВГУСТА 2026</p>
-          <h2>Серверный hotfix, лаунчер 1.4.1 и донат по нику</h2>
-          <p class="updates-lead">Выпустили серверный hotfix против лишней фоновой нагрузки: убрали битые datapack-команды после перехода с EasyNPC на CustomNPCs, почистили ошибку MineTraps и снизили частоту фонового автоспавна Infectious, из-за которого сервер мог проседать по тикам и выкидывать игроков. Параллельно довели UX лаунчера HORDE и донат через DonationAlerts по нику игрока.</p>
+          <h2>Аварийный hotfix лаунчера 1.4.4</h2>
+          <p class="updates-lead">Исправили проблему, из-за которой у игроков могло открываться несколько окон HORDE, обновление падало с ошибкой недокачанного файла, SHA-256 или <code>WinError 32</code>. Лаунчер теперь блокирует второй запуск, скачивает файлы через безопасный <code>.part</code>-файл и больше не требует старую базовую сборку <code>5.0.11</code>.</p>
         </div>
         <div class="updates-grid">
           <article class="update-card update-card-main">
