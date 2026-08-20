@@ -1,12 +1,12 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-20T23:15:31.477378+00:00",
+  "published_at": "2026-08-21T02:15:31.477378+03:00",
   "news": [
     {
       "tag": "ЛАУНЧЕР",
       "title": "HORDE Launcher 1.4.7",
-      "text": "Свежий интерфейс, рабочие панели уведомлений, помощь и настройки внутри лаунчера.",
+      "text": "Если старый лаунчер зациклился на перезапуске, скачайте свежий HORDE.exe с сайта один раз вручную. Сборка модов продолжит обновляться автоматически.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#f02b3e"
     },
@@ -27,7 +27,7 @@
   ],
   "launcher": {
     "version": "1.4.7",
-    "required": true,
+    "required": false,
     "url": "https://hordeminecraft.ru/HORDE.exe",
     "urls": [
       "https://hordeminecraft.ru/HORDE.exe",
