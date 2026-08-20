@@ -1,27 +1,27 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-20T19:53:15.792801+00:00",
+  "published_at": "2026-08-20T20:44:41.511076+00:00",
   "news": [
     {
-      "tag": "СБОРКА",
-      "title": "HORDE Pack 5.0.28",
-      "text": "Добавлены William Wythers Overworld, BetterNether, Belt Slot и библиотеки WunderLib/BCLib.",
+      "tag": "ЛАУНЧЕР",
+      "title": "HORDE Launcher 1.4.4",
+      "text": "Свежий интерфейс, рабочие панели уведомлений, помощь и настройки внутри лаунчера.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#f02b3e"
     },
     {
-      "tag": "БАЛАНС",
-      "title": "Спавн и жемчуги",
-      "text": "/spawn ведёт в фиксированную точку штаба, а жемчуг больше не должен проталкивать через двери и панели.",
+      "tag": "СБОРКА",
+      "title": "Pack 5.0.28",
+      "text": "Очищены старые подсказки спавна и заблокированы отключённые переходы мини-игр.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#b9f1ef"
     },
     {
-      "tag": "КРАФТЫ",
-      "title": "Superb Warfare убран",
-      "text": "Продолжаем чистку хвостов Superb Warfare, старых мини-игр и устаревших подсказок сервера.",
-      "url": "https://hordeminecraft.ru/updates/",
+      "tag": "ДОНАТ",
+      "title": "DonationAlerts и подписки",
+      "text": "Донат работает по нику игрока, а описание привилегий и китов доступно на сайте.",
+      "url": "https://hordeminecraft.ru/donate/",
       "color": "#f0c66d"
     }
   ],
@@ -47,7 +47,7 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack.zip"
     ],
-    "size": 375813546,
-    "sha256": "7e87e20598b63724046f3558cd1398814c82b6d1307bd29cfbad56453c330b72"
+    "size": 375813547,
+    "sha256": "a3112c730a57989b450697f88bfe62f615b0710834dcb639e2f8062231a7d833"
   }
 }
