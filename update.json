@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-20T22:21:58.515252+00:00",
+  "published_at": "2026-08-20T23:15:31.477378+00:00",
   "news": [
     {
       "tag": "ЛАУНЧЕР",
@@ -35,8 +35,8 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 46177134,
-    "sha256": "3d4d82bbf0d32a77e77ecd0e6150aeeec0e182de083f8b5e78e9a905df2e2233"
+    "size": 46179360,
+    "sha256": "c7552b3087d01f4bb64175fe2c1d77859530c401b5c42730e6543013b0129421"
   },
   "pack": {
     "version": "5.0.31",
@@ -47,7 +47,7 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack.zip"
     ],
-    "size": 365464157,
-    "sha256": "0e5e59f703fdcf9b182486ee616a50f35ea0955b6b4f2c906945fa20c26bd79a"
+    "size": 365393130,
+    "sha256": "f9e547ae86372c3a1b900ebe039fb77ea68f8decddae8ab7eb7587c4e64907cd"
   }
 }
