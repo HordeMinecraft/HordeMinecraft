@@ -1,18 +1,18 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-20T22:06:23.794917+00:00",
+  "published_at": "2026-08-20T22:21:58.515252+00:00",
   "news": [
     {
       "tag": "ЛАУНЧЕР",
-      "title": "HORDE Launcher 1.4.6",
+      "title": "HORDE Launcher 1.4.7",
       "text": "Свежий интерфейс, рабочие панели уведомлений, помощь и настройки внутри лаунчера.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#f02b3e"
     },
     {
       "tag": "СБОРКА",
-      "title": "Pack 5.0.30",
+      "title": "Pack 5.0.31",
       "text": "Очищены старые подсказки спавна и заблокированы отключённые переходы мини-игр.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#b9f1ef"
@@ -26,7 +26,7 @@
     }
   ],
   "launcher": {
-    "version": "1.4.6",
+    "version": "1.4.7",
     "required": true,
     "url": "https://hordeminecraft.ru/HORDE.exe",
     "urls": [
@@ -35,11 +35,11 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 46177651,
-    "sha256": "4205bd612dbfe1e1b2e24ffcbef943ce46c067cfc567a73a99ce965b44ab4af3"
+    "size": 46177134,
+    "sha256": "3d4d82bbf0d32a77e77ecd0e6150aeeec0e182de083f8b5e78e9a905df2e2233"
   },
   "pack": {
-    "version": "5.0.30",
+    "version": "5.0.31",
     "required": true,
     "mode": "replace",
     "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
@@ -47,7 +47,7 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack.zip"
     ],
-    "size": 374550475,
-    "sha256": "b3baf7fc4b3b0fbe3c4c65c9b9d42ef350005d0d1f83db18d95e625aae6c70f3"
+    "size": 365464157,
+    "sha256": "0e5e59f703fdcf9b182486ee616a50f35ea0955b6b4f2c906945fa20c26bd79a"
   }
 }
