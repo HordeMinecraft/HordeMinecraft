@@ -1,18 +1,18 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-21T02:15:31.477378+03:00",
+  "published_at": "2026-08-21T02:42:31.360598+03:00",
   "news": [
     {
       "tag": "ЛАУНЧЕР",
-      "title": "HORDE Launcher: аварийный режим обновления",
-      "text": "Старый лаунчер временно не самообновляется, чтобы не уходить в перезапуск. Сборка модов обновляется автоматически; свежий HORDE.exe можно скачать с сайта вручную.",
+      "title": "HORDE 5.0.32: вайп обычного мира",
+      "text": "Обычный мир пересоздаётся, миникарта будет очищена у игроков после обновления. Убраны проблемные хвосты Doomsday/Berezka, из-за которых клиент падал при запуске.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#f02b3e"
     },
     {
       "tag": "СБОРКА",
-      "title": "Pack 5.0.31",
+      "title": "Pack 5.0.32",
       "text": "Очищены старые подсказки спавна и заблокированы отключённые переходы мини-игр.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#b9f1ef"
@@ -35,11 +35,11 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 46179360,
-    "sha256": "c7552b3087d01f4bb64175fe2c1d77859530c401b5c42730e6543013b0129421"
+    "size": 46179187,
+    "sha256": "8dcd06a0c3f19c30c9ba0d650a689591e1be46e6c7367cecb577b6c364cd3178"
   },
   "pack": {
-    "version": "5.0.31",
+    "version": "5.0.32",
     "required": true,
     "mode": "replace",
     "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
@@ -47,7 +47,7 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack.zip"
     ],
-    "size": 365393130,
-    "sha256": "f9e547ae86372c3a1b900ebe039fb77ea68f8decddae8ab7eb7587c4e64907cd"
+    "size": 365317674,
+    "sha256": "9065005e9ba7d1e338d2ffc224a4ac4085654b689f7f8d95cf8a9f7a931b417f"
   }
 }
