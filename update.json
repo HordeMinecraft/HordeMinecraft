@@ -1,18 +1,18 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-21T02:42:31.360598+03:00",
+  "published_at": "2026-08-21T03:27:10.411444+03:00",
   "news": [
     {
       "tag": "ЛАУНЧЕР",
-      "title": "HORDE 5.0.32: вайп обычного мира",
-      "text": "Обычный мир пересоздаётся, миникарта будет очищена у игроков после обновления. Убраны проблемные хвосты Doomsday/Berezka, из-за которых клиент падал при запуске.",
+      "title": "HORDE 5.0.33: полная очистка карты Xaero",
+      "text": "Лаунчер теперь чистит не только world-map, но и серверный кэш Xaero Minimap для HORDE. Это убирает старые прогруженные чанки после вайпа обычного мира.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#f02b3e"
     },
     {
       "tag": "СБОРКА",
-      "title": "Pack 5.0.32",
+      "title": "Pack 5.0.33",
       "text": "Очищены старые подсказки спавна и заблокированы отключённые переходы мини-игр.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#b9f1ef"
@@ -35,11 +35,11 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 46179187,
-    "sha256": "8dcd06a0c3f19c30c9ba0d650a689591e1be46e6c7367cecb577b6c364cd3178"
+    "size": 46179815,
+    "sha256": "07400f5fc9bee57f848b6f15667ec877ee135f48f45d834874add0afe55fa327"
   },
   "pack": {
-    "version": "5.0.32",
+    "version": "5.0.33",
     "required": true,
     "mode": "replace",
     "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
@@ -48,6 +48,6 @@
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack.zip"
     ],
     "size": 365317674,
-    "sha256": "9065005e9ba7d1e338d2ffc224a4ac4085654b689f7f8d95cf8a9f7a931b417f"
+    "sha256": "20d644cf23ac3b0e1312ad7f360859e5034c5fce2b84613a69213187b6889ef1"
   }
 }
