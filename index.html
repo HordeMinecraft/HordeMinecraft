@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0a0b0e">
-    <meta name="description" content="Русский Minecraft сервер с модами: зомби-апокалипсис, оружие TacZ, данжи, танки, CustomNPCs, квесты, аномалии и автообновление через лаунчер HORDE. Сборка 5.0.33.">
+    <meta name="description" content="Русский Minecraft сервер с модами: зомби-апокалипсис, оружие TacZ, данжи, танки, CustomNPCs, квесты, аномалии и автообновление через лаунчер HORDE. Сборка 5.0.34.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta property="og:title" content="HORDE — сервер Minecraft с модами, лаунчером и зомби-апокалипсисом">
   <meta property="og:description" content="Русский сервер Minecraft Java 1.20.1: оружие, орды зомби, данжи, танки, рынок игроков, события и автоматические обновления через лаунчер HORDE.">
@@ -78,8 +78,8 @@
       {
         "@type": "NewsArticle",
         "@id": "https://hordeminecraft.ru/#update-5-0-25",
-        "headline": "Аварийное обновление HORDE: pack 5.0.33 и безопасное обновление",
-        "description": "HORDE обновляет сборку до 5.0.33: обычный мир world пересоздаётся, миникарта и world-map игроков очищаются после обновления, убраны Doomsday Translations/Doomsday Structures и остатки Berezka/LostCities, а старые лаунчеры переведены в безопасный режим без бесконечного самоперезапуска.",
+        "headline": "Аварийное обновление HORDE: pack 5.0.34 отключает MineTraps",
+        "description": "HORDE обновляет сборку до 5.0.34: MineTraps отключён из-за бесконечных взрывов мин, добавлена аварийная очистка проблемной зоны, а полный pack заменяет папку mods без ручной чистки.",
         "datePublished": "2026-08-15",
         "dateModified": "2026-08-15",
         "inLanguage": "ru-RU",
@@ -110,7 +110,7 @@
           {
             "@type": "Question",
             "name": "Что нового в HORDE сейчас?",
-            "acceptedAnswer": {"@type": "Answer", "text": "Сборка обновлена до 5.0.33: обычный мир world вайпнут и будет сгенерирован заново, миникарта очищается у игроков, Doomsday/Berezka/LostCities-хвосты удалены, старый лаунчер больше не должен уходить в вечный перезапуск."}
+            "acceptedAnswer": {"@type": "Answer", "text": "Сборка обновлена до 5.0.34: отключён MineTraps, закрыт риск бесконечных взрывов мин, опубликован полный pack без форс-обновления EXE."}
           },
           {
             "@type": "Question",
@@ -293,8 +293,8 @@
       <div class="section-shell updates-layout">
         <div class="section-heading">
           <p class="section-label">ОБНОВЛЕНИЕ · 21 АВГУСТА 2026</p>
-          <h2>Hotfix 5.0.33: вайп world и полная очистка Xaero-карты</h2>
-          <p class="updates-lead">Обычный мир <code>world</code> пересоздаётся: старые region/entities/poi перенесены в backup, а pack <code>5.0.33</code> чистит Xaero World Map и серверный кэш Xaero Minimap у игроков. Дополнительно убраны Doomsday Translations/Doomsday Structures и хвосты Berezka/LostCities, которые ломали запуск клиента и сервера.</p>
+          <h2>Hotfix 5.0.34: MineTraps отключён</h2>
+          <p class="updates-lead">Pack <code>5.0.34</code> отключает <code>MineTraps</code>, который мог вызывать бесконечные взрывы мин. Лаунчер скачивает полный replace-pack без MineTraps, а сервер получает аварийную очистку проблемной зоны.</p>
         </div>
         <div class="updates-grid">
           <article class="update-card update-card-main">
@@ -505,6 +505,7 @@
   <div class="copy-toast" role="status" aria-live="polite" data-copy-toast>IP сервера скопирован</div>
 </body>
 </html>
+
 
 
 
