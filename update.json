@@ -1,33 +1,33 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-21T19:05:32.207612+03:00",
+  "published_at": "2026-08-22T17:31:23.434769+00:00",
   "news": [
     {
-      "tag": "ФИКС",
-      "title": "HORDE 5.0.34: MineTraps отключён",
-      "text": "Убран мод MineTraps, который мог вызывать бесконечные взрывы мин. Сборка автоматически заменит папку mods без этого мода.",
+      "tag": "ЛАУНЧЕР",
+      "title": "HORDE Launcher 1.4.9",
+      "text": "Обновлён дизайн главного экрана, подсвечена папка игры, улучшено закрытие процесса и поддержаны HD-скины Minecraft.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#f02b3e"
     },
     {
-      "tag": "СЕРВЕР",
-      "title": "MineTraps снят с сервера",
-      "text": "Серверный JAR MineTraps и старые mine-datapacks перенесены в backup, чтобы не оставлять ссылок на удалённые блоки.",
+      "tag": "СБОРКА",
+      "title": "Pack 5.0.35",
+      "text": "Заменён partyhealth-1.0.7.jar на новую русскую версию из присланного файла.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#b9f1ef"
     },
     {
-      "tag": "СБОРКА",
-      "title": "Pack 5.0.34",
-      "text": "Обновление не требует ручной чистки папок: старые файлы сборки заменяются полным паком.",
-      "url": "https://hordeminecraft.ru/updates/",
+      "tag": "ДОНАТ",
+      "title": "DonationAlerts и подписки",
+      "text": "Донат работает по нику игрока, а описание привилегий и китов доступно на сайте.",
+      "url": "https://hordeminecraft.ru/donate/",
       "color": "#f0c66d"
     }
   ],
   "launcher": {
-    "version": "0.0.0",
-    "required": false,
+    "version": "1.4.9",
+    "required": true,
     "url": "https://hordeminecraft.ru/HORDE.exe",
     "urls": [
       "https://hordeminecraft.ru/HORDE.exe",
@@ -35,11 +35,11 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 46179815,
-    "sha256": "07400f5fc9bee57f848b6f15667ec877ee135f48f45d834874add0afe55fa327"
+    "size": 46344822,
+    "sha256": "9606c5482b844f1eaff269832c38092ee1a75dead49f0f02bfce3b4a1bb7e4be"
   },
   "pack": {
-    "version": "5.0.34",
+    "version": "5.0.35",
     "required": true,
     "mode": "replace",
     "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
@@ -47,7 +47,7 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack.zip"
     ],
-    "size": 365188266,
-    "sha256": "cec235b4a37f610ce2e3ea1abd8a331589292509f9fee64f5f764a8081c72a95"
+    "size": 365262221,
+    "sha256": "2475e4574e8ba9a0ae9e97721f7717606405e5c0eb3aa2232432bb4754f6fb13"
   }
 }
