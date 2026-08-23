@@ -1,8 +1,15 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-22T20:31:23.434769+03:00",
+  "published_at": "2026-08-23T03:06:45.448531+03:00",
   "news": [
+    {
+      "tag": "ЛАУНЧЕР",
+      "title": "HORDE Launcher 1.4.10",
+      "text": "Принудительный hotfix для старых лаунчеров: исправлен запуск после обновления и ошибка hero-анимации, из-за которой окно могло не открываться.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#f02b3e"
+    },
     {
       "tag": "ЛАУНЧЕР",
       "title": "HORDE Launcher 1.4.9 hotfix",
@@ -26,7 +33,7 @@
     }
   ],
   "launcher": {
-    "version": "1.4.9",
+    "version": "1.4.10",
     "required": true,
     "url": "https://hordeminecraft.ru/HORDE.exe",
     "urls": [
@@ -35,8 +42,8 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 46345918,
-    "sha256": "26a5b95bd2ba934e6ca2c19393831b0b0481503e3c41c3aac61b68622a881369"
+    "size": 46345994,
+    "sha256": "6044c44be9d8507cbbeb5a1ecbaf694c42eb08718ff6a57f5d14f9c73c2932e6"
   },
   "pack": {
     "version": "5.0.35",
