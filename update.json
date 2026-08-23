@@ -1,8 +1,15 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-23T03:06:45.448531+03:00",
+  "published_at": "2026-08-23T10:32:39.898505+03:00",
   "news": [
+    {
+      "tag": "ЛАУНЧЕР",
+      "title": "HORDE Launcher 1.4.11",
+      "text": "Главный баннер очищен: убраны плашки, линии, геометрия и текст поверх фотографий. Заменена иконка лаунчера, чтобы новый EXE принёс новый значок всем игрокам.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#f02b3e"
+    },
     {
       "tag": "ЛАУНЧЕР",
       "title": "HORDE Launcher 1.4.10",
@@ -33,7 +40,7 @@
     }
   ],
   "launcher": {
-    "version": "1.4.10",
+    "version": "1.4.11",
     "required": true,
     "url": "https://hordeminecraft.ru/HORDE.exe",
     "urls": [
@@ -42,8 +49,8 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 46345994,
-    "sha256": "6044c44be9d8507cbbeb5a1ecbaf694c42eb08718ff6a57f5d14f9c73c2932e6"
+    "size": 46604893,
+    "sha256": "2ffcac7ebe8091f3d9677b97f2ea3d907a078005e197244bf810f799a78a4827"
   },
   "pack": {
     "version": "5.0.35",
