@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0a0b0e">
   <meta name="description" content="Личный кабинет HORDE Minecraft: вход по нику, донат-подписка и синхронизация скина для лаунчера.">
   <meta name="robots" content="noindex, follow">
-  <meta property="og:title" content="HORDE — тест авторизации">
+  <meta property="og:title" content="HORDE — личный кабинет">
   <meta property="og:description" content="Будущий личный кабинет HORDE: вход по нику, привязка аккаунта и отображение донат-подписки.">
   <meta property="og:image" content="https://hordeminecraft.ru/assets/horde-hero-survivors.png">
   <meta property="og:url" content="https://hordeminecraft.ru/auth/">
@@ -48,14 +48,14 @@
           <p>Здесь игрок входит по нику Minecraft, проверяет донат-подписку и готовит синхронизацию скина для лаунчера HORDE.</p>
           <div class="auth-warning">
             <i data-lucide="triangle-alert" aria-hidden="true"></i>
-            <span>Кабинет подключён к HORDE API. Скины уже сохраняются на backend; подключение лаунчера к этой синхронизации будет следующим шагом.</span>
+            <span>В личном кабинете можно войти по нику, проверить подписку и сохранить свой скин для будущей синхронизации с лаунчером.</span>
           </div>
         </div>
 
         <form class="auth-card" data-auth-demo data-auth-view="login">
           <div class="auth-card-head">
             <span>Вход HORDE</span>
-            <strong data-auth-api-status>API CHECK</strong>
+            <strong data-auth-api-status>ПРОВЕРКА</strong>
           </div>
           <label>
             Ник Minecraft
@@ -74,7 +74,7 @@
             <button class="auth-secondary" type="submit" data-auth-action="register">Создать</button>
             <button class="auth-secondary" type="submit" data-auth-action="link">Привязать</button>
           </div>
-          <p class="auth-demo-result" data-auth-demo-result>Проверяем API. Если backend ещё не запущен, сайт покажет понятную ошибку.</p>
+          <p class="auth-demo-result" data-auth-demo-result>Введите ник и пароль, чтобы войти в кабинет.</p>
         </form>
 
         <section class="auth-card auth-cabinet" data-auth-cabinet hidden>
@@ -135,7 +135,7 @@
       <article class="auth-step">
         <span>02</span>
         <h2>Сайт и лаунчер</h2>
-        <p>После входа игрок видит профиль, донат и скин. Лаунчер получает безопасный токен, а не прямой доступ к базе.</p>
+        <p>После входа игрок видит профиль, донат и скин. Дальше лаунчер сможет использовать этот вход без лишних команд в игре.</p>
       </article>
       <article class="auth-step">
         <span>03</span>

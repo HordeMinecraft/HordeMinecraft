@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
       body: payload ? JSON.stringify(payload) : undefined,
     });
     const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(data.detail || `API HTTP ${response.status}`);
+    if (!response.ok) throw new Error(data.detail || `Сервис вернул ошибку ${response.status}`);
     return data;
   };
   const formatDonate = (subscription) => {
@@ -148,20 +148,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = await authRequest("/auth/me", null, {method: "GET", token});
     await renderProfile(data.user);
     showCabinet(true);
-    setAuthStatus("API OK", "good");
+    setAuthStatus("ГОТОВО", "good");
     setCabinetStatus("ONLINE", "good");
     return true;
   };
   if (authDemo) {
     if (!authApiBase) {
-      setAuthStatus("API OFF", "bad");
-      setAuthResult("API-адрес не задан. Форма работает только как макет.", "bad");
+      setAuthStatus("НЕТ СВЯЗИ", "bad");
+      setAuthResult("Кабинет временно недоступен. Попробуйте позже.", "bad");
     } else {
       fetch(`${authApiBase}/health`, {method: "GET"})
         .then((response) => {
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
-          setAuthStatus("API ONLINE", "good");
-          setAuthResult("API доступен. Можно входить в кабинет.", "good");
+          setAuthStatus("ГОТОВО", "good");
+          setAuthResult("Введите ник и пароль, чтобы войти в кабинет.", "good");
           if (getSessionToken()) {
             loadProfile().catch(() => {
               localStorage.removeItem("horde_session_token");
@@ -171,8 +171,8 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         })
         .catch(() => {
-          setAuthStatus("API WAIT", "warn");
-          setAuthResult("Backend ещё не запущен на публичном адресе. Сайт уже готов к подключению API.", "warn");
+          setAuthStatus("ОЖИДАНИЕ", "warn");
+          setAuthResult("Кабинет просыпается или временно недоступен. Попробуйте ещё раз через минуту.", "warn");
         });
     }
   }
@@ -186,22 +186,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const code = form.get("code")?.toString().trim();
     if (!minecraft_nick || minecraft_nick.length < 3) return setAuthResult("Введите ник от 3 символов.", "bad");
     if (!password || password.length < 6) return setAuthResult("Пароль должен быть минимум 6 символов.", "bad");
-    if (!authApiBase) return setAuthResult("API-адрес не задан.", "bad");
+    if (!authApiBase) return setAuthResult("Кабинет временно недоступен.", "bad");
     const path = action === "register" ? "/auth/register" : action === "link" ? "/auth/link" : "/auth/login";
     const payload = action === "link" ? {minecraft_nick, password, code} : {minecraft_nick, password};
     if (action === "link" && (!code || code.length < 4)) return setAuthResult("Для привязки нужен код из игры.", "bad");
-    setAuthResult("Отправляю запрос в HORDE API...", "info");
+    setAuthResult("Проверяем данные входа...", "info");
     try {
       const data = await authRequest(path, payload);
       if (data.session_token) localStorage.setItem("horde_session_token", data.session_token);
       if (data.launcher_token) localStorage.setItem("horde_launcher_token", data.launcher_token);
-      setAuthStatus("API OK", "good");
-      setAuthResult(`Готово: ${data.user?.minecraft_nick || minecraft_nick}. Открываю кабинет.`, "good");
+      setAuthStatus("ГОТОВО", "good");
+      setAuthResult(`Вход выполнен: ${data.user?.minecraft_nick || minecraft_nick}.`, "good");
       await renderProfile(data.user);
       showCabinet(true);
     } catch (error) {
-      setAuthStatus("API ERROR", "bad");
-      setAuthResult(`Ошибка API: ${error.message}`, "bad");
+      setAuthStatus("ОШИБКА", "bad");
+      setAuthResult(`Не удалось войти: ${error.message}`, "bad");
     }
   });
   refreshProfile?.addEventListener("click", async () => {
@@ -231,13 +231,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const reader = new FileReader();
     reader.onload = async () => {
       try {
-        setSkinResult("Сохраняю скин в HORDE API...", "info");
+        setSkinResult("Сохраняю скин...", "info");
         const data = await authRequest("/auth/skin", {
           skin_data_url: reader.result,
           skin_model: skinModel?.value || "classic",
         }, {token});
         await renderProfile(data.user);
-        setSkinResult("Скин сохранён. Следующий шаг — подключить лаунчер к этой синхронизации.", "good");
+        setSkinResult("Скин сохранён. Он будет применён после синхронизации лаунчера.", "good");
       } catch (error) {
         setSkinResult(`Ошибка сохранения скина: ${error.message}`, "bad");
       }
