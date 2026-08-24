@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: horde-auth-api
+    env: python
+    plan: free
+    rootDir: backend/auth
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn horde_auth.app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: HORDE_AUTH_DB_HOST
+        sync: false
+      - key: HORDE_AUTH_DB_PORT
+        sync: false
+      - key: HORDE_AUTH_DB_NAME
+        sync: false
+      - key: HORDE_AUTH_DB_USER
+        sync: false
+      - key: HORDE_AUTH_DB_PASSWORD
+        sync: false
+      - key: HORDE_AUTH_DB_SSL_CA_TEXT
+        sync: false
+      - key: HORDE_AUTH_SERVER_SECRET
+        generateValue: true
+      - key: HORDE_AUTH_CORS_ORIGINS
+        value: https://hordeminecraft.ru
+      - key: HORDE_AUTH_SESSION_DAYS
+        value: "30"
+
