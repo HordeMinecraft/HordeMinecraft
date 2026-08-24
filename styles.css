@@ -606,22 +606,68 @@ body::before {
 
 .auth-reset {
   margin-top: 18px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(255, 209, 102, 0.08), rgba(225, 29, 50, 0.05)),
+    rgba(7, 8, 12, 0.46);
 }
 
 .auth-reset summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  list-style: none;
   cursor: pointer;
   color: var(--yellow);
   font-weight: 900;
   text-transform: uppercase;
+  outline: none;
+}
+
+.auth-reset summary::-webkit-details-marker {
+  display: none;
+}
+
+.auth-reset summary::before {
+  content: "?";
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  color: #07080c;
+  background: var(--yellow);
+  font-family: Impact, "Arial Black", sans-serif;
+}
+
+.auth-reset summary:focus-visible {
+  color: var(--cyan);
 }
 
 .auth-reset p {
-  margin: 10px 0 14px;
+  margin: 12px 0 14px;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.55;
+}
+
+.auth-reset label {
+  margin-bottom: 12px;
+}
+
+.auth-reset .auth-actions {
+  margin: 0 0 12px;
+}
+
+.auth-reset .auth-secondary {
+  min-height: 46px;
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, rgba(225, 29, 50, 0.86), rgba(255, 209, 102, 0.18)),
+    rgba(10, 11, 16, 0.82);
 }
 
 .auth-demo-result[data-state="good"],
