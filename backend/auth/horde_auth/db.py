@@ -22,9 +22,9 @@ def connect(settings: Settings) -> Iterator[Connection]:
         cursorclass=pymysql.cursors.DictCursor,
         autocommit=False,
         ssl=ssl,
-        connect_timeout=10,
-        read_timeout=10,
-        write_timeout=10,
+        connect_timeout=4,
+        read_timeout=6,
+        write_timeout=6,
     )
     try:
         yield conn

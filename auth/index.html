@@ -43,7 +43,7 @@
     <section class="auth-hero">
       <div class="section-shell auth-layout">
         <div class="auth-copy">
-          <p class="section-label">HORDE ACCOUNT</p>
+          <p class="section-label">ЛИЧНЫЙ КАБИНЕТ</p>
           <h1>Личный кабинет HORDE</h1>
           <p>Здесь игрок входит по нику Minecraft, проверяет подписку, меняет скин и привязывает игровой аккаунт.</p>
           <div class="auth-warning">
@@ -70,15 +70,15 @@
             <input name="email" type="email" autocomplete="email" placeholder="mail@example.com">
           </label>
           <label>
-            Код привязки, если есть
-            <input name="code" autocomplete="one-time-code" maxlength="32" placeholder="Код из /linksite">
+            Код привязки старого аккаунта
+            <input name="code" autocomplete="one-time-code" maxlength="32" placeholder="Напиши /linksite в Minecraft">
           </label>
           <div class="auth-actions">
             <button class="download-button" type="submit" data-auth-action="login">Войти</button>
             <button class="auth-secondary" type="submit" data-auth-action="register">Создать</button>
-            <button class="auth-secondary" type="submit" data-auth-action="link">Привязать</button>
+            <button class="auth-secondary" type="submit" data-auth-action="link">Привязать старый аккаунт</button>
           </div>
-          <p class="auth-demo-result" data-auth-demo-result>Введите ник и пароль, чтобы войти в кабинет.</p>
+          <p class="auth-demo-result" data-auth-demo-result>Введите ник и пароль. Для старого аккаунта сначала получите код командой /linksite в игре.</p>
           <details class="auth-reset">
             <summary>Забыли пароль?</summary>
             <p>Укажите ник и почту аккаунта. Если данные совпадут, мы отправим код восстановления.</p>
@@ -162,7 +162,7 @@
       <article class="auth-step">
         <span>01</span>
         <h2>Привязка старого аккаунта</h2>
-        <p>Игрок заходит на сервер, пишет команду <code>/linksite</code>, получает код и вводит его здесь на сайте.</p>
+        <p>Игрок заходит на сервер, пишет команду <code>/linksite</code>, получает код прямо в чате Minecraft и вводит его здесь на сайте.</p>
       </article>
       <article class="auth-step">
         <span>02</span>

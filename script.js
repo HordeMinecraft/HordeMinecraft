@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const friendlyError = (error) => {
     const text = String(error?.message || error || "");
     if (text.includes("Неверный ник") || text.includes("зарегистрирован") || text.includes("Код") || text.includes("Сессия")) return text;
-    if (text.includes("Failed to fetch")) return "нет связи с кабинетом, попробуйте позже.";
+    if (text.includes("Failed to fetch") || text.includes("AbortError") || text.includes("abort")) return "кабинет запускается или временно недоступен. Попробуйте ещё раз через минуту.";
     if (text.includes("422") || text.includes("validation") || text.includes("loc") || text.includes("string_")) return "проверьте ник, пароль и заполненные поля.";
     return text || "попробуйте ещё раз.";
   };
@@ -100,19 +100,28 @@ document.addEventListener("DOMContentLoaded", () => {
     skinResult.textContent = text;
     skinResult.dataset.state = state;
   };
+  const fetchWithTimeout = async (url, options = {}, timeoutMs = 15000) => {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      return await fetch(url, {...options, signal: controller.signal});
+    } finally {
+      window.clearTimeout(timer);
+    }
+  };
   const showCabinet = (show) => {
     if (authDemo) authDemo.hidden = show;
     if (authCabinet) authCabinet.hidden = !show;
   };
   const authRequest = async (path, payload, options = {}) => {
-    const response = await fetch(`${authApiBase}${path}`, {
+    const response = await fetchWithTimeout(`${authApiBase}${path}`, {
       method: options.method || "POST",
       headers: {
         "Content-Type": "application/json",
         ...(options.token ? {"Authorization": `Bearer ${options.token}`} : {}),
       },
       body: payload ? JSON.stringify(payload) : undefined,
-    });
+    }, options.timeoutMs || 18000);
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {
       const detail = typeof data.detail === "string" ? data.detail : "";
@@ -200,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = await authRequest("/auth/me", null, {method: "GET", token});
     await renderProfile(data.user);
     showCabinet(true);
-    setAuthStatus("ГОТОВО", "good");
+    setAuthStatus("ГОТОВ", "good");
     setCabinetStatus("ONLINE", "good");
     return true;
   };
@@ -209,10 +218,10 @@ document.addEventListener("DOMContentLoaded", () => {
       setAuthStatus("НЕТ СВЯЗИ", "bad");
       setAuthResult("Кабинет временно недоступен. Попробуйте позже.", "bad");
     } else {
-      fetch(`${authApiBase}/health`, {method: "GET"})
+      fetchWithTimeout(`${authApiBase}/health`, {method: "GET"}, 12000)
         .then((response) => {
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
-          setAuthStatus("ГОТОВО", "good");
+          setAuthStatus("ГОТОВ", "good");
           setAuthResult("Введите ник и пароль, чтобы войти в кабинет.", "good");
           if (getSessionToken()) {
             loadProfile().catch(() => {
@@ -224,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(() => {
           setAuthStatus("ОЖИДАНИЕ", "warn");
-          setAuthResult("Кабинет просыпается или временно недоступен. Попробуйте ещё раз через минуту.", "warn");
+          setAuthResult("Кабинет запускается. Если вход не сработает сразу, попробуйте ещё раз через минуту.", "warn");
         });
     }
   }
@@ -246,18 +255,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if ((action === "register" || action === "link") && email && !email.includes("@")) {
       return setAuthResult("Проверьте почту для восстановления.", "bad");
     }
-    setAuthResult("Проверяем данные входа...", "info");
+    setAuthResult(action === "link" ? "Проверяем код из Minecraft..." : "Проверяем данные входа...", "info");
     try {
       const data = await authRequest(path, payload);
       if (data.session_token) localStorage.setItem("horde_session_token", data.session_token);
       if (data.launcher_token) localStorage.setItem("horde_launcher_token", data.launcher_token);
-      setAuthStatus("ГОТОВО", "good");
+      setAuthStatus("ГОТОВ", "good");
       setAuthResult(`Вход выполнен: ${data.user?.minecraft_nick || minecraft_nick}.`, "good");
       await renderProfile(data.user);
       showCabinet(true);
     } catch (error) {
       setAuthStatus("ОШИБКА", "bad");
-      setAuthResult(`Не удалось войти: ${friendlyError(error)}`, "bad");
+      const actionText = action === "link" ? "Не удалось привязать аккаунт" : "Не удалось войти";
+      setAuthResult(`${actionText}: ${friendlyError(error)}`, "bad");
     }
   });
   refreshProfile?.addEventListener("click", async () => {

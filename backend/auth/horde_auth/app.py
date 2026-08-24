@@ -256,10 +256,17 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.on_event("startup")
     def startup() -> None:
-        ensure_runtime_schema(settings)
+        try:
+            ensure_runtime_schema(settings)
+        except Exception as exc:
+            print(f"HORDE auth: database schema check postponed: {exc}", flush=True)
 
     @app.get("/health")
     def health() -> dict[str, str]:
+        return {"status": "ok"}
+
+    @app.get("/db-health")
+    def db_health() -> dict[str, str]:
         with connect(settings) as conn:
             with conn.cursor() as cur:
                 cur.execute("SELECT 1 AS ok")
