@@ -245,6 +245,7 @@ def issue_tokens(settings: Settings, user_id: int, request: Request) -> dict[str
 
 def create_app(settings: Settings | None = None) -> FastAPI:
     settings = settings or load_settings()
+    schema_ready = False
     app = FastAPI(title="HORDE Auth API", version="0.1.0", docs_url=None, redoc_url=None, openapi_url=None)
     app.add_middleware(
         CORSMiddleware,
@@ -254,12 +255,16 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         allow_headers=["Authorization", "Content-Type"],
     )
 
+    def ensure_schema_ready() -> None:
+        nonlocal schema_ready
+        if schema_ready:
+            return
+        ensure_runtime_schema(settings)
+        schema_ready = True
+
     @app.on_event("startup")
     def startup() -> None:
-        try:
-            ensure_runtime_schema(settings)
-        except Exception as exc:
-            print(f"HORDE auth: database schema check postponed: {exc}", flush=True)
+        print("HORDE auth: API started; database schema will be checked lazily.", flush=True)
 
     @app.get("/health")
     def health() -> dict[str, str]:
@@ -267,6 +272,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.get("/db-health")
     def db_health() -> dict[str, str]:
+        ensure_schema_ready()
         with connect(settings) as conn:
             with conn.cursor() as cur:
                 cur.execute("SELECT 1 AS ok")
@@ -275,6 +281,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.post("/auth/register")
     def register(payload: RegisterRequest, request: Request) -> dict[str, Any]:
+        ensure_schema_ready()
         nick = normalize_nick(payload.minecraft_nick)
         pwd_hash = hash_password(payload.password)
         with connect(settings) as conn:
@@ -301,6 +308,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.post("/auth/login")
     def login(payload: LoginRequest, request: Request) -> dict[str, Any]:
+        ensure_schema_ready()
         nick = normalize_nick(payload.minecraft_nick)
         with connect(settings) as conn:
             with conn.cursor() as cur:
@@ -312,6 +320,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.post("/auth/link")
     def link_site_account(payload: LinkRequest, request: Request) -> dict[str, Any]:
+        ensure_schema_ready()
         nick = normalize_nick(payload.minecraft_nick)
         code_digest = token_hash(payload.code.strip(), settings.server_secret)
         now = utcnow().replace(tzinfo=None)
@@ -350,11 +359,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.get("/auth/me")
     def me(authorization: str = Header(default="")) -> dict[str, Any]:
+        ensure_schema_ready()
         user = get_user_by_session(settings, authorization)
         return {"user": public_user(user)}
 
     @app.get("/auth/inventory")
     def my_inventory(authorization: str = Header(default="")) -> dict[str, Any]:
+        ensure_schema_ready()
         user = get_user_by_session(settings, authorization)
         with connect(settings) as conn:
             with conn.cursor() as cur:
@@ -386,6 +397,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.post("/auth/skin")
     def update_skin(payload: SkinUpdateRequest, authorization: str = Header(default="")) -> dict[str, Any]:
+        ensure_schema_ready()
         user = get_user_by_session(settings, authorization)
         skin_model = payload.skin_model.lower().strip()
         if skin_model not in {"classic", "slim"}:
@@ -405,6 +417,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.post("/auth/password-reset/request")
     def password_reset_request(payload: PasswordResetRequest) -> dict[str, Any]:
+        ensure_schema_ready()
         nick = normalize_nick(payload.minecraft_nick)
         email = payload.email.strip().lower()
         now = utcnow().replace(tzinfo=None)
@@ -426,6 +439,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.post("/auth/password-reset/confirm")
     def password_reset_confirm(payload: PasswordResetConfirmRequest, request: Request) -> dict[str, Any]:
+        ensure_schema_ready()
         nick = normalize_nick(payload.minecraft_nick)
         code_digest = token_hash(payload.code.strip().upper(), settings.server_secret)
         now = utcnow().replace(tzinfo=None)
@@ -452,6 +466,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.post("/server/link-code")
     def server_link_code(payload: ServerLinkCodeRequest, x_horde_server_secret: str = Header(default="")) -> dict[str, Any]:
         require_server_secret(settings, x_horde_server_secret)
+        ensure_schema_ready()
         nick = normalize_nick(payload.minecraft_nick)
         code = make_short_code(8)
         now = utcnow().replace(tzinfo=None)
@@ -478,6 +493,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.post("/server/inventory")
     def server_inventory(payload: ServerInventoryRequest, x_horde_server_secret: str = Header(default="")) -> dict[str, Any]:
         require_server_secret(settings, x_horde_server_secret)
+        ensure_schema_ready()
         nick = normalize_nick(payload.minecraft_nick)
         inventory_json = json.dumps(payload.inventory, ensure_ascii=False)
         equipment_json = json.dumps(payload.equipment or {}, ensure_ascii=False)
@@ -502,6 +518,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.get("/donate/subscription/{minecraft_nick}")
     def subscription(minecraft_nick: str) -> dict[str, Any]:
+        ensure_schema_ready()
         nick = normalize_nick(minecraft_nick)
         now = utcnow().replace(tzinfo=None)
         with connect(settings) as conn:
