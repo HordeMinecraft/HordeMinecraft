@@ -17,6 +17,7 @@
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=20260823">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=20260823">
   <link rel="stylesheet" href="/styles.css">
+  <script src="/auth/config.js" defer></script>
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
   <script src="/script.js" defer></script>
 </head>
@@ -53,8 +54,8 @@
 
         <form class="auth-card" data-auth-demo>
           <div class="auth-card-head">
-            <span>Тест входа</span>
-            <strong>DEMO</strong>
+            <span>Вход HORDE</span>
+            <strong data-auth-api-status>API CHECK</strong>
           </div>
           <label>
             Ник Minecraft
@@ -64,8 +65,16 @@
             Пароль
             <input name="password" type="password" autocomplete="current-password" placeholder="Будущий пароль сайта">
           </label>
-          <button class="download-button" type="submit">Проверить форму</button>
-          <p class="auth-demo-result" data-auth-demo-result>Форма пока ничего не отправляет — безопасный тест дизайна.</p>
+          <label>
+            Код привязки, если есть
+            <input name="code" autocomplete="one-time-code" maxlength="32" placeholder="Код из будущей /linksite">
+          </label>
+          <div class="auth-actions">
+            <button class="download-button" type="submit" data-auth-action="login">Войти</button>
+            <button class="auth-secondary" type="submit" data-auth-action="register">Создать</button>
+            <button class="auth-secondary" type="submit" data-auth-action="link">Привязать</button>
+          </div>
+          <p class="auth-demo-result" data-auth-demo-result>Проверяем API. Если backend ещё не запущен, сайт покажет понятную ошибку.</p>
         </form>
       </div>
     </section>

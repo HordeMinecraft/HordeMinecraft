@@ -550,9 +550,58 @@ body::before {
   box-shadow: 0 0 0 3px rgba(185, 241, 239, 0.12);
 }
 
+.auth-actions {
+  display: grid;
+  grid-template-columns: 1fr 0.72fr 0.86fr;
+  gap: 10px;
+}
+
+.auth-actions .download-button,
+.auth-secondary {
+  width: 100%;
+  min-height: 48px;
+  justify-content: center;
+}
+
+.auth-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 14px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  font-family: Impact, "Arial Black", sans-serif;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.auth-secondary:hover,
+.auth-secondary:focus-visible {
+  color: var(--cyan);
+  border-color: rgba(185, 241, 239, 0.48);
+}
+
 .auth-demo-result {
   margin: 14px 0 0;
   color: var(--muted);
+}
+
+.auth-demo-result[data-state="good"],
+[data-auth-api-status][data-state="good"] {
+  color: #9ff2aa;
+}
+
+.auth-demo-result[data-state="warn"],
+[data-auth-api-status][data-state="warn"] {
+  color: var(--yellow);
+}
+
+.auth-demo-result[data-state="bad"],
+[data-auth-api-status][data-state="bad"] {
+  color: var(--red-bright);
 }
 
 .auth-grid {
@@ -603,6 +652,61 @@ body::before {
   .auth-card,
   .auth-step {
     border-radius: 16px;
+  }
+
+  .auth-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Header hotfix: keep nav readable on desktop and highlight cabinet. */
+.site-header .nav-shell {
+  width: min(calc(100% - 28px), 1320px);
+  gap: clamp(10px, 1.2vw, 18px);
+}
+
+.site-header .brand {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.site-header .nav-links {
+  min-width: 0;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  gap: clamp(10px, 1.25vw, 20px);
+  font-size: clamp(11px, 0.86vw, 13px);
+}
+
+.site-header .nav-links a,
+.site-header .nav-community-button {
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.site-header .nav-links a[href="/auth/"],
+.site-header .nav-links a[aria-current="page"] {
+  padding: 9px 13px;
+  color: #090a0d;
+  background: linear-gradient(135deg, var(--yellow), #fff0b0);
+  border-radius: 999px;
+  box-shadow: 0 0 20px rgba(240, 198, 109, 0.25);
+}
+
+.site-header .nav-links a[href="/auth/"]:hover,
+.site-header .nav-links a[href="/auth/"]:focus-visible {
+  color: #090a0d;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 1180px) {
+  .site-header .nav-links {
+    gap: 10px;
+    font-size: 11px;
+  }
+
+  .site-header .brand span {
+    font-size: 18px;
   }
 }
 

@@ -51,14 +51,70 @@ document.addEventListener("DOMContentLoaded", () => {
   if (year) year.textContent = String(new Date().getFullYear());
 
   const authDemo = document.querySelector("[data-auth-demo]");
-  authDemo?.addEventListener("submit", (event) => {
+  const authResult = document.querySelector("[data-auth-demo-result]");
+  const authApiStatus = document.querySelector("[data-auth-api-status]");
+  const authApiBase = window.HORDE_AUTH_API_BASE || "";
+  const setAuthResult = (text, state = "info") => {
+    if (!authResult) return;
+    authResult.textContent = text;
+    authResult.dataset.state = state;
+  };
+  const setAuthStatus = (text, state = "info") => {
+    if (!authApiStatus) return;
+    authApiStatus.textContent = text;
+    authApiStatus.dataset.state = state;
+  };
+  const authRequest = async (path, payload) => {
+    const response = await fetch(`${authApiBase}${path}`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload),
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.detail || `API HTTP ${response.status}`);
+    return data;
+  };
+  if (authDemo) {
+    if (!authApiBase) {
+      setAuthStatus("API OFF", "bad");
+      setAuthResult("API-адрес не задан. Форма работает только как макет.", "bad");
+    } else {
+      fetch(`${authApiBase}/health`, {method: "GET"})
+        .then((response) => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          setAuthStatus("API ONLINE", "good");
+          setAuthResult("API доступен. Можно проверять регистрацию и вход.", "good");
+        })
+        .catch(() => {
+          setAuthStatus("API WAIT", "warn");
+          setAuthResult("Backend ещё не запущен на публичном адресе. Сайт уже готов к подключению API.", "warn");
+        });
+    }
+  }
+  authDemo?.addEventListener("submit", async (event) => {
     event.preventDefault();
-    const result = document.querySelector("[data-auth-demo-result]");
-    const nick = new FormData(authDemo).get("nick")?.toString().trim();
-    if (result) {
-      result.textContent = nick && nick.length >= 3
-        ? `Форма работает. Следующий шаг — подключить backend API для ника ${nick}.`
-        : "Введите ник от 3 символов, чтобы проверить форму.";
+    const submitter = event.submitter;
+    const action = submitter?.dataset?.authAction || "login";
+    const form = new FormData(authDemo);
+    const minecraft_nick = form.get("nick")?.toString().trim();
+    const password = form.get("password")?.toString();
+    const code = form.get("code")?.toString().trim();
+    if (!minecraft_nick || minecraft_nick.length < 3) return setAuthResult("Введите ник от 3 символов.", "bad");
+    if (!password || password.length < 6) return setAuthResult("Пароль должен быть минимум 6 символов.", "bad");
+    if (!authApiBase) return setAuthResult("API-адрес не задан.", "bad");
+    const path = action === "register" ? "/auth/register" : action === "link" ? "/auth/link" : "/auth/login";
+    const payload = action === "link" ? {minecraft_nick, password, code} : {minecraft_nick, password};
+    if (action === "link" && (!code || code.length < 4)) return setAuthResult("Для привязки нужен код из игры.", "bad");
+    setAuthResult("Отправляю запрос в HORDE API...", "info");
+    try {
+      const data = await authRequest(path, payload);
+      if (data.session_token) localStorage.setItem("horde_session_token", data.session_token);
+      if (data.launcher_token) localStorage.setItem("horde_launcher_token", data.launcher_token);
+      setAuthStatus("API OK", "good");
+      setAuthResult(`Готово: ${data.user?.minecraft_nick || minecraft_nick}. Токен сохранён локально в браузере.`, "good");
+    } catch (error) {
+      setAuthStatus("API ERROR", "bad");
+      setAuthResult(`Ошибка API: ${error.message}`, "bad");
     }
   });
 
