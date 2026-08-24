@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0b0e">
+  <meta name="description" content="Тестовый личный кабинет HORDE Minecraft: будущая авторизация для сайта и лаунчера по нику Minecraft.">
+  <meta name="robots" content="noindex, follow">
+  <meta property="og:title" content="HORDE — тест авторизации">
+  <meta property="og:description" content="Будущий личный кабинет HORDE: вход по нику, привязка аккаунта и отображение донат-подписки.">
+  <meta property="og:image" content="https://hordeminecraft.ru/assets/horde-hero-survivors.png">
+  <meta property="og:url" content="https://hordeminecraft.ru/auth/">
+  <meta property="og:type" content="website">
+  <title>HORDE — тест авторизации</title>
+  <link rel="canonical" href="https://hordeminecraft.ru/auth/">
+  <link rel="icon" href="/assets/favicon.ico?v=20260823" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/favicon.png?v=20260823">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=20260823">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="/script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="Основная навигация">
+      <a class="brand" href="/" aria-label="HORDE — на главную">
+        <img src="/assets/horde-avatar.webp" alt="" width="42" height="42">
+        <span>HORDE</span>
+      </a>
+      <div class="nav-links">
+        <a href="/">Главная</a>
+        <a href="/launcher/">Лаунчер</a>
+        <a href="/guides/">Гайды</a>
+        <a href="/donate/">Донат</a>
+        <a href="/auth/" aria-current="page">Кабинет</a>
+      </div>
+      <a class="nav-download" href="/HORDE.exe" download>Скачать лаунчер</a>
+    </nav>
+  </header>
+
+  <main class="auth-page">
+    <section class="auth-hero">
+      <div class="section-shell auth-layout">
+        <div class="auth-copy">
+          <p class="section-label">HORDE ACCOUNT</p>
+          <h1>Личный кабинет HORDE</h1>
+          <p>Тестовая страница будущей авторизации: игрок сможет создать пароль на сайте, зайти в лаунчер и больше не вводить <code>/login</code> вручную каждый раз.</p>
+          <div class="auth-warning">
+            <i data-lucide="triangle-alert" aria-hidden="true"></i>
+            <span>Сейчас это визуальный тест. Backend уже подготовлен отдельно, но публично ещё не включён.</span>
+          </div>
+        </div>
+
+        <form class="auth-card" data-auth-demo>
+          <div class="auth-card-head">
+            <span>Тест входа</span>
+            <strong>DEMO</strong>
+          </div>
+          <label>
+            Ник Minecraft
+            <input name="nick" autocomplete="username" maxlength="32" placeholder="Например: TechnoDean">
+          </label>
+          <label>
+            Пароль
+            <input name="password" type="password" autocomplete="current-password" placeholder="Будущий пароль сайта">
+          </label>
+          <button class="download-button" type="submit">Проверить форму</button>
+          <p class="auth-demo-result" data-auth-demo-result>Форма пока ничего не отправляет — безопасный тест дизайна.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section-shell auth-grid" aria-label="Как будет работать авторизация">
+      <article class="auth-step">
+        <span>01</span>
+        <h2>Привязка старого аккаунта</h2>
+        <p>Игрок заходит на сервер старым способом, пишет будущую команду <code>/linksite</code>, получает код и вводит его здесь на сайте.</p>
+      </article>
+      <article class="auth-step">
+        <span>02</span>
+        <h2>Сайт и лаунчер</h2>
+        <p>После привязки игрок входит по нику и паролю. Лаунчер получает безопасный токен, а не прямой доступ к базе.</p>
+      </article>
+      <article class="auth-step">
+        <span>03</span>
+        <h2>Донат сохраняется</h2>
+        <p>Текущие активные подписки переносятся в MySQL. Уже купленные PRO/ELITE/PRIME/EMPEROR не должны пропасть.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="section-shell footer-layout">
+      <div class="footer-brand"><img src="/assets/horde-avatar.webp" alt="" width="36" height="36"><strong>HORDE</strong></div>
+      <p>© <span data-year></span> HORDE Minecraft. Тестовый кабинет находится в разработке.</p>
+      <a href="/">На главную</a>
+    </div>
+  </footer>
+</body>
+</html>

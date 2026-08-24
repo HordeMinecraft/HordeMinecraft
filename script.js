@@ -50,6 +50,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const year = document.querySelector("[data-year]");
   if (year) year.textContent = String(new Date().getFullYear());
 
+  const authDemo = document.querySelector("[data-auth-demo]");
+  authDemo?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const result = document.querySelector("[data-auth-demo-result]");
+    const nick = new FormData(authDemo).get("nick")?.toString().trim();
+    if (result) {
+      result.textContent = nick && nick.length >= 3
+        ? `Форма работает. Следующий шаг — подключить backend API для ника ${nick}.`
+        : "Введите ник от 3 символов, чтобы проверить форму.";
+    }
+  });
+
   const donateNick = document.querySelector("[data-donate-nick]");
   const donateMessage = document.querySelector("[data-donate-message]");
   const donateCopyButton = document.querySelector("[data-copy-donate-message]");
