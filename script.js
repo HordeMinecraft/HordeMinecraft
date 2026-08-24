@@ -51,9 +51,24 @@ document.addEventListener("DOMContentLoaded", () => {
   if (year) year.textContent = String(new Date().getFullYear());
 
   const authDemo = document.querySelector("[data-auth-demo]");
+  const authCabinet = document.querySelector("[data-auth-cabinet]");
   const authResult = document.querySelector("[data-auth-demo-result]");
   const authApiStatus = document.querySelector("[data-auth-api-status]");
+  const cabinetStatus = document.querySelector("[data-cabinet-status]");
+  const cabinetNick = document.querySelector("[data-cabinet-nick]");
+  const cabinetDonate = document.querySelector("[data-cabinet-donate]");
+  const cabinetSubscription = document.querySelector("[data-cabinet-subscription]");
+  const subscriptionTier = document.querySelector("[data-subscription-tier]");
+  const subscriptionExpires = document.querySelector("[data-subscription-expires]");
+  const skinPreview = document.querySelector("[data-skin-preview]");
+  const skinModel = document.querySelector("[data-skin-model]");
+  const skinFile = document.querySelector("[data-skin-file]");
+  const skinResult = document.querySelector("[data-skin-result]");
+  const saveSkin = document.querySelector("[data-save-skin]");
+  const refreshProfile = document.querySelector("[data-refresh-profile]");
+  const authLogout = document.querySelector("[data-auth-logout]");
   const authApiBase = window.HORDE_AUTH_API_BASE || "";
+  const getSessionToken = () => localStorage.getItem("horde_session_token") || "";
   const setAuthResult = (text, state = "info") => {
     if (!authResult) return;
     authResult.textContent = text;
@@ -64,15 +79,78 @@ document.addEventListener("DOMContentLoaded", () => {
     authApiStatus.textContent = text;
     authApiStatus.dataset.state = state;
   };
-  const authRequest = async (path, payload) => {
+  const setCabinetStatus = (text, state = "info") => {
+    if (!cabinetStatus) return;
+    cabinetStatus.textContent = text;
+    cabinetStatus.dataset.state = state;
+  };
+  const setSkinResult = (text, state = "info") => {
+    if (!skinResult) return;
+    skinResult.textContent = text;
+    skinResult.dataset.state = state;
+  };
+  const showCabinet = (show) => {
+    if (authDemo) authDemo.hidden = show;
+    if (authCabinet) authCabinet.hidden = !show;
+  };
+  const authRequest = async (path, payload, options = {}) => {
     const response = await fetch(`${authApiBase}${path}`, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(payload),
+      method: options.method || "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(options.token ? {"Authorization": `Bearer ${options.token}`} : {}),
+      },
+      body: payload ? JSON.stringify(payload) : undefined,
     });
     const data = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(data.detail || `API HTTP ${response.status}`);
     return data;
+  };
+  const formatDonate = (subscription) => {
+    if (!subscription?.active) return "Активной донат-подписки сейчас нет.";
+    const expires = subscription.expires_at ? new Date(subscription.expires_at).toLocaleString("ru-RU") : "дата уточняется";
+    return `Активна подписка ${subscription.tier} до ${expires}.`;
+  };
+  const renderSubscription = (subscription) => {
+    const active = Boolean(subscription?.active);
+    cabinetSubscription?.classList.toggle("active", active);
+    if (subscriptionTier) subscriptionTier.textContent = active ? subscription.tier : "Нет активной";
+    if (subscriptionExpires) {
+      if (active) {
+        const expires = subscription.expires_at ? new Date(subscription.expires_at).toLocaleString("ru-RU") : "дата уточняется";
+        subscriptionExpires.textContent = `Действует до ${expires}. Префикс и защита донат-вещей активны до окончания подписки.`;
+      } else {
+        subscriptionExpires.textContent = "После покупки PRO/ELITE/PRIME/EMPEROR статус появится здесь.";
+      }
+    }
+  };
+  const renderProfile = async (user) => {
+    const nick = user?.minecraft_nick || "Игрок";
+    if (cabinetNick) cabinetNick.textContent = nick;
+    if (skinModel) skinModel.value = user?.skin_model || "classic";
+    if (skinPreview) {
+      skinPreview.style.backgroundImage = user?.skin_data_url ? `url("${user.skin_data_url}")` : "";
+      skinPreview.classList.toggle("has-skin", Boolean(user?.skin_data_url));
+    }
+    if (cabinetDonate) cabinetDonate.textContent = "Проверяем донат-подписку...";
+    try {
+      const sub = await fetch(`${authApiBase}/donate/subscription/${encodeURIComponent(nick)}`).then((r) => r.json());
+      if (cabinetDonate) cabinetDonate.textContent = formatDonate(sub);
+      renderSubscription(sub);
+    } catch {
+      if (cabinetDonate) cabinetDonate.textContent = "Донат-подписку сейчас не удалось проверить.";
+      renderSubscription(null);
+    }
+  };
+  const loadProfile = async () => {
+    const token = getSessionToken();
+    if (!authApiBase || !token) return false;
+    const data = await authRequest("/auth/me", null, {method: "GET", token});
+    await renderProfile(data.user);
+    showCabinet(true);
+    setAuthStatus("API OK", "good");
+    setCabinetStatus("ONLINE", "good");
+    return true;
   };
   if (authDemo) {
     if (!authApiBase) {
@@ -83,7 +161,14 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((response) => {
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           setAuthStatus("API ONLINE", "good");
-          setAuthResult("API доступен. Можно проверять регистрацию и вход.", "good");
+          setAuthResult("API доступен. Можно входить в кабинет.", "good");
+          if (getSessionToken()) {
+            loadProfile().catch(() => {
+              localStorage.removeItem("horde_session_token");
+              localStorage.removeItem("horde_launcher_token");
+              showCabinet(false);
+            });
+          }
         })
         .catch(() => {
           setAuthStatus("API WAIT", "warn");
@@ -111,11 +196,54 @@ document.addEventListener("DOMContentLoaded", () => {
       if (data.session_token) localStorage.setItem("horde_session_token", data.session_token);
       if (data.launcher_token) localStorage.setItem("horde_launcher_token", data.launcher_token);
       setAuthStatus("API OK", "good");
-      setAuthResult(`Готово: ${data.user?.minecraft_nick || minecraft_nick}. Токен сохранён локально в браузере.`, "good");
+      setAuthResult(`Готово: ${data.user?.minecraft_nick || minecraft_nick}. Открываю кабинет.`, "good");
+      await renderProfile(data.user);
+      showCabinet(true);
     } catch (error) {
       setAuthStatus("API ERROR", "bad");
       setAuthResult(`Ошибка API: ${error.message}`, "bad");
     }
+  });
+  refreshProfile?.addEventListener("click", async () => {
+    setCabinetStatus("SYNC", "warn");
+    try {
+      await loadProfile();
+    } catch (error) {
+      setCabinetStatus("ERROR", "bad");
+      setSkinResult(`Не удалось обновить профиль: ${error.message}`, "bad");
+    }
+  });
+  authLogout?.addEventListener("click", () => {
+    localStorage.removeItem("horde_session_token");
+    localStorage.removeItem("horde_launcher_token");
+    showCabinet(false);
+    setAuthResult("Вы вышли из кабинета на этом устройстве.", "warn");
+  });
+  saveSkin?.addEventListener("click", async () => {
+    const file = skinFile?.files?.[0];
+    if (!file) return setSkinResult("Выберите PNG-файл скина.", "bad");
+    if (file.type !== "image/png" && !file.name.toLowerCase().endsWith(".png")) {
+      return setSkinResult("Нужен именно PNG-скин Minecraft.", "bad");
+    }
+    if (file.size > 650 * 1024) return setSkinResult("Файл слишком большой. Для скина Minecraft хватит PNG до 650 КБ.", "bad");
+    const token = getSessionToken();
+    if (!token) return setSkinResult("Сначала войдите в кабинет.", "bad");
+    const reader = new FileReader();
+    reader.onload = async () => {
+      try {
+        setSkinResult("Сохраняю скин в HORDE API...", "info");
+        const data = await authRequest("/auth/skin", {
+          skin_data_url: reader.result,
+          skin_model: skinModel?.value || "classic",
+        }, {token});
+        await renderProfile(data.user);
+        setSkinResult("Скин сохранён. Следующий шаг — подключить лаунчер к этой синхронизации.", "good");
+      } catch (error) {
+        setSkinResult(`Ошибка сохранения скина: ${error.message}`, "bad");
+      }
+    };
+    reader.onerror = () => setSkinResult("Не удалось прочитать файл скина.", "bad");
+    reader.readAsDataURL(file);
   });
 
   const donateNick = document.querySelector("[data-donate-nick]");

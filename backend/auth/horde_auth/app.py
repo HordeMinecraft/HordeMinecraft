@@ -30,6 +30,11 @@ class LinkRequest(BaseModel):
     email: str | None = Field(default=None, max_length=255)
 
 
+class SkinUpdateRequest(BaseModel):
+    skin_data_url: str = Field(min_length=32, max_length=700_000)
+    skin_model: str = Field(default="classic", max_length=16)
+
+
 def utcnow() -> datetime:
     return datetime.now(timezone.utc)
 
@@ -39,7 +44,52 @@ def public_user(row: dict[str, Any]) -> dict[str, Any]:
         "id": row["id"],
         "minecraft_nick": row["minecraft_nick"],
         "email": row.get("email"),
+        "skin_model": row.get("skin_model") or "classic",
+        "skin_data_url": row.get("skin_data_url"),
+        "skin_updated_at": row["skin_updated_at"].isoformat() if row.get("skin_updated_at") else None,
     }
+
+
+def ensure_skin_columns(settings: Settings) -> None:
+    required = {
+        "skin_model": "ALTER TABLE users ADD COLUMN skin_model ENUM('classic','slim') NOT NULL DEFAULT 'classic'",
+        "skin_data_url": "ALTER TABLE users ADD COLUMN skin_data_url MEDIUMTEXT NULL",
+        "skin_updated_at": "ALTER TABLE users ADD COLUMN skin_updated_at TIMESTAMP NULL",
+    }
+    with connect(settings) as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT COLUMN_NAME FROM information_schema.COLUMNS
+                WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='users'
+                """
+            )
+            existing = {row["COLUMN_NAME"] for row in cur.fetchall()}
+            for column, sql in required.items():
+                if column not in existing:
+                    cur.execute(sql)
+
+
+def get_user_by_session(settings: Settings, authorization: str) -> dict[str, Any]:
+    prefix = "Bearer "
+    if not authorization.startswith(prefix):
+        raise HTTPException(status_code=401, detail="Нет токена.")
+    digest = token_hash(authorization[len(prefix) :], settings.server_secret)
+    now = utcnow().replace(tzinfo=None)
+    with connect(settings) as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT u.* FROM sessions s
+                JOIN users u ON u.id=s.user_id
+                WHERE s.session_token_hash=%s AND s.revoked_at IS NULL AND s.expires_at > %s
+                """,
+                (digest, now),
+            )
+            user = cur.fetchone()
+    if not user:
+        raise HTTPException(status_code=401, detail="Сессия истекла.")
+    return user
 
 
 def issue_tokens(settings: Settings, user_id: int, request: Request) -> dict[str, str]:
@@ -88,6 +138,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         allow_methods=["GET", "POST"],
         allow_headers=["Authorization", "Content-Type"],
     )
+
+    @app.on_event("startup")
+    def startup() -> None:
+        ensure_skin_columns(settings)
 
     @app.get("/health")
     def health() -> dict[str, str]:
@@ -174,25 +228,27 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.get("/auth/me")
     def me(authorization: str = Header(default="")) -> dict[str, Any]:
-        prefix = "Bearer "
-        if not authorization.startswith(prefix):
-            raise HTTPException(status_code=401, detail="Нет токена.")
-        digest = token_hash(authorization[len(prefix) :], settings.server_secret)
+        user = get_user_by_session(settings, authorization)
+        return {"user": public_user(user)}
+
+    @app.post("/auth/skin")
+    def update_skin(payload: SkinUpdateRequest, authorization: str = Header(default="")) -> dict[str, Any]:
+        user = get_user_by_session(settings, authorization)
+        skin_model = payload.skin_model.lower().strip()
+        if skin_model not in {"classic", "slim"}:
+            raise HTTPException(status_code=400, detail="Модель скина должна быть classic или slim.")
+        if not payload.skin_data_url.startswith("data:image/png;base64,"):
+            raise HTTPException(status_code=400, detail="Загрузите PNG-скин Minecraft.")
         now = utcnow().replace(tzinfo=None)
         with connect(settings) as conn:
             with conn.cursor() as cur:
                 cur.execute(
-                    """
-                    SELECT u.* FROM sessions s
-                    JOIN users u ON u.id=s.user_id
-                    WHERE s.session_token_hash=%s AND s.revoked_at IS NULL AND s.expires_at > %s
-                    """,
-                    (digest, now),
+                    "UPDATE users SET skin_model=%s, skin_data_url=%s, skin_updated_at=%s WHERE id=%s",
+                    (skin_model, payload.skin_data_url, now, user["id"]),
                 )
-                user = cur.fetchone()
-        if not user:
-            raise HTTPException(status_code=401, detail="Сессия истекла.")
-        return {"user": public_user(user)}
+                cur.execute("SELECT * FROM users WHERE id=%s", (user["id"],))
+                updated = cur.fetchone()
+        return {"user": public_user(updated)}
 
     @app.get("/donate/subscription/{minecraft_nick}")
     def subscription(minecraft_nick: str) -> dict[str, Any]:

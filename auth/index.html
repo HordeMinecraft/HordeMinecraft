@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0a0b0e">
-  <meta name="description" content="Тестовый личный кабинет HORDE Minecraft: будущая авторизация для сайта и лаунчера по нику Minecraft.">
+  <meta name="description" content="Личный кабинет HORDE Minecraft: вход по нику, донат-подписка и синхронизация скина для лаунчера.">
   <meta name="robots" content="noindex, follow">
   <meta property="og:title" content="HORDE — тест авторизации">
   <meta property="og:description" content="Будущий личный кабинет HORDE: вход по нику, привязка аккаунта и отображение донат-подписки.">
   <meta property="og:image" content="https://hordeminecraft.ru/assets/horde-hero-survivors.png">
   <meta property="og:url" content="https://hordeminecraft.ru/auth/">
   <meta property="og:type" content="website">
-  <title>HORDE — тест авторизации</title>
+  <title>HORDE — личный кабинет</title>
   <link rel="canonical" href="https://hordeminecraft.ru/auth/">
   <link rel="icon" href="/assets/favicon.ico?v=20260823" sizes="any">
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=20260823">
@@ -45,14 +45,14 @@
         <div class="auth-copy">
           <p class="section-label">HORDE ACCOUNT</p>
           <h1>Личный кабинет HORDE</h1>
-          <p>Тестовая страница будущей авторизации: игрок сможет создать пароль на сайте, зайти в лаунчер и больше не вводить <code>/login</code> вручную каждый раз.</p>
+          <p>Здесь игрок входит по нику Minecraft, проверяет донат-подписку и готовит синхронизацию скина для лаунчера HORDE.</p>
           <div class="auth-warning">
             <i data-lucide="triangle-alert" aria-hidden="true"></i>
-            <span>Сейчас это визуальный тест. Backend уже подготовлен отдельно, но публично ещё не включён.</span>
+            <span>Кабинет подключён к HORDE API. Скины уже сохраняются на backend; подключение лаунчера к этой синхронизации будет следующим шагом.</span>
           </div>
         </div>
 
-        <form class="auth-card" data-auth-demo>
+        <form class="auth-card" data-auth-demo data-auth-view="login">
           <div class="auth-card-head">
             <span>Вход HORDE</span>
             <strong data-auth-api-status>API CHECK</strong>
@@ -76,6 +76,53 @@
           </div>
           <p class="auth-demo-result" data-auth-demo-result>Проверяем API. Если backend ещё не запущен, сайт покажет понятную ошибку.</p>
         </form>
+
+        <section class="auth-card auth-cabinet" data-auth-cabinet hidden>
+          <div class="auth-card-head">
+            <span>Кабинет игрока</span>
+            <strong data-cabinet-status>ONLINE</strong>
+          </div>
+
+          <div class="cabinet-profile">
+            <div class="skin-preview" data-skin-preview>
+              <span>SKIN</span>
+            </div>
+            <div>
+              <p class="section-label">Minecraft nick</p>
+              <h2 data-cabinet-nick>Игрок</h2>
+              <p data-cabinet-donate>Проверяем донат-подписку...</p>
+            </div>
+          </div>
+
+          <div class="cabinet-subscription" data-cabinet-subscription>
+            <span class="cabinet-subscription-label">Подписка</span>
+            <strong data-subscription-tier>Нет активной</strong>
+            <p data-subscription-expires>После покупки PRO/ELITE/PRIME/EMPEROR статус появится здесь.</p>
+          </div>
+
+          <div class="cabinet-panel">
+            <h3>Скин игрока</h3>
+            <p>Загрузи PNG-скин Minecraft. Поддерживаем обычную и slim-модель. Файл сохранится в кабинете, затем лаунчер сможет синхронизировать его в игру.</p>
+            <label>
+              Модель
+              <select data-skin-model>
+                <option value="classic">Classic / Steve</option>
+                <option value="slim">Slim / Alex</option>
+              </select>
+            </label>
+            <label>
+              PNG-скин
+              <input type="file" accept="image/png" data-skin-file>
+            </label>
+            <button class="download-button" type="button" data-save-skin>Сохранить скин</button>
+            <p class="auth-demo-result" data-skin-result>Скин ещё не менялся в этой сессии.</p>
+          </div>
+
+          <div class="cabinet-actions">
+            <button class="auth-secondary" type="button" data-refresh-profile>Обновить профиль</button>
+            <button class="auth-secondary" type="button" data-auth-logout>Выйти</button>
+          </div>
+        </section>
       </div>
     </section>
 
@@ -88,12 +135,12 @@
       <article class="auth-step">
         <span>02</span>
         <h2>Сайт и лаунчер</h2>
-        <p>После привязки игрок входит по нику и паролю. Лаунчер получает безопасный токен, а не прямой доступ к базе.</p>
+        <p>После входа игрок видит профиль, донат и скин. Лаунчер получает безопасный токен, а не прямой доступ к базе.</p>
       </article>
       <article class="auth-step">
         <span>03</span>
         <h2>Донат сохраняется</h2>
-        <p>Текущие активные подписки переносятся в MySQL. Уже купленные PRO/ELITE/PRIME/EMPEROR не должны пропасть.</p>
+        <p>Текущие активные подписки читаются из MySQL. Уже купленные PRO/ELITE/PRIME/EMPEROR отображаются в кабинете.</p>
       </article>
     </section>
   </main>
