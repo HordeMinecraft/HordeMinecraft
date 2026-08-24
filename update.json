@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-23T10:32:39.898505+03:00",
+  "published_at": "2026-08-24T21:19:15.959844+00:00",
   "news": [
     {
       "tag": "ЛАУНЧЕР",
@@ -26,8 +26,8 @@
     },
     {
       "tag": "СБОРКА",
-      "title": "Pack 5.0.35",
-      "text": "Заменён partyhealth-1.0.7.jar на новую русскую версию из присланного файла.",
+      "title": "Pack 5.0.36",
+      "text": "Добавлены каналы чата global/local/trade/staff и новые зомби OutBreak | A.B. Обновление обязательно для входа на сервер.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#b9f1ef"
     },
@@ -53,7 +53,7 @@
     "sha256": "2ffcac7ebe8091f3d9677b97f2ea3d907a078005e197244bf810f799a78a4827"
   },
   "pack": {
-    "version": "5.0.35",
+    "version": "5.0.36",
     "required": true,
     "mode": "replace",
     "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
@@ -61,7 +61,7 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack.zip"
     ],
-    "size": 365262221,
-    "sha256": "2475e4574e8ba9a0ae9e97721f7717606405e5c0eb3aa2232432bb4754f6fb13"
+    "size": 371627733,
+    "sha256": "1ceebf4aebb002d06548a9bd4df926ed52b2db88f9fdbf88bbaad29f6321792c"
   }
 }
