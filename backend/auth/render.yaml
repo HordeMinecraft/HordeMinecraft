@@ -26,4 +26,15 @@ services:
         value: https://hordeminecraft.ru
       - key: HORDE_AUTH_SESSION_DAYS
         value: "30"
-
+      - key: HORDE_AUTH_SMTP_HOST
+        sync: false
+      - key: HORDE_AUTH_SMTP_PORT
+        sync: false
+      - key: HORDE_AUTH_SMTP_USER
+        sync: false
+      - key: HORDE_AUTH_SMTP_PASSWORD
+        sync: false
+      - key: HORDE_AUTH_SMTP_FROM
+        sync: false
+      - key: HORDE_AUTH_SMTP_TLS
+        value: "true"

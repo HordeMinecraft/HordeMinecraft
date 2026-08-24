@@ -23,6 +23,12 @@ class Settings:
     server_secret: str
     cors_origins: list[str]
     session_days: int
+    smtp_host: str | None
+    smtp_port: int
+    smtp_user: str | None
+    smtp_password: str | None
+    smtp_from: str | None
+    smtp_tls: bool
 
 
 def load_settings() -> Settings:
@@ -51,4 +57,10 @@ def load_settings() -> Settings:
             if origin.strip()
         ],
         session_days=int(os.getenv("HORDE_AUTH_SESSION_DAYS", "30")),
+        smtp_host=os.getenv("HORDE_AUTH_SMTP_HOST") or None,
+        smtp_port=int(os.getenv("HORDE_AUTH_SMTP_PORT", "587")),
+        smtp_user=os.getenv("HORDE_AUTH_SMTP_USER") or None,
+        smtp_password=os.getenv("HORDE_AUTH_SMTP_PASSWORD") or None,
+        smtp_from=os.getenv("HORDE_AUTH_SMTP_FROM") or os.getenv("HORDE_AUTH_SMTP_USER") or None,
+        smtp_tls=os.getenv("HORDE_AUTH_SMTP_TLS", "true").lower() not in {"0", "false", "no", "off"},
     )

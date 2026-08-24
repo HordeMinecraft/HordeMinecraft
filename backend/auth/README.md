@@ -8,8 +8,9 @@
 - вход по нику и паролю;
 - токен сессии для сайта;
 - отдельный токен для лаунчера;
-- привязка существующего игрового аккаунта через одноразовый код `/linksite` в будущем;
-- чтение активной донат-подписки по нику.
+- привязка существующего игрового аккаунта через одноразовый код `/linksite`;
+- чтение активной донат-подписки по нику;
+- восстановление пароля по почте, если на backend настроен SMTP.
 
 Важно: пароль MySQL нельзя хранить в GitHub Pages, лаунчере или публичном репозитории. Он должен лежать только в `.env` на сервере, где работает backend.
 
@@ -87,6 +88,12 @@ HORDE_AUTH_DB_SSL_CA_TEXT
 HORDE_AUTH_SERVER_SECRET
 HORDE_AUTH_CORS_ORIGINS=https://hordeminecraft.ru
 HORDE_AUTH_SESSION_DAYS=30
+HORDE_AUTH_SMTP_HOST
+HORDE_AUTH_SMTP_PORT=587
+HORDE_AUTH_SMTP_USER
+HORDE_AUTH_SMTP_PASSWORD
+HORDE_AUTH_SMTP_FROM
+HORDE_AUTH_SMTP_TLS=true
 ```
 
 8. После запуска открыть:

@@ -92,3 +92,31 @@ CREATE TABLE IF NOT EXISTS donate_pending_kits (
   UNIQUE KEY uq_pending_kit_external_payment (source, external_payment_id),
   KEY idx_pending_kit_nick_claimed (minecraft_nick, claimed_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS player_inventory_snapshots (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  minecraft_nick VARCHAR(32) NOT NULL,
+  minecraft_uuid CHAR(36) NULL,
+  inventory_json JSON NOT NULL,
+  equipment_json JSON NULL,
+  ender_chest_json JSON NULL,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_inventory_nick (minecraft_nick),
+  KEY idx_inventory_uuid (minecraft_uuid),
+  KEY idx_inventory_updated_at (updated_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS password_reset_codes (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  user_id BIGINT UNSIGNED NOT NULL,
+  code_hash CHAR(64) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  expires_at TIMESTAMP NOT NULL,
+  used_at TIMESTAMP NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_password_reset_code_hash (code_hash),
+  KEY idx_password_reset_user (user_id),
+  KEY idx_password_reset_expires (expires_at),
+  CONSTRAINT fk_password_reset_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

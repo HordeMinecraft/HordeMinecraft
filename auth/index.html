@@ -7,7 +7,7 @@
   <meta name="description" content="Личный кабинет HORDE Minecraft: вход по нику, донат-подписка и синхронизация скина для лаунчера.">
   <meta name="robots" content="noindex, follow">
   <meta property="og:title" content="HORDE — личный кабинет">
-  <meta property="og:description" content="Будущий личный кабинет HORDE: вход по нику, привязка аккаунта и отображение донат-подписки.">
+  <meta property="og:description" content="Личный кабинет HORDE: вход по нику, привязка аккаунта, скин, инвентарь и донат-подписка.">
   <meta property="og:image" content="https://hordeminecraft.ru/assets/horde-hero-survivors.png">
   <meta property="og:url" content="https://hordeminecraft.ru/auth/">
   <meta property="og:type" content="website">
@@ -45,17 +45,17 @@
         <div class="auth-copy">
           <p class="section-label">HORDE ACCOUNT</p>
           <h1>Личный кабинет HORDE</h1>
-          <p>Здесь игрок входит по нику Minecraft, проверяет донат-подписку и готовит синхронизацию скина для лаунчера HORDE.</p>
+          <p>Здесь игрок входит по нику Minecraft, проверяет подписку, меняет скин и привязывает игровой аккаунт.</p>
           <div class="auth-warning">
             <i data-lucide="triangle-alert" aria-hidden="true"></i>
-            <span>В личном кабинете можно войти по нику, проверить подписку и сохранить свой скин для будущей синхронизации с лаунчером.</span>
+            <span>Если аккаунт уже был на сервере, привяжи его через команду <code>/linksite</code> и код из чата.</span>
           </div>
         </div>
 
         <form class="auth-card" data-auth-demo data-auth-view="login">
           <div class="auth-card-head">
             <span>Вход HORDE</span>
-            <strong data-auth-api-status>ПРОВЕРКА</strong>
+            <strong data-auth-api-status>ГОТОВ</strong>
           </div>
           <label>
             Ник Minecraft
@@ -63,11 +63,15 @@
           </label>
           <label>
             Пароль
-            <input name="password" type="password" autocomplete="current-password" placeholder="Будущий пароль сайта">
+            <input name="password" type="password" autocomplete="current-password" placeholder="Пароль от кабинета">
+          </label>
+          <label>
+            Почта для восстановления
+            <input name="email" type="email" autocomplete="email" placeholder="mail@example.com">
           </label>
           <label>
             Код привязки, если есть
-            <input name="code" autocomplete="one-time-code" maxlength="32" placeholder="Код из будущей /linksite">
+            <input name="code" autocomplete="one-time-code" maxlength="32" placeholder="Код из /linksite">
           </label>
           <div class="auth-actions">
             <button class="download-button" type="submit" data-auth-action="login">Войти</button>
@@ -75,6 +79,28 @@
             <button class="auth-secondary" type="submit" data-auth-action="link">Привязать</button>
           </div>
           <p class="auth-demo-result" data-auth-demo-result>Введите ник и пароль, чтобы войти в кабинет.</p>
+          <details class="auth-reset">
+            <summary>Забыли пароль?</summary>
+            <p>Укажите ник и почту аккаунта. Если данные совпадут, мы отправим код восстановления.</p>
+            <label>
+              Почта аккаунта
+              <input name="reset_email" type="email" autocomplete="email" placeholder="mail@example.com">
+            </label>
+            <div class="auth-actions auth-actions-compact">
+              <button class="auth-secondary" type="button" data-reset-request>Получить код</button>
+            </div>
+            <label>
+              Код восстановления
+              <input name="reset_code" maxlength="16" placeholder="Код из письма">
+            </label>
+            <label>
+              Новый пароль
+              <input name="reset_password" type="password" autocomplete="new-password" placeholder="Минимум 6 символов">
+            </label>
+            <div class="auth-actions auth-actions-compact">
+              <button class="auth-secondary" type="button" data-reset-confirm>Сменить пароль</button>
+            </div>
+          </details>
         </form>
 
         <section class="auth-card auth-cabinet" data-auth-cabinet hidden>
@@ -101,8 +127,14 @@
           </div>
 
           <div class="cabinet-panel">
+            <h3>Инвентарь</h3>
+            <p data-inventory-status>Инвентарь появится здесь после синхронизации с сервера.</p>
+            <div class="inventory-grid" data-inventory-grid aria-label="Инвентарь игрока"></div>
+          </div>
+
+          <div class="cabinet-panel">
             <h3>Скин игрока</h3>
-            <p>Загрузи PNG-скин Minecraft. Поддерживаем обычную и slim-модель. Файл сохранится в кабинете, затем лаунчер сможет синхронизировать его в игру.</p>
+            <p>Загрузи PNG-скин Minecraft. Поддерживаем обычную и slim-модель; файл сохранится в кабинете игрока.</p>
             <label>
               Модель
               <select data-skin-model>
@@ -130,7 +162,7 @@
       <article class="auth-step">
         <span>01</span>
         <h2>Привязка старого аккаунта</h2>
-        <p>Игрок заходит на сервер старым способом, пишет будущую команду <code>/linksite</code>, получает код и вводит его здесь на сайте.</p>
+        <p>Игрок заходит на сервер, пишет команду <code>/linksite</code>, получает код и вводит его здесь на сайте.</p>
       </article>
       <article class="auth-step">
         <span>02</span>
@@ -140,7 +172,7 @@
       <article class="auth-step">
         <span>03</span>
         <h2>Донат сохраняется</h2>
-        <p>Текущие активные подписки читаются из MySQL. Уже купленные PRO/ELITE/PRIME/EMPEROR отображаются в кабинете.</p>
+        <p>Уже купленные PRO/ELITE/PRIME/EMPEROR отображаются в кабинете и не теряются при входе на сайт.</p>
       </article>
     </section>
   </main>
@@ -148,7 +180,7 @@
   <footer>
     <div class="section-shell footer-layout">
       <div class="footer-brand"><img src="/assets/horde-avatar.webp" alt="" width="36" height="36"><strong>HORDE</strong></div>
-      <p>© <span data-year></span> HORDE Minecraft. Тестовый кабинет находится в разработке.</p>
+      <p>© <span data-year></span> HORDE Minecraft. Личный кабинет проекта.</p>
       <a href="/">На главную</a>
     </div>
   </footer>

@@ -1,6 +1,11 @@
 from __future__ import annotations
 
+import json
+import secrets
+import smtplib
+import string
 from datetime import datetime, timedelta, timezone
+from email.message import EmailMessage
 from typing import Any
 
 from fastapi import FastAPI, Header, HTTPException, Request
@@ -35,6 +40,30 @@ class SkinUpdateRequest(BaseModel):
     skin_model: str = Field(default="classic", max_length=16)
 
 
+class ServerLinkCodeRequest(BaseModel):
+    minecraft_nick: str = Field(min_length=3, max_length=32)
+    minecraft_uuid: str | None = Field(default=None, max_length=36)
+
+
+class ServerInventoryRequest(BaseModel):
+    minecraft_nick: str = Field(min_length=3, max_length=32)
+    minecraft_uuid: str | None = Field(default=None, max_length=36)
+    inventory: list[dict[str, Any]] = Field(default_factory=list)
+    equipment: dict[str, Any] | None = None
+    ender_chest: list[dict[str, Any]] | None = None
+
+
+class PasswordResetRequest(BaseModel):
+    minecraft_nick: str = Field(min_length=3, max_length=32)
+    email: str = Field(min_length=5, max_length=255)
+
+
+class PasswordResetConfirmRequest(BaseModel):
+    minecraft_nick: str = Field(min_length=3, max_length=32)
+    code: str = Field(min_length=6, max_length=16)
+    new_password: str = Field(min_length=6, max_length=128)
+
+
 def utcnow() -> datetime:
     return datetime.now(timezone.utc)
 
@@ -50,7 +79,7 @@ def public_user(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def ensure_skin_columns(settings: Settings) -> None:
+def ensure_runtime_schema(settings: Settings) -> None:
     required = {
         "skin_model": "ALTER TABLE users ADD COLUMN skin_model ENUM('classic','slim') NOT NULL DEFAULT 'classic'",
         "skin_data_url": "ALTER TABLE users ADD COLUMN skin_data_url MEDIUMTEXT NULL",
@@ -68,6 +97,92 @@ def ensure_skin_columns(settings: Settings) -> None:
             for column, sql in required.items():
                 if column not in existing:
                     cur.execute(sql)
+            cur.execute(
+                """
+                CREATE TABLE IF NOT EXISTS player_inventory_snapshots (
+                  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+                  minecraft_nick VARCHAR(32) NOT NULL,
+                  minecraft_uuid CHAR(36) NULL,
+                  inventory_json JSON NOT NULL,
+                  equipment_json JSON NULL,
+                  ender_chest_json JSON NULL,
+                  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                  PRIMARY KEY (id),
+                  UNIQUE KEY uq_inventory_nick (minecraft_nick),
+                  KEY idx_inventory_uuid (minecraft_uuid),
+                  KEY idx_inventory_updated_at (updated_at)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+                """
+            )
+            cur.execute(
+                """
+                CREATE TABLE IF NOT EXISTS password_reset_codes (
+                  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+                  user_id BIGINT UNSIGNED NOT NULL,
+                  code_hash CHAR(64) NOT NULL,
+                  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                  expires_at TIMESTAMP NOT NULL,
+                  used_at TIMESTAMP NULL,
+                  PRIMARY KEY (id),
+                  UNIQUE KEY uq_password_reset_code_hash (code_hash),
+                  KEY idx_password_reset_user (user_id),
+                  KEY idx_password_reset_expires (expires_at),
+                  CONSTRAINT fk_password_reset_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+                """
+            )
+
+
+def require_server_secret(settings: Settings, secret_header: str) -> None:
+    if not secret_header or not secrets.compare_digest(secret_header, settings.server_secret):
+        raise HTTPException(status_code=403, detail="Серверный доступ запрещён.")
+
+
+def make_short_code(length: int = 8) -> str:
+    alphabet = string.ascii_uppercase + string.digits
+    return "".join(secrets.choice(alphabet) for _ in range(length))
+
+
+def decode_json_field(value: Any, fallback: Any) -> Any:
+    if value is None:
+        return fallback
+    if isinstance(value, str):
+        try:
+            return json.loads(value)
+        except json.JSONDecodeError:
+            return fallback
+    return value
+
+
+def send_password_reset_email(settings: Settings, email: str, nick: str, code: str) -> bool:
+    if not settings.smtp_host or not settings.smtp_from:
+        return False
+    message = EmailMessage()
+    message["Subject"] = "HORDE Minecraft: код восстановления пароля"
+    message["From"] = settings.smtp_from
+    message["To"] = email
+    message.set_content(
+        "\n".join(
+            [
+                f"Привет, {nick}!",
+                "",
+                "Код восстановления пароля HORDE:",
+                code,
+                "",
+                "Код действует 20 минут. Если это были не вы, просто игнорируйте письмо.",
+            ]
+        )
+    )
+    try:
+        with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=15) as smtp:
+            if settings.smtp_tls:
+                smtp.starttls()
+            if settings.smtp_user and settings.smtp_password:
+                smtp.login(settings.smtp_user, settings.smtp_password)
+            smtp.send_message(message)
+        return True
+    except Exception:
+        return False
 
 
 def get_user_by_session(settings: Settings, authorization: str) -> dict[str, Any]:
@@ -130,7 +245,7 @@ def issue_tokens(settings: Settings, user_id: int, request: Request) -> dict[str
 
 def create_app(settings: Settings | None = None) -> FastAPI:
     settings = settings or load_settings()
-    app = FastAPI(title="HORDE Auth API", version="0.1.0")
+    app = FastAPI(title="HORDE Auth API", version="0.1.0", docs_url=None, redoc_url=None, openapi_url=None)
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.cors_origins,
@@ -141,7 +256,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.on_event("startup")
     def startup() -> None:
-        ensure_skin_columns(settings)
+        ensure_runtime_schema(settings)
 
     @app.get("/health")
     def health() -> dict[str, str]:
@@ -231,6 +346,37 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         user = get_user_by_session(settings, authorization)
         return {"user": public_user(user)}
 
+    @app.get("/auth/inventory")
+    def my_inventory(authorization: str = Header(default="")) -> dict[str, Any]:
+        user = get_user_by_session(settings, authorization)
+        with connect(settings) as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT inventory_json, equipment_json, ender_chest_json, updated_at
+                    FROM player_inventory_snapshots
+                    WHERE minecraft_nick=%s
+                    """,
+                    (user["minecraft_nick"],),
+                )
+                row = cur.fetchone()
+        if not row:
+            return {
+                "synced": False,
+                "minecraft_nick": user["minecraft_nick"],
+                "inventory": [],
+                "equipment": {},
+                "ender_chest": [],
+            }
+        return {
+            "synced": True,
+            "minecraft_nick": user["minecraft_nick"],
+            "inventory": decode_json_field(row.get("inventory_json"), []),
+            "equipment": decode_json_field(row.get("equipment_json"), {}),
+            "ender_chest": decode_json_field(row.get("ender_chest_json"), []),
+            "updated_at": row["updated_at"].isoformat() if row.get("updated_at") else None,
+        }
+
     @app.post("/auth/skin")
     def update_skin(payload: SkinUpdateRequest, authorization: str = Header(default="")) -> dict[str, Any]:
         user = get_user_by_session(settings, authorization)
@@ -249,6 +395,103 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 cur.execute("SELECT * FROM users WHERE id=%s", (user["id"],))
                 updated = cur.fetchone()
         return {"user": public_user(updated)}
+
+    @app.post("/auth/password-reset/request")
+    def password_reset_request(payload: PasswordResetRequest) -> dict[str, Any]:
+        nick = normalize_nick(payload.minecraft_nick)
+        email = payload.email.strip().lower()
+        now = utcnow().replace(tzinfo=None)
+        code = make_short_code(8)
+        with connect(settings) as conn:
+            with conn.cursor() as cur:
+                cur.execute("SELECT * FROM users WHERE minecraft_nick=%s AND LOWER(email)=LOWER(%s)", (nick, email))
+                user = cur.fetchone()
+                if user:
+                    cur.execute(
+                        """
+                        INSERT INTO password_reset_codes (user_id, code_hash, expires_at)
+                        VALUES (%s, %s, %s)
+                        """,
+                        (user["id"], token_hash(code, settings.server_secret), now + timedelta(minutes=20)),
+                    )
+                    send_password_reset_email(settings, email, nick, code)
+        return {"ok": True, "message": "Если почта совпала с аккаунтом, код восстановления будет отправлен."}
+
+    @app.post("/auth/password-reset/confirm")
+    def password_reset_confirm(payload: PasswordResetConfirmRequest, request: Request) -> dict[str, Any]:
+        nick = normalize_nick(payload.minecraft_nick)
+        code_digest = token_hash(payload.code.strip().upper(), settings.server_secret)
+        now = utcnow().replace(tzinfo=None)
+        with connect(settings) as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT pr.*, u.minecraft_nick FROM password_reset_codes pr
+                    JOIN users u ON u.id=pr.user_id
+                    WHERE u.minecraft_nick=%s AND pr.code_hash=%s AND pr.used_at IS NULL AND pr.expires_at > %s
+                    ORDER BY pr.id DESC LIMIT 1
+                    """,
+                    (nick, code_digest, now),
+                )
+                row = cur.fetchone()
+                if not row:
+                    raise HTTPException(status_code=400, detail="Код восстановления неверный или истёк.")
+                cur.execute("UPDATE users SET password_hash=%s WHERE id=%s", (hash_password(payload.new_password), row["user_id"]))
+                cur.execute("UPDATE password_reset_codes SET used_at=%s WHERE id=%s", (now, row["id"]))
+                cur.execute("SELECT * FROM users WHERE id=%s", (row["user_id"],))
+                user = cur.fetchone()
+        return {"user": public_user(user), **issue_tokens(settings, user["id"], request)}
+
+    @app.post("/server/link-code")
+    def server_link_code(payload: ServerLinkCodeRequest, x_horde_server_secret: str = Header(default="")) -> dict[str, Any]:
+        require_server_secret(settings, x_horde_server_secret)
+        nick = normalize_nick(payload.minecraft_nick)
+        code = make_short_code(8)
+        now = utcnow().replace(tzinfo=None)
+        with connect(settings) as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    INSERT INTO site_link_codes (minecraft_nick, code_hash, expires_at)
+                    VALUES (%s, %s, %s)
+                    """,
+                    (nick, token_hash(code, settings.server_secret), now + timedelta(minutes=10)),
+                )
+                if payload.minecraft_uuid:
+                    cur.execute(
+                        """
+                        INSERT INTO users (minecraft_nick, minecraft_uuid, is_site_linked)
+                        VALUES (%s, %s, 0)
+                        ON DUPLICATE KEY UPDATE minecraft_uuid=COALESCE(minecraft_uuid, VALUES(minecraft_uuid))
+                        """,
+                        (nick, payload.minecraft_uuid),
+                    )
+        return {"minecraft_nick": nick, "code": code, "expires_in_seconds": 600}
+
+    @app.post("/server/inventory")
+    def server_inventory(payload: ServerInventoryRequest, x_horde_server_secret: str = Header(default="")) -> dict[str, Any]:
+        require_server_secret(settings, x_horde_server_secret)
+        nick = normalize_nick(payload.minecraft_nick)
+        inventory_json = json.dumps(payload.inventory, ensure_ascii=False)
+        equipment_json = json.dumps(payload.equipment or {}, ensure_ascii=False)
+        ender_json = json.dumps(payload.ender_chest or [], ensure_ascii=False)
+        with connect(settings) as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    INSERT INTO player_inventory_snapshots
+                      (minecraft_nick, minecraft_uuid, inventory_json, equipment_json, ender_chest_json)
+                    VALUES (%s, %s, CAST(%s AS JSON), CAST(%s AS JSON), CAST(%s AS JSON))
+                    ON DUPLICATE KEY UPDATE
+                      minecraft_uuid=VALUES(minecraft_uuid),
+                      inventory_json=VALUES(inventory_json),
+                      equipment_json=VALUES(equipment_json),
+                      ender_chest_json=VALUES(ender_chest_json),
+                      updated_at=CURRENT_TIMESTAMP
+                    """,
+                    (nick, payload.minecraft_uuid, inventory_json, equipment_json, ender_json),
+                )
+        return {"ok": True, "minecraft_nick": nick}
 
     @app.get("/donate/subscription/{minecraft_nick}")
     def subscription(minecraft_nick: str) -> dict[str, Any]:

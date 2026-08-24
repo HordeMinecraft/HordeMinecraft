@@ -67,8 +67,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const saveSkin = document.querySelector("[data-save-skin]");
   const refreshProfile = document.querySelector("[data-refresh-profile]");
   const authLogout = document.querySelector("[data-auth-logout]");
+  const resetRequest = document.querySelector("[data-reset-request]");
+  const resetConfirm = document.querySelector("[data-reset-confirm]");
+  const inventoryStatus = document.querySelector("[data-inventory-status]");
+  const inventoryGrid = document.querySelector("[data-inventory-grid]");
   const authApiBase = window.HORDE_AUTH_API_BASE || "";
   const getSessionToken = () => localStorage.getItem("horde_session_token") || "";
+  const friendlyError = (error) => {
+    const text = String(error?.message || error || "");
+    if (text.includes("Неверный ник") || text.includes("зарегистрирован") || text.includes("Код") || text.includes("Сессия")) return text;
+    if (text.includes("Failed to fetch")) return "нет связи с кабинетом, попробуйте позже.";
+    if (text.includes("422") || text.includes("validation") || text.includes("loc") || text.includes("string_")) return "проверьте ник, пароль и заполненные поля.";
+    return text || "попробуйте ещё раз.";
+  };
   const setAuthResult = (text, state = "info") => {
     if (!authResult) return;
     authResult.textContent = text;
@@ -103,7 +114,10 @@ document.addEventListener("DOMContentLoaded", () => {
       body: payload ? JSON.stringify(payload) : undefined,
     });
     const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(data.detail || `Сервис вернул ошибку ${response.status}`);
+    if (!response.ok) {
+      const detail = typeof data.detail === "string" ? data.detail : "";
+      throw new Error(detail || `Ошибка ${response.status}`);
+    }
     return data;
   };
   const formatDonate = (subscription) => {
@@ -124,6 +138,43 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   };
+  const renderInventory = (snapshot) => {
+    if (!inventoryStatus || !inventoryGrid) return;
+    inventoryGrid.innerHTML = "";
+    const items = Array.isArray(snapshot?.inventory) ? snapshot.inventory : [];
+    if (!snapshot?.synced) {
+      inventoryStatus.textContent = "Инвентарь появится здесь после привязки и синхронизации с сервера.";
+      inventoryGrid.hidden = true;
+      return;
+    }
+    const updated = snapshot.updated_at ? new Date(snapshot.updated_at).toLocaleString("ru-RU") : "только что";
+    inventoryStatus.textContent = `Последняя синхронизация: ${updated}.`;
+    inventoryGrid.hidden = false;
+    const visibleItems = items.slice(0, 36);
+    for (let i = 0; i < 36; i += 1) {
+      const item = visibleItems[i];
+      const slot = document.createElement("span");
+      slot.className = "inventory-slot";
+      if (item) {
+        const count = item.count || item.Count || "";
+        const name = item.name || item.id || item.item || "Предмет";
+        slot.textContent = count && Number(count) > 1 ? String(count) : "•";
+        slot.title = `${name}${count ? ` ×${count}` : ""}`;
+        slot.dataset.filled = "true";
+      }
+      inventoryGrid.appendChild(slot);
+    }
+  };
+  const loadInventory = async () => {
+    const token = getSessionToken();
+    if (!authApiBase || !token) return;
+    try {
+      const snapshot = await authRequest("/auth/inventory", null, {method: "GET", token});
+      renderInventory(snapshot);
+    } catch {
+      if (inventoryStatus) inventoryStatus.textContent = "Инвентарь сейчас не удалось обновить.";
+    }
+  };
   const renderProfile = async (user) => {
     const nick = user?.minecraft_nick || "Игрок";
     if (cabinetNick) cabinetNick.textContent = nick;
@@ -141,6 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (cabinetDonate) cabinetDonate.textContent = "Донат-подписку сейчас не удалось проверить.";
       renderSubscription(null);
     }
+    await loadInventory();
   };
   const loadProfile = async () => {
     const token = getSessionToken();
@@ -183,13 +235,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = new FormData(authDemo);
     const minecraft_nick = form.get("nick")?.toString().trim();
     const password = form.get("password")?.toString();
+    const email = form.get("email")?.toString().trim();
     const code = form.get("code")?.toString().trim();
     if (!minecraft_nick || minecraft_nick.length < 3) return setAuthResult("Введите ник от 3 символов.", "bad");
     if (!password || password.length < 6) return setAuthResult("Пароль должен быть минимум 6 символов.", "bad");
     if (!authApiBase) return setAuthResult("Кабинет временно недоступен.", "bad");
     const path = action === "register" ? "/auth/register" : action === "link" ? "/auth/link" : "/auth/login";
-    const payload = action === "link" ? {minecraft_nick, password, code} : {minecraft_nick, password};
+    const payload = action === "link" ? {minecraft_nick, password, code, email} : {minecraft_nick, password, email};
     if (action === "link" && (!code || code.length < 4)) return setAuthResult("Для привязки нужен код из игры.", "bad");
+    if ((action === "register" || action === "link") && email && !email.includes("@")) {
+      return setAuthResult("Проверьте почту для восстановления.", "bad");
+    }
     setAuthResult("Проверяем данные входа...", "info");
     try {
       const data = await authRequest(path, payload);
@@ -201,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
       showCabinet(true);
     } catch (error) {
       setAuthStatus("ОШИБКА", "bad");
-      setAuthResult(`Не удалось войти: ${error.message}`, "bad");
+      setAuthResult(`Не удалось войти: ${friendlyError(error)}`, "bad");
     }
   });
   refreshProfile?.addEventListener("click", async () => {
@@ -210,7 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
       await loadProfile();
     } catch (error) {
       setCabinetStatus("ERROR", "bad");
-      setSkinResult(`Не удалось обновить профиль: ${error.message}`, "bad");
+      setSkinResult(`Не удалось обновить профиль: ${friendlyError(error)}`, "bad");
     }
   });
   authLogout?.addEventListener("click", () => {
@@ -239,11 +295,45 @@ document.addEventListener("DOMContentLoaded", () => {
         await renderProfile(data.user);
         setSkinResult("Скин сохранён. Он будет применён после синхронизации лаунчера.", "good");
       } catch (error) {
-        setSkinResult(`Ошибка сохранения скина: ${error.message}`, "bad");
+        setSkinResult(`Ошибка сохранения скина: ${friendlyError(error)}`, "bad");
       }
     };
     reader.onerror = () => setSkinResult("Не удалось прочитать файл скина.", "bad");
     reader.readAsDataURL(file);
+  });
+
+  resetRequest?.addEventListener("click", async () => {
+    const form = new FormData(authDemo);
+    const minecraft_nick = form.get("nick")?.toString().trim();
+    const email = form.get("reset_email")?.toString().trim();
+    if (!minecraft_nick || minecraft_nick.length < 3) return setAuthResult("Введите ник аккаунта.", "bad");
+    if (!email || !email.includes("@")) return setAuthResult("Введите почту аккаунта.", "bad");
+    try {
+      const data = await authRequest("/auth/password-reset/request", {minecraft_nick, email});
+      setAuthResult(data.message || "Если почта совпала с аккаунтом, код восстановления будет отправлен.", "warn");
+    } catch (error) {
+      setAuthResult(`Не удалось запросить восстановление: ${friendlyError(error)}`, "bad");
+    }
+  });
+
+  resetConfirm?.addEventListener("click", async () => {
+    const form = new FormData(authDemo);
+    const minecraft_nick = form.get("nick")?.toString().trim();
+    const code = form.get("reset_code")?.toString().trim();
+    const new_password = form.get("reset_password")?.toString();
+    if (!minecraft_nick || minecraft_nick.length < 3) return setAuthResult("Введите ник аккаунта.", "bad");
+    if (!code || code.length < 6) return setAuthResult("Введите код восстановления.", "bad");
+    if (!new_password || new_password.length < 6) return setAuthResult("Новый пароль должен быть минимум 6 символов.", "bad");
+    try {
+      const data = await authRequest("/auth/password-reset/confirm", {minecraft_nick, code, new_password});
+      if (data.session_token) localStorage.setItem("horde_session_token", data.session_token);
+      if (data.launcher_token) localStorage.setItem("horde_launcher_token", data.launcher_token);
+      setAuthResult("Пароль изменён. Вход выполнен.", "good");
+      await renderProfile(data.user);
+      showCabinet(true);
+    } catch (error) {
+      setAuthResult(`Не удалось сменить пароль: ${friendlyError(error)}`, "bad");
+    }
   });
 
   const donateNick = document.querySelector("[data-donate-nick]");
