@@ -373,6 +373,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = await authRequest("/auth/skin", {
           skin_data_url: reader.result,
           skin_model: skinModel?.value || "classic",
+          session_token: token,
         }, {token});
         await renderProfile(data.user);
         setSkinResult("Скин сохранён. Он будет применён после синхронизации лаунчера.", "good");

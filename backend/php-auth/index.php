@@ -77,10 +77,36 @@ function password_make(string $password): string { return password_hash($passwor
 function password_ok(?string $hash, string $password): bool { return $hash ? password_verify($password, $hash) : false; }
 function public_user(array $u): array { return ['id'=>(int)$u['id'], 'minecraft_nick'=>$u['minecraft_nick'], 'email'=>$u['email'] ?? null, 'skin_model'=>$u['skin_model'] ?: 'classic', 'skin_data_url'=>$u['skin_data_url'] ?? null, 'skin_updated_at'=>$u['skin_updated_at'] ?? null]; }
 
-function auth_user(PDO $db, array $config): array {
-    $auth = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
-    if (!horde_starts_with($auth, 'Bearer ')) json_response(['detail'=>'Нет токена.'], 401);
-    $digest = token_hash(substr($auth, 7), $config['server_secret']);
+function bearer_token(?string $fallback = null): string {
+    $auth = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
+    if (!$auth && function_exists('apache_request_headers')) {
+        $headers = apache_request_headers();
+        foreach ($headers as $key => $value) {
+            if (strtolower((string)$key) === 'authorization') {
+                $auth = (string)$value;
+                break;
+            }
+        }
+    }
+    if (!$auth && function_exists('getallheaders')) {
+        $headers = getallheaders();
+        foreach ($headers as $key => $value) {
+            if (strtolower((string)$key) === 'authorization') {
+                $auth = (string)$value;
+                break;
+            }
+        }
+    }
+    if (horde_starts_with($auth, 'Bearer ')) return trim(substr($auth, 7));
+    $fallback = trim((string)$fallback);
+    if ($fallback !== '') return $fallback;
+    json_response(['detail'=>'Нет токена.'], 401);
+}
+
+function auth_user(PDO $db, array $config, ?string $fallbackToken = null): array {
+    $token = bearer_token($fallbackToken);
+    if (!$token) json_response(['detail'=>'Нет токена.'], 401);
+    $digest = token_hash($token, $config['server_secret']);
     $st=$db->prepare('SELECT u.* FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.session_token_hash=? AND s.revoked_at IS NULL AND s.expires_at > NOW()');
     $st->execute([$digest]);
     $u=$st->fetch();
@@ -149,7 +175,7 @@ try {
 
     if ($method === 'GET' && $path === '/auth/me') json_response(['user'=>public_user(auth_user($db,$config))]);
     if ($method === 'GET' && $path === '/auth/inventory') { $u=auth_user($db,$config); $st=$db->prepare('SELECT * FROM player_inventory_snapshots WHERE minecraft_nick=?'); $st->execute([$u['minecraft_nick']]); $r=$st->fetch(); if(!$r) json_response(['synced'=>false,'minecraft_nick'=>$u['minecraft_nick'],'inventory'=>[],'equipment'=>new stdClass(),'ender_chest'=>[]]); json_response(['synced'=>true,'minecraft_nick'=>$u['minecraft_nick'],'inventory'=>json_decode($r['inventory_json'],true) ?: [],'equipment'=>json_decode($r['equipment_json'] ?: '{}',true) ?: new stdClass(),'ender_chest'=>json_decode($r['ender_chest_json'] ?: '[]',true) ?: [],'updated_at'=>$r['updated_at']]); }
-    if ($method === 'POST' && $path === '/auth/skin') { $u=auth_user($db,$config); $p=read_json(); $model=strtolower(trim((string)($p['skin_model'] ?? 'classic'))); if(!in_array($model,['classic','slim'],true)) json_response(['detail'=>'Модель скина должна быть classic или slim.'],400); $skin=(string)($p['skin_data_url'] ?? ''); if(!horde_starts_with($skin,'data:image/png;base64,')) json_response(['detail'=>'Загрузите PNG-скин Minecraft.'],400); $st=$db->prepare('UPDATE users SET skin_model=?, skin_data_url=?, skin_updated_at=NOW() WHERE id=?'); $st->execute([$model,$skin,$u['id']]); $st=$db->prepare('SELECT * FROM users WHERE id=?'); $st->execute([$u['id']]); json_response(['user'=>public_user($st->fetch())]); }
+    if ($method === 'POST' && $path === '/auth/skin') { $p=read_json(); $u=auth_user($db,$config,(string)($p['session_token'] ?? '')); $model=strtolower(trim((string)($p['skin_model'] ?? 'classic'))); if(!in_array($model,['classic','slim'],true)) json_response(['detail'=>'Модель скина должна быть classic или slim.'],400); $skin=(string)($p['skin_data_url'] ?? ''); if(!horde_starts_with($skin,'data:image/png;base64,')) json_response(['detail'=>'Загрузите PNG-скин Minecraft.'],400); $st=$db->prepare('UPDATE users SET skin_model=?, skin_data_url=?, skin_updated_at=NOW() WHERE id=?'); $st->execute([$model,$skin,$u['id']]); $st=$db->prepare('SELECT * FROM users WHERE id=?'); $st->execute([$u['id']]); json_response(['user'=>public_user($st->fetch())]); }
 
     if ($method === 'POST' && $path === '/server/link-code') { $secret=$_SERVER['HTTP_X_HORDE_SERVER_SECRET'] ?? ''; if(!hash_equals($config['server_secret'],$secret)) json_response(['detail'=>'Серверный доступ запрещён.'],403); $p=read_json(); $nick=normalize_nick($p['minecraft_nick'] ?? ''); $code=code_short(); $st=$db->prepare('INSERT INTO site_link_codes (minecraft_nick, code_hash, expires_at) VALUES (?,?,DATE_ADD(NOW(), INTERVAL 10 MINUTE))'); $st->execute([$nick,token_hash($code,$config['server_secret'])]); if(!empty($p['minecraft_uuid'])){ $st=$db->prepare('INSERT INTO users (minecraft_nick,minecraft_uuid,is_site_linked) VALUES (?,?,0) ON DUPLICATE KEY UPDATE minecraft_uuid=COALESCE(minecraft_uuid, VALUES(minecraft_uuid))'); $st->execute([$nick,$p['minecraft_uuid']]); } json_response(['minecraft_nick'=>$nick,'code'=>$code,'expires_in_seconds'=>600]); }
     if ($method === 'POST' && $path === '/server/inventory') { $secret=$_SERVER['HTTP_X_HORDE_SERVER_SECRET'] ?? ''; if(!hash_equals($config['server_secret'],$secret)) json_response(['detail'=>'Серверный доступ запрещён.'],403); $p=read_json(); $nick=normalize_nick($p['minecraft_nick'] ?? ''); $st=$db->prepare('INSERT INTO player_inventory_snapshots (minecraft_nick,minecraft_uuid,inventory_json,equipment_json,ender_chest_json) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE minecraft_uuid=VALUES(minecraft_uuid), inventory_json=VALUES(inventory_json), equipment_json=VALUES(equipment_json), ender_chest_json=VALUES(ender_chest_json), updated_at=CURRENT_TIMESTAMP'); $st->execute([$nick,$p['minecraft_uuid'] ?? null,json_encode($p['inventory'] ?? [],JSON_UNESCAPED_UNICODE),json_encode($p['equipment'] ?? new stdClass(),JSON_UNESCAPED_UNICODE),json_encode($p['ender_chest'] ?? [],JSON_UNESCAPED_UNICODE)]); json_response(['ok'=>true,'minecraft_nick'=>$nick]); }

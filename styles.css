@@ -925,6 +925,58 @@ body::before {
   }
 }
 
+/* Cabinet mobile hotfix: skin preview and auth controls must not overflow phones. */
+@media (max-width: 640px) {
+  .auth-layout,
+  .auth-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .auth-card {
+    width: 100%;
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+  .auth-card-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .auth-actions,
+  .auth-reset .auth-actions,
+  .cabinet-actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .auth-actions .download-button,
+  .auth-actions .auth-secondary,
+  .cabinet-actions .download-button,
+  .cabinet-actions .auth-secondary {
+    width: 100%;
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .cabinet-profile {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+  }
+
+  .skin-preview {
+    width: min(132px, 54vw);
+    min-height: 168px;
+  }
+
+  .cabinet-panel label,
+  .cabinet-panel input,
+  .cabinet-panel select {
+    min-width: 0;
+  }
+}
+
 /* Header hotfix: keep nav readable on desktop and highlight cabinet. */
 .site-header .nav-shell {
   width: min(calc(100% - 28px), 1320px);
