@@ -196,7 +196,7 @@ body::before {
 
 .hero-menu-strip {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
   margin-top: 28px;
 }
@@ -1025,6 +1025,78 @@ body::before {
 
   .site-header .brand span {
     font-size: 18px;
+  }
+}
+
+@media (max-width: 760px) {
+  .site-header {
+    height: auto;
+    min-height: 64px;
+  }
+
+  .site-header .nav-shell {
+    width: min(calc(100% - 18px), 1320px);
+    min-height: 64px;
+    height: auto;
+    padding: 8px 0;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .site-header .brand {
+    order: 1;
+    max-width: calc(100% - 118px);
+  }
+
+  .site-header .brand img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .site-header .brand span {
+    font-size: 18px;
+  }
+
+  .site-header .nav-download {
+    order: 2;
+    margin-left: auto;
+    min-height: 38px;
+    padding: 0 12px;
+    font-size: 12px;
+  }
+
+  .site-header .nav-links {
+    order: 3;
+    flex: 1 0 100%;
+    justify-content: flex-start;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 2px 0 4px;
+    scrollbar-width: none;
+  }
+
+  .site-header .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .site-header .nav-links a,
+  .site-header .nav-community-button {
+    flex: 0 0 auto;
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    background: rgba(10, 12, 17, 0.58);
+    font-size: 11px;
+  }
+
+  .site-header .nav-links a[href="/auth/"],
+  .site-header .nav-links a[aria-current="page"] {
+    padding: 8px 13px;
+    font-size: 12px;
+    box-shadow: 0 0 16px rgba(240, 198, 109, 0.32);
   }
 }
 
