@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const subscriptionTier = document.querySelector("[data-subscription-tier]");
   const subscriptionExpires = document.querySelector("[data-subscription-expires]");
   const skinPreview = document.querySelector("[data-skin-preview]");
+  const skinCanvas = document.querySelector("[data-skin-canvas]");
   const skinModel = document.querySelector("[data-skin-model]");
   const skinFile = document.querySelector("[data-skin-file]");
   const skinResult = document.querySelector("[data-skin-result]");
@@ -99,6 +100,77 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!skinResult) return;
     skinResult.textContent = text;
     skinResult.dataset.state = state;
+  };
+  const drawSkinPlaceholder = () => {
+    if (!skinCanvas) return;
+    const ctx = skinCanvas.getContext("2d");
+    if (!ctx) return;
+    ctx.clearRect(0, 0, skinCanvas.width, skinCanvas.height);
+    ctx.save();
+    ctx.fillStyle = "rgba(185, 241, 239, 0.14)";
+    ctx.fillRect(62, 26, 44, 44);
+    ctx.fillRect(66, 74, 36, 58);
+    ctx.fillRect(42, 78, 20, 54);
+    ctx.fillRect(106, 78, 20, 54);
+    ctx.fillRect(64, 136, 20, 58);
+    ctx.fillRect(88, 136, 20, 58);
+    ctx.restore();
+  };
+  const renderSkinCanvas = (skinDataUrl, model = "classic") => {
+    if (!skinCanvas) return;
+    const ctx = skinCanvas.getContext("2d");
+    if (!ctx) return;
+    if (!skinDataUrl) {
+      skinPreview?.classList.remove("has-skin");
+      drawSkinPlaceholder();
+      return;
+    }
+    const img = new Image();
+    img.onload = () => {
+      const sx = img.width / 64;
+      const sy = img.height / (img.height >= 64 ? 64 : 32);
+      const legacy = img.height < 64;
+      const slim = model === "slim";
+      const armW = slim ? 3 : 4;
+      const draw = (x, y, w, h, dx, dy, dw, dh) => {
+        ctx.drawImage(img, x * sx, y * sy, w * sx, h * sy, dx, dy, dw, dh);
+      };
+      const shade = (x, y, w, h, alpha = 0.18) => {
+        ctx.fillStyle = `rgba(0, 0, 0, ${alpha})`;
+        ctx.fillRect(x, y, w, h);
+      };
+      ctx.clearRect(0, 0, skinCanvas.width, skinCanvas.height);
+      ctx.imageSmoothingEnabled = false;
+      ctx.fillStyle = "rgba(0, 0, 0, 0.32)";
+      ctx.beginPath();
+      ctx.ellipse(84, 202, 44, 10, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      draw(44, 20, armW, 12, 35, 82, slim ? 18 : 22, 64);
+      shade(35, 82, slim ? 18 : 22, 64, 0.2);
+      draw(legacy ? 44 : 36, legacy ? 20 : 52, armW, 12, 112, 82, slim ? 18 : 22, 64);
+      shade(112, 82, slim ? 18 : 22, 64, 0.1);
+
+      draw(20, 20, 8, 12, 64, 78, 40, 64);
+      shade(96, 78, 8, 64, 0.15);
+      draw(4, 20, 4, 12, 62, 144, 22, 60);
+      draw(legacy ? 4 : 20, legacy ? 20 : 52, 4, 12, 88, 144, 22, 60);
+      shade(62, 144, 48, 60, 0.08);
+
+      draw(8, 8, 8, 8, 54, 24, 58, 58);
+      if (!legacy) draw(40, 8, 8, 8, 51, 21, 64, 64);
+      shade(96, 24, 16, 58, 0.14);
+      ctx.strokeStyle = "rgba(185, 241, 239, 0.24)";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(54, 24, 58, 58);
+      skinPreview?.classList.add("has-skin");
+    };
+    img.onerror = () => {
+      skinPreview?.classList.remove("has-skin");
+      drawSkinPlaceholder();
+      setSkinResult("Скин сохранён, но предпросмотр не смог прочитать PNG.", "warn");
+    };
+    img.src = skinDataUrl;
   };
   const fetchWithTimeout = async (url, options = {}, timeoutMs = 15000) => {
     const controller = new AbortController();
@@ -189,9 +261,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cabinetNick) cabinetNick.textContent = nick;
     if (skinModel) skinModel.value = user?.skin_model || "classic";
     if (skinPreview) {
-      skinPreview.style.backgroundImage = user?.skin_data_url ? `url("${user.skin_data_url}")` : "";
       skinPreview.classList.toggle("has-skin", Boolean(user?.skin_data_url));
     }
+    renderSkinCanvas(user?.skin_data_url || "", user?.skin_model || "classic");
     if (cabinetDonate) cabinetDonate.textContent = "Проверяем донат-подписку...";
     try {
       const sub = await fetch(`${authApiBase}/donate/subscription/${encodeURIComponent(nick)}`).then((r) => r.json());
@@ -311,6 +383,25 @@ document.addEventListener("DOMContentLoaded", () => {
     reader.onerror = () => setSkinResult("Не удалось прочитать файл скина.", "bad");
     reader.readAsDataURL(file);
   });
+  skinFile?.addEventListener("change", () => {
+    const file = skinFile.files?.[0];
+    if (!file) return;
+    if (file.type !== "image/png" && !file.name.toLowerCase().endsWith(".png")) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      renderSkinCanvas(String(reader.result || ""), skinModel?.value || "classic");
+      setSkinResult("Предпросмотр обновлён. Нажмите «Сохранить скин», чтобы записать его в профиль.", "info");
+    };
+    reader.readAsDataURL(file);
+  });
+  skinModel?.addEventListener("change", () => {
+    const file = skinFile?.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => renderSkinCanvas(String(reader.result || ""), skinModel.value || "classic");
+    reader.readAsDataURL(file);
+  });
+  drawSkinPlaceholder();
 
   resetRequest?.addEventListener("click", async () => {
     const form = new FormData(authDemo);
