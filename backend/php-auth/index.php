@@ -70,6 +70,13 @@ function normalize_nick($nick): string {
     return $nick;
 }
 
+function require_server_secret(array $config): void {
+    $secret = $_SERVER['HTTP_X_HORDE_SERVER_SECRET'] ?? '';
+    if (!hash_equals($config['server_secret'], $secret)) {
+        json_response(['detail'=>'Серверный доступ запрещён.'],403);
+    }
+}
+
 function token_hash(string $token, string $secret): string { return hash_hmac('sha256', $token, $secret); }
 function new_token(): string { return rtrim(strtr(base64_encode(random_bytes(40)), '+/', '-_'), '='); }
 function code_short(): string { $a='ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; $s=''; for($i=0;$i<8;$i++) $s.=$a[random_int(0, strlen($a)-1)]; return $s; }
@@ -145,7 +152,7 @@ try {
         $p=read_json(); $nick=normalize_nick($p['minecraft_nick'] ?? ''); $password=(string)($p['password'] ?? ''); if(strlen($password)<6) json_response(['detail'=>'Пароль должен быть не короче 6 символов.'],400);
         $email=isset($p['email']) && $p['email']!=='' ? trim((string)$p['email']) : null; $hash=password_make($password);
         $db->beginTransaction();
-        $st=$db->prepare('SELECT * FROM users WHERE minecraft_nick=? FOR UPDATE'); $st->execute([$nick]); $u=$st->fetch();
+        $st=$db->prepare('SELECT * FROM users WHERE LOWER(minecraft_nick)=LOWER(?) FOR UPDATE'); $st->execute([$nick]); $u=$st->fetch();
         if($u && $u['password_hash']) { $db->rollBack(); json_response(['detail'=>'Этот ник уже зарегистрирован.'],409); }
         if($u){ $st=$db->prepare('UPDATE users SET password_hash=?, email=? WHERE id=?'); $st->execute([$hash,$email,$u['id']]); $uid=(int)$u['id']; }
         else { $st=$db->prepare('INSERT INTO users (minecraft_nick,email,password_hash) VALUES (?,?,?)'); $st->execute([$nick,$email,$hash]); $uid=(int)$db->lastInsertId(); }
@@ -154,7 +161,7 @@ try {
 
     if ($method === 'POST' && $path === '/auth/login') {
         $p=read_json(); $nick=normalize_nick($p['minecraft_nick'] ?? ''); $password=(string)($p['password'] ?? '');
-        $st=$db->prepare('SELECT * FROM users WHERE minecraft_nick=?'); $st->execute([$nick]); $u=$st->fetch();
+        $st=$db->prepare('SELECT * FROM users WHERE LOWER(minecraft_nick)=LOWER(?)'); $st->execute([$nick]); $u=$st->fetch();
         if(!$u || !password_ok($u['password_hash'] ?? null, $password)) json_response(['detail'=>'Неверный ник или пароль.'],401);
         $tokens=issue_tokens($db,$config,(int)$u['id']); json_response(['user'=>public_user($u)] + $tokens);
     }
@@ -163,9 +170,9 @@ try {
         $p=read_json(); $nick=normalize_nick($p['minecraft_nick'] ?? ''); $password=(string)($p['password'] ?? ''); if(strlen($password)<6) json_response(['detail'=>'Пароль должен быть не короче 6 символов.'],400);
         $digest=token_hash(trim((string)($p['code'] ?? '')), $config['server_secret']); $email=isset($p['email']) && $p['email']!=='' ? trim((string)$p['email']) : null;
         $db->beginTransaction();
-        $st=$db->prepare('SELECT * FROM site_link_codes WHERE minecraft_nick=? AND code_hash=? AND used_at IS NULL AND expires_at > NOW() ORDER BY id DESC LIMIT 1'); $st->execute([$nick,$digest]); $code=$st->fetch();
+        $st=$db->prepare('SELECT * FROM site_link_codes WHERE LOWER(minecraft_nick)=LOWER(?) AND code_hash=? AND used_at IS NULL AND expires_at > NOW() ORDER BY id DESC LIMIT 1'); $st->execute([$nick,$digest]); $code=$st->fetch();
         if(!$code){ $db->rollBack(); json_response(['detail'=>'Код привязки неверный или истёк.'],400); }
-        $st=$db->prepare('SELECT * FROM users WHERE minecraft_nick=? FOR UPDATE'); $st->execute([$nick]); $u=$st->fetch();
+        $st=$db->prepare('SELECT * FROM users WHERE LOWER(minecraft_nick)=LOWER(?) FOR UPDATE'); $st->execute([$nick]); $u=$st->fetch();
         $hash=password_make($password);
         if($u){ $st=$db->prepare('UPDATE users SET password_hash=?, email=COALESCE(?, email), is_site_linked=1 WHERE id=?'); $st->execute([$hash,$email,$u['id']]); $uid=(int)$u['id']; }
         else { $st=$db->prepare('INSERT INTO users (minecraft_nick,email,password_hash,is_site_linked) VALUES (?,?,?,1)'); $st->execute([$nick,$email,$hash]); $uid=(int)$db->lastInsertId(); }
@@ -174,13 +181,34 @@ try {
     }
 
     if ($method === 'GET' && $path === '/auth/me') json_response(['user'=>public_user(auth_user($db,$config))]);
-    if ($method === 'GET' && $path === '/auth/inventory') { $u=auth_user($db,$config); $st=$db->prepare('SELECT * FROM player_inventory_snapshots WHERE minecraft_nick=?'); $st->execute([$u['minecraft_nick']]); $r=$st->fetch(); if(!$r) json_response(['synced'=>false,'minecraft_nick'=>$u['minecraft_nick'],'inventory'=>[],'equipment'=>new stdClass(),'ender_chest'=>[]]); json_response(['synced'=>true,'minecraft_nick'=>$u['minecraft_nick'],'inventory'=>json_decode($r['inventory_json'],true) ?: [],'equipment'=>json_decode($r['equipment_json'] ?: '{}',true) ?: new stdClass(),'ender_chest'=>json_decode($r['ender_chest_json'] ?: '[]',true) ?: [],'updated_at'=>$r['updated_at']]); }
+    if ($method === 'GET' && $path === '/auth/inventory') { $u=auth_user($db,$config); $st=$db->prepare('SELECT * FROM player_inventory_snapshots WHERE LOWER(minecraft_nick)=LOWER(?)'); $st->execute([$u['minecraft_nick']]); $r=$st->fetch(); if(!$r) json_response(['synced'=>false,'minecraft_nick'=>$u['minecraft_nick'],'inventory'=>[],'equipment'=>new stdClass(),'ender_chest'=>[]]); json_response(['synced'=>true,'minecraft_nick'=>$u['minecraft_nick'],'inventory'=>json_decode($r['inventory_json'],true) ?: [],'equipment'=>json_decode($r['equipment_json'] ?: '{}',true) ?: new stdClass(),'ender_chest'=>json_decode($r['ender_chest_json'] ?: '[]',true) ?: [],'updated_at'=>$r['updated_at']]); }
     if ($method === 'POST' && $path === '/auth/skin') { $p=read_json(); $u=auth_user($db,$config,(string)($p['session_token'] ?? '')); $model=strtolower(trim((string)($p['skin_model'] ?? 'classic'))); if(!in_array($model,['classic','slim'],true)) json_response(['detail'=>'Модель скина должна быть classic или slim.'],400); $skin=(string)($p['skin_data_url'] ?? ''); if(!horde_starts_with($skin,'data:image/png;base64,')) json_response(['detail'=>'Загрузите PNG-скин Minecraft.'],400); $st=$db->prepare('UPDATE users SET skin_model=?, skin_data_url=?, skin_updated_at=NOW() WHERE id=?'); $st->execute([$model,$skin,$u['id']]); $st=$db->prepare('SELECT * FROM users WHERE id=?'); $st->execute([$u['id']]); json_response(['user'=>public_user($st->fetch())]); }
 
-    if ($method === 'POST' && $path === '/server/link-code') { $secret=$_SERVER['HTTP_X_HORDE_SERVER_SECRET'] ?? ''; if(!hash_equals($config['server_secret'],$secret)) json_response(['detail'=>'Серверный доступ запрещён.'],403); $p=read_json(); $nick=normalize_nick($p['minecraft_nick'] ?? ''); $code=code_short(); $st=$db->prepare('INSERT INTO site_link_codes (minecraft_nick, code_hash, expires_at) VALUES (?,?,DATE_ADD(NOW(), INTERVAL 10 MINUTE))'); $st->execute([$nick,token_hash($code,$config['server_secret'])]); if(!empty($p['minecraft_uuid'])){ $st=$db->prepare('INSERT INTO users (minecraft_nick,minecraft_uuid,is_site_linked) VALUES (?,?,0) ON DUPLICATE KEY UPDATE minecraft_uuid=COALESCE(minecraft_uuid, VALUES(minecraft_uuid))'); $st->execute([$nick,$p['minecraft_uuid']]); } json_response(['minecraft_nick'=>$nick,'code'=>$code,'expires_in_seconds'=>600]); }
-    if ($method === 'POST' && $path === '/server/inventory') { $secret=$_SERVER['HTTP_X_HORDE_SERVER_SECRET'] ?? ''; if(!hash_equals($config['server_secret'],$secret)) json_response(['detail'=>'Серверный доступ запрещён.'],403); $p=read_json(); $nick=normalize_nick($p['minecraft_nick'] ?? ''); $st=$db->prepare('INSERT INTO player_inventory_snapshots (minecraft_nick,minecraft_uuid,inventory_json,equipment_json,ender_chest_json) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE minecraft_uuid=VALUES(minecraft_uuid), inventory_json=VALUES(inventory_json), equipment_json=VALUES(equipment_json), ender_chest_json=VALUES(ender_chest_json), updated_at=CURRENT_TIMESTAMP'); $st->execute([$nick,$p['minecraft_uuid'] ?? null,json_encode($p['inventory'] ?? [],JSON_UNESCAPED_UNICODE),json_encode($p['equipment'] ?? new stdClass(),JSON_UNESCAPED_UNICODE),json_encode($p['ender_chest'] ?? [],JSON_UNESCAPED_UNICODE)]); json_response(['ok'=>true,'minecraft_nick'=>$nick]); }
+    if ($method === 'POST' && $path === '/server/link-code') { require_server_secret($config); $p=read_json(); $nick=normalize_nick($p['minecraft_nick'] ?? ''); $code=code_short(); $st=$db->prepare('INSERT INTO site_link_codes (minecraft_nick, code_hash, expires_at) VALUES (?,?,DATE_ADD(NOW(), INTERVAL 10 MINUTE))'); $st->execute([$nick,token_hash($code,$config['server_secret'])]); if(!empty($p['minecraft_uuid'])){ $st=$db->prepare('INSERT INTO users (minecraft_nick,minecraft_uuid,is_site_linked) VALUES (?,?,0) ON DUPLICATE KEY UPDATE minecraft_uuid=COALESCE(minecraft_uuid, VALUES(minecraft_uuid))'); $st->execute([$nick,$p['minecraft_uuid']]); } json_response(['minecraft_nick'=>$nick,'code'=>$code,'expires_in_seconds'=>600]); }
+    if ($method === 'POST' && $path === '/server/inventory') { require_server_secret($config); $p=read_json(); $nick=normalize_nick($p['minecraft_nick'] ?? ''); $st=$db->prepare('INSERT INTO player_inventory_snapshots (minecraft_nick,minecraft_uuid,inventory_json,equipment_json,ender_chest_json) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE minecraft_uuid=VALUES(minecraft_uuid), inventory_json=VALUES(inventory_json), equipment_json=VALUES(equipment_json), ender_chest_json=VALUES(ender_chest_json), updated_at=CURRENT_TIMESTAMP'); $st->execute([$nick,$p['minecraft_uuid'] ?? null,json_encode($p['inventory'] ?? [],JSON_UNESCAPED_UNICODE),json_encode($p['equipment'] ?? new stdClass(),JSON_UNESCAPED_UNICODE),json_encode($p['ender_chest'] ?? [],JSON_UNESCAPED_UNICODE)]); json_response(['ok'=>true,'minecraft_nick'=>$nick]); }
 
-    if ($method === 'GET' && preg_match('#^/donate/subscription/([A-Za-z0-9_]{3,32})$#', $path, $m)) { $nick=normalize_nick($m[1]); $st=$db->prepare('SELECT tier, expires_at FROM donate_subscriptions WHERE minecraft_nick=? AND active=1 AND expires_at > NOW() ORDER BY expires_at DESC LIMIT 1'); $st->execute([$nick]); $r=$st->fetch(); if(!$r) json_response(['active'=>false,'minecraft_nick'=>$nick]); json_response(['active'=>true,'minecraft_nick'=>$nick,'tier'=>$r['tier'],'expires_at'=>$r['expires_at']]); }
+    if ($method === 'POST' && $path === '/server/donate-subscription') {
+        require_server_secret($config);
+        $p=read_json();
+        $nick=normalize_nick($p['minecraft_nick'] ?? '');
+        $tier=strtoupper(trim((string)($p['tier'] ?? '')));
+        if(!in_array($tier,['PRO','ELITE','PRIME','EMPEROR'],true)) json_response(['detail'=>'Неизвестная подписка.'],400);
+        if(isset($p['expires_epoch'])) {
+            $expires=(new DateTimeImmutable('@' . (int)$p['expires_epoch']))->setTimezone(new DateTimeZone('UTC'))->format('Y-m-d H:i:s');
+        } else {
+            $expiresText=trim((string)($p['expires_at'] ?? ''));
+            if($expiresText==='') json_response(['detail'=>'Не указана дата окончания подписки.'],400);
+            $expires=(new DateTimeImmutable($expiresText))->setTimezone(new DateTimeZone('UTC'))->format('Y-m-d H:i:s');
+        }
+        $source=substr(trim((string)($p['source'] ?? 'horde_server')),0,64);
+        $external=trim((string)($p['external_payment_id'] ?? ''));
+        if($external==='') $external='server:' . strtolower($nick) . ':' . $tier . ':' . $expires;
+        $st=$db->prepare('INSERT INTO donate_subscriptions (minecraft_nick,tier,source,external_payment_id,expires_at,active) VALUES (?,?,?,?,?,1) ON DUPLICATE KEY UPDATE minecraft_nick=VALUES(minecraft_nick), tier=VALUES(tier), expires_at=GREATEST(expires_at, VALUES(expires_at)), active=1');
+        $st->execute([$nick,$tier,$source,$external,$expires]);
+        json_response(['ok'=>true,'minecraft_nick'=>$nick,'tier'=>$tier,'expires_at'=>$expires]);
+    }
+
+    if ($method === 'GET' && preg_match('#^/donate/subscription/([A-Za-z0-9_]{3,32})$#', $path, $m)) { $nick=normalize_nick($m[1]); $st=$db->prepare('SELECT minecraft_nick, tier, expires_at FROM donate_subscriptions WHERE LOWER(minecraft_nick)=LOWER(?) AND active=1 AND expires_at > NOW() ORDER BY expires_at DESC LIMIT 1'); $st->execute([$nick]); $r=$st->fetch(); if(!$r) json_response(['active'=>false,'minecraft_nick'=>$nick]); json_response(['active'=>true,'minecraft_nick'=>$r['minecraft_nick'],'tier'=>$r['tier'],'expires_at'=>$r['expires_at']]); }
 
     if ($method === 'POST' && $path === '/auth/password-reset/request') json_response(['ok'=>true,'message'=>'Если почта совпала с аккаунтом, код восстановления будет отправлен.']);
     if ($method === 'POST' && $path === '/auth/password-reset/confirm') json_response(['detail'=>'Восстановление пароля на PHP API будет подключено после настройки почтового SMTP.'],501);

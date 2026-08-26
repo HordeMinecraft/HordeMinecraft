@@ -1,8 +1,15 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-24T21:19:15.959844+00:00",
+  "published_at": "2026-08-26T11:10:00+00:00",
   "news": [
+    {
+      "tag": "SERVER HOTFIX",
+      "title": "Market и донат-подписки",
+      "text": "Исправлена причина, из-за которой на /market могли пропадать жители и торговцы. Кабинет точнее проверяет донат-подписку по нику без ошибки регистра.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#b9f1ef"
+    },
     {
       "tag": "ЛАУНЧЕР",
       "title": "HORDE Launcher 1.4.11",
