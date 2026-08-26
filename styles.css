@@ -413,6 +413,93 @@ body::before {
   }
 }
 
+/* Mobile header hotfix: the Cabinet link must stay visible on phones. */
+@media (max-width: 760px) {
+  .site-header {
+    height: auto !important;
+    min-height: 72px;
+  }
+
+  .site-header .nav-shell {
+    width: min(calc(100% - 16px), var(--shell));
+    height: auto !important;
+    min-height: 72px;
+    padding: 8px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .site-header .brand {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .site-header .brand span {
+    font-size: 17px;
+    white-space: nowrap;
+  }
+
+  .site-header .nav-download {
+    flex: 0 0 auto;
+    min-width: 42px;
+    width: 42px;
+    min-height: 40px;
+    padding: 0;
+    margin-left: auto;
+  }
+
+  .site-header .nav-download span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .site-header .nav-links {
+    order: 3;
+    flex: 1 0 100%;
+    display: flex !important;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-left: 0;
+    padding-top: 6px;
+    overflow: visible;
+    flex-wrap: wrap;
+    font-size: 11px;
+  }
+
+  .site-header .nav-links a,
+  .site-header .nav-community-button {
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    background: rgba(9, 10, 13, 0.72);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .site-header .nav-links a[href="/auth/"] {
+    order: -20;
+    color: #111318;
+    background: linear-gradient(135deg, var(--yellow), #fff3b5);
+    border-color: rgba(255, 218, 106, 0.9);
+    box-shadow: 0 0 18px rgba(240, 198, 109, 0.38);
+  }
+
+  .site-header .nav-links a[href="/donate/"] {
+    order: -10;
+  }
+}
+
 .auth-page {
   min-height: 100vh;
   padding-top: 72px;
