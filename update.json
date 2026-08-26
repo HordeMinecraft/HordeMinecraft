@@ -5,6 +5,13 @@
   "news": [
     {
       "tag": "SERVER HOTFIX",
+      "title": "PvP везде, кроме spawn и market",
+      "text": "PvP включён во всех игровых мирах HORDE. Безопасными зонами остаются только /spawn и /market. Клиентский pack и лаунчер этим hotfix не менялись.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#f0c66d"
+    },
+    {
+      "tag": "SERVER HOTFIX",
       "title": "Market и донат-подписки",
       "text": "Исправлена причина, из-за которой на /market могли пропадать жители и торговцы. Кабинет точнее проверяет донат-подписку по нику без ошибки регистра.",
       "url": "https://hordeminecraft.ru/updates/",
