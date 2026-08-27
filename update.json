@@ -1,8 +1,15 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-26T11:10:00+00:00",
+  "published_at": "2026-08-27T00:00:00+03:00",
   "news": [
+    {
+      "tag": "ЛАУНЧЕР HOTFIX",
+      "title": "HORDE Launcher 1.4.12",
+      "text": "Исправлена загрузка сборки для игроков с нестабильным доступом к GitHub: увеличены таймауты, добавлены дополнительные повторы, а недокачанный .part-файл теперь сохраняется для продолжения.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#f02b3e"
+    },
     {
       "tag": "SERVER HOTFIX",
       "title": "PvP везде, кроме spawn и market",
@@ -54,7 +61,7 @@
     }
   ],
   "launcher": {
-    "version": "1.4.11",
+    "version": "1.4.12",
     "required": true,
     "url": "https://hordeminecraft.ru/HORDE.exe",
     "urls": [
@@ -63,8 +70,8 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 46604893,
-    "sha256": "2ffcac7ebe8091f3d9677b97f2ea3d907a078005e197244bf810f799a78a4827"
+    "size": 46604869,
+    "sha256": "3f6db24061169dd673af1a216b9056f9f42cbd9eafdf6f16e876d2f6ca1f93af"
   },
   "pack": {
     "version": "5.0.36",
