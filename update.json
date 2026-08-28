@@ -1,8 +1,15 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-27T00:00:00+03:00",
+  "published_at": "2026-08-28T00:00:00+03:00",
   "news": [
+    {
+      "tag": "ЛАУНЧЕР HOTFIX",
+      "title": "HORDE Launcher 1.4.13",
+      "text": "Лаунчер теперь сначала берёт update.json с hordeminecraft.ru, а GitHub использует только как запас. Это ускоряет проверку обновлений у игроков, у которых GitHub отвечает таймаутом.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#f02b3e"
+    },
     {
       "tag": "ЛАУНЧЕР HOTFIX",
       "title": "HORDE Launcher 1.4.12",
@@ -61,7 +68,7 @@
     }
   ],
   "launcher": {
-    "version": "1.4.12",
+    "version": "1.4.13",
     "required": true,
     "url": "https://hordeminecraft.ru/HORDE.exe",
     "urls": [
@@ -70,8 +77,8 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 46604869,
-    "sha256": "3f6db24061169dd673af1a216b9056f9f42cbd9eafdf6f16e876d2f6ca1f93af"
+    "size": 46605262,
+    "sha256": "248fc058467b33b0966ac66c9e1311f1271d572e322e6e1271b6ea53954e585f"
   },
   "pack": {
     "version": "5.0.36",
