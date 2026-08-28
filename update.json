@@ -5,6 +5,13 @@
   "news": [
     {
       "tag": "SERVER HOTFIX",
+      "title": "Бинты и трупы в чужих приватах",
+      "text": "OpenPAC получил исключения для Infectious bandage, Survival Instinct медицины и Corpse. Игроки должны иметь возможность лечиться и забирать свои вещи после смерти даже в чужом привате.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#b9f1ef"
+    },
+    {
+      "tag": "SERVER HOTFIX",
       "title": "Зомби могут прорываться в приваты",
       "text": "OpenPAC настроен так, чтобы зомби, зомби-жители, хаски и утопленники могли ломать блоки в защищённых чанках. PvP и доступ игроков к чужим блокам этим изменением не открывались.",
       "url": "https://hordeminecraft.ru/updates/",
