@@ -1,95 +1,18 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-29T17:05:00+03:00",
+  "published_at": "2026-08-29T16:37:00+00:00",
   "news": [
     {
-      "tag": "ЛАУНЧЕР HOTFIX",
-      "title": "Скачивание Pack 5.0.37 перенесено на хостинг",
-      "text": "Большой архив сборки HORDE-pack.zip теперь сначала скачивается с api.hordeminecraft.ru, а GitHub Release оставлен запасным зеркалом. Это исправляет timeout 10060 у игроков, у которых GitHub не отвечает.",
+      "tag": "ЛАУНЧЕР",
+      "title": "HORDE Launcher 1.4.14",
+      "text": "В настройках лаунчера добавлен выбор папки установки: теперь игру можно поставить на другой диск, например D:\\HORDE.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#f02b3e"
     },
     {
       "tag": "СБОРКА",
-      "title": "Pack 5.0.37: RTP и Chunk Loaders",
-      "text": "Добавлены RTP для случайной телепортации и Chunk Loaders для загрузки чанков. Вместе с Chunk Loaders добавлены обязательные библиотеки SuperMartijn642 Config Lib и Core Lib. Обновление обязательно для входа на сервер.",
-      "url": "https://hordeminecraft.ru/updates/",
-      "color": "#b9f1ef"
-    },
-    {
-      "tag": "SERVER HOTFIX",
-      "title": "Все зомби Infectious и Outbreak в whitelist OpenPAC",
-      "text": "В OpenPAC добавлены все проверенные заражённые entity ID из Infectious и боевые ZED’ы из OutBreak | A.B, чтобы защита приватов не блокировала их ломание блоков. У Infectious по jar видна механика BreakDoorGoal; для Outbreak whitelist снимает запрет OpenPAC, но не добавляет мобам новую AI-механику.",
-      "url": "https://hordeminecraft.ru/updates/",
-      "color": "#f0c66d"
-    },
-    {
-      "tag": "SERVER HOTFIX",
-      "title": "Бинты и трупы в чужих приватах",
-      "text": "OpenPAC получил исключения для Infectious bandage, Survival Instinct медицины и Corpse. Игроки должны иметь возможность лечиться и забирать свои вещи после смерти даже в чужом привате.",
-      "url": "https://hordeminecraft.ru/updates/",
-      "color": "#b9f1ef"
-    },
-    {
-      "tag": "SERVER HOTFIX",
-      "title": "Зомби могут прорываться в приваты",
-      "text": "OpenPAC настроен так, чтобы зомби, зомби-жители, хаски и утопленники могли ломать блоки в защищённых чанках. PvP и доступ игроков к чужим блокам этим изменением не открывались.",
-      "url": "https://hordeminecraft.ru/updates/",
-      "color": "#f0c66d"
-    },
-    {
-      "tag": "ЛАУНЧЕР HOTFIX",
-      "title": "HORDE Launcher 1.4.13",
-      "text": "Лаунчер теперь сначала берёт update.json с hordeminecraft.ru, а GitHub использует только как запас. Это ускоряет проверку обновлений у игроков, у которых GitHub отвечает таймаутом.",
-      "url": "https://hordeminecraft.ru/updates/",
-      "color": "#f02b3e"
-    },
-    {
-      "tag": "ЛАУНЧЕР HOTFIX",
-      "title": "HORDE Launcher 1.4.12",
-      "text": "Исправлена загрузка сборки для игроков с нестабильным доступом к GitHub: увеличены таймауты, добавлены дополнительные повторы, а недокачанный .part-файл теперь сохраняется для продолжения.",
-      "url": "https://hordeminecraft.ru/updates/",
-      "color": "#f02b3e"
-    },
-    {
-      "tag": "SERVER HOTFIX",
-      "title": "PvP везде, кроме spawn и market",
-      "text": "PvP включён во всех игровых мирах HORDE. Безопасными зонами остаются только /spawn и /market. Клиентский pack и лаунчер этим hotfix не менялись.",
-      "url": "https://hordeminecraft.ru/updates/",
-      "color": "#f0c66d"
-    },
-    {
-      "tag": "SERVER HOTFIX",
-      "title": "Market и донат-подписки",
-      "text": "Исправлена причина, из-за которой на /market могли пропадать жители и торговцы. Кабинет точнее проверяет донат-подписку по нику без ошибки регистра.",
-      "url": "https://hordeminecraft.ru/updates/",
-      "color": "#b9f1ef"
-    },
-    {
-      "tag": "ЛАУНЧЕР",
-      "title": "HORDE Launcher 1.4.11",
-      "text": "Главный баннер очищен: убраны плашки, линии, геометрия и текст поверх фотографий. Заменена иконка лаунчера, чтобы новый EXE принёс новый значок всем игрокам.",
-      "url": "https://hordeminecraft.ru/updates/",
-      "color": "#f02b3e"
-    },
-    {
-      "tag": "ЛАУНЧЕР",
-      "title": "HORDE Launcher 1.4.10",
-      "text": "Принудительный hotfix для старых лаунчеров: исправлен запуск после обновления и ошибка hero-анимации, из-за которой окно могло не открываться.",
-      "url": "https://hordeminecraft.ru/updates/",
-      "color": "#f02b3e"
-    },
-    {
-      "tag": "ЛАУНЧЕР",
-      "title": "HORDE Launcher 1.4.9 hotfix",
-      "text": "Исправлен перезапуск после самообновления: лаунчер теперь завершает старый процесс и запускает новый EXE через простой Start-Process.",
-      "url": "https://hordeminecraft.ru/updates/",
-      "color": "#f02b3e"
-    },
-    {
-      "tag": "СБОРКА",
-      "title": "Pack 5.0.36",
+      "title": "Pack 5.0.37",
       "text": "Добавлены каналы чата global/local/trade/staff и новые зомби OutBreak | A.B. Обновление обязательно для входа на сервер.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#b9f1ef"
@@ -103,7 +26,7 @@
     }
   ],
   "launcher": {
-    "version": "1.4.13",
+    "version": "1.4.14",
     "required": true,
     "url": "https://hordeminecraft.ru/HORDE.exe",
     "urls": [
@@ -112,8 +35,8 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 46605262,
-    "sha256": "248fc058467b33b0966ac66c9e1311f1271d572e322e6e1271b6ea53954e585f"
+    "size": 47664011,
+    "sha256": "6474753568fd32e4121b901036f3854de105fb2043e94307ffa69e2e12137db6"
   },
   "pack": {
     "version": "5.0.37",
