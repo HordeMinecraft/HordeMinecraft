@@ -1,8 +1,15 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-29T21:45:00+00:00",
+  "published_at": "2026-08-29T22:15:00+00:00",
   "news": [
+    {
+      "tag": "ЛАУНЧЕР",
+      "title": "HORDE Launcher 1.4.15: обновление можно остановить",
+      "text": "Добавлена кнопка остановки обновления, сокращено ожидание при сетевом таймауте 10060 и добавлен видимый процент резервной загрузки curl.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#f02b3e"
+    },
     {
       "tag": "SERVER HOTFIX",
       "title": "Отключён no_villager_lag после проблем с жителями",
@@ -40,7 +47,7 @@
     }
   ],
   "launcher": {
-    "version": "1.4.14",
+    "version": "1.4.15",
     "required": true,
     "url": "https://hordeminecraft.ru/HORDE.exe",
     "urls": [
@@ -49,8 +56,8 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 47664011,
-    "sha256": "6474753568fd32e4121b901036f3854de105fb2043e94307ffa69e2e12137db6"
+    "size": 47668133,
+    "sha256": "42ac8fe08942f503efcb44b661589a981e49518f99cb452a76992e989d45b484"
   },
   "pack": {
     "version": "5.0.38",
