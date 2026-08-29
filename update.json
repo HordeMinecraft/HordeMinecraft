@@ -1,14 +1,14 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-29T19:45:00+00:00",
+  "published_at": "2026-08-29T20:30:00+00:00",
   "news": [
     {
-      "tag": "СЕРВЕР",
-      "title": "RTP до 3000 блоков и Chunk Loaders x32",
-      "text": "Радиус случайной телепортации расширен до 3000 блоков от центра, а лимит Chunk Loaders выставлен на 32 чанка на игрока.",
+      "tag": "СБОРКА",
+      "title": "Pack 5.0.38: Chunk Loaders удалён, RTP закрыт в spawn",
+      "text": "Chunk Loaders и его библиотеки убраны из сборки, потому что это не мод оптимизации. Команда /rtp теперь запрещена в мире spawn.",
       "url": "https://hordeminecraft.ru/updates/",
-      "color": "#b9f1ef"
+      "color": "#f02b3e"
     },
     {
       "tag": "ЛАУНЧЕР",
@@ -16,6 +16,13 @@
       "text": "В настройках лаунчера добавлен выбор папки установки: теперь игру можно поставить на другой диск, например D:\\HORDE.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#f02b3e"
+    },
+    {
+      "tag": "СБОРКА",
+      "title": "Pack 5.0.38",
+      "text": "Обновление обязательно для входа на сервер: нажмите Проверить в лаунчере, чтобы получить сборку без Chunk Loaders.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#b9f1ef"
     },
     {
       "tag": "СБОРКА",
@@ -46,16 +53,15 @@
     "sha256": "6474753568fd32e4121b901036f3854de105fb2043e94307ffa69e2e12137db6"
   },
   "pack": {
-    "version": "5.0.37",
+    "version": "5.0.38",
     "required": true,
     "mode": "replace",
-    "url": "https://api.hordeminecraft.ru/HORDE-pack.zip",
+    "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.38.zip",
     "urls": [
-      "https://api.hordeminecraft.ru/HORDE-pack.zip",
-      "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
-      "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack.zip"
+      "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.38.zip",
+      "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack-5.0.38.zip"
     ],
-    "size": 372502850,
-    "sha256": "85a7e7f3fafde810256d4c959a3fad3863bbceee0a1a307a84e6a481d1b2a1b6"
+    "size": 371648919,
+    "sha256": "07c86190f98ddfe375827eaa54bd311395adb06a418f0b12ae5a94e591d6ac10"
   }
 }
