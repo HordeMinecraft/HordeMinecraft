@@ -1,12 +1,12 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-29T20:30:00+00:00",
+  "published_at": "2026-08-29T20:45:00+00:00",
   "news": [
     {
-      "tag": "СБОРКА",
-      "title": "Pack 5.0.38: Chunk Loaders удалён, RTP закрыт в spawn",
-      "text": "Chunk Loaders и его библиотеки убраны из сборки, потому что это не мод оптимизации. Команда /rtp теперь запрещена в мире spawn.",
+      "tag": "ОПТИМИЗАЦИЯ",
+      "title": "Pack 5.0.38: Chunky для предгенерации, Chunk Loaders удалён",
+      "text": "Добавлен Chunky для предварительной генерации мира, Chunk Loaders и его библиотеки убраны. /rtp запрещён в мире spawn.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#f02b3e"
     },
@@ -20,14 +20,7 @@
     {
       "tag": "СБОРКА",
       "title": "Pack 5.0.38",
-      "text": "Обновление обязательно для входа на сервер: нажмите Проверить в лаунчере, чтобы получить сборку без Chunk Loaders.",
-      "url": "https://hordeminecraft.ru/updates/",
-      "color": "#b9f1ef"
-    },
-    {
-      "tag": "СБОРКА",
-      "title": "Pack 5.0.37",
-      "text": "Добавлены каналы чата global/local/trade/staff и новые зомби OutBreak | A.B. Обновление обязательно для входа на сервер.",
+      "text": "Обновление обязательно для входа на сервер: нажмите Проверить в лаунчере, чтобы получить сборку без Chunk Loaders и с Chunky.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#b9f1ef"
     },
@@ -61,7 +54,7 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.38.zip",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack-5.0.38.zip"
     ],
-    "size": 371648919,
-    "sha256": "07c86190f98ddfe375827eaa54bd311395adb06a418f0b12ae5a94e591d6ac10"
+    "size": 371968323,
+    "sha256": "c76ebe17c1e6399c9a72f45cfdc3e91a1e54f6adc3520961f2d17571c9801723"
   }
 }
