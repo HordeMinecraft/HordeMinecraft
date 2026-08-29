@@ -1,12 +1,12 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-29T22:15:00+00:00",
+  "published_at": "2026-08-29T22:20:00+00:00",
   "news": [
     {
       "tag": "ЛАУНЧЕР",
-      "title": "HORDE Launcher 1.4.15: обновление можно остановить",
-      "text": "Добавлена кнопка остановки обновления, сокращено ожидание при сетевом таймауте 10060 и добавлен видимый процент резервной загрузки curl.",
+      "title": "HORDE Launcher 1.4.16: исправлена ошибка обновления",
+      "text": "Исправлена ошибка cannot access local variable error после сетевого таймаута. Кнопка остановки обновления и процент curl сохранены.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#f02b3e"
     },
@@ -47,7 +47,7 @@
     }
   ],
   "launcher": {
-    "version": "1.4.15",
+    "version": "1.4.16",
     "required": true,
     "url": "https://hordeminecraft.ru/HORDE.exe",
     "urls": [
@@ -56,8 +56,8 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 47668133,
-    "sha256": "42ac8fe08942f503efcb44b661589a981e49518f99cb452a76992e989d45b484"
+    "size": 47668930,
+    "sha256": "34fae9a900c890a695b34ff89a94fe6280edcb0c5a64fa0f106efccf4c3d3b06"
   },
   "pack": {
     "version": "5.0.38",
