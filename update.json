@@ -1,8 +1,15 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-28T00:00:00+03:00",
+  "published_at": "2026-08-29T13:50:00+03:00",
   "news": [
+    {
+      "tag": "СБОРКА",
+      "title": "Pack 5.0.37: RTP и Chunk Loaders",
+      "text": "Добавлены RTP для случайной телепортации и Chunk Loaders для загрузки чанков. Вместе с Chunk Loaders добавлены обязательные библиотеки SuperMartijn642 Config Lib и Core Lib. Обновление обязательно для входа на сервер.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#b9f1ef"
+    },
     {
       "tag": "SERVER HOTFIX",
       "title": "Все зомби Infectious и Outbreak в whitelist OpenPAC",
@@ -102,7 +109,7 @@
     "sha256": "248fc058467b33b0966ac66c9e1311f1271d572e322e6e1271b6ea53954e585f"
   },
   "pack": {
-    "version": "5.0.36",
+    "version": "5.0.37",
     "required": true,
     "mode": "replace",
     "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
@@ -110,7 +117,7 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack.zip"
     ],
-    "size": 371627733,
-    "sha256": "1ceebf4aebb002d06548a9bd4df926ed52b2db88f9fdbf88bbaad29f6321792c"
+    "size": 372502850,
+    "sha256": "85a7e7f3fafde810256d4c959a3fad3863bbceee0a1a307a84e6a481d1b2a1b6"
   }
 }
