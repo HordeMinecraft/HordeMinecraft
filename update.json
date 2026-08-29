@@ -1,8 +1,15 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-29T13:50:00+03:00",
+  "published_at": "2026-08-29T17:05:00+03:00",
   "news": [
+    {
+      "tag": "ЛАУНЧЕР HOTFIX",
+      "title": "Скачивание Pack 5.0.37 перенесено на хостинг",
+      "text": "Большой архив сборки HORDE-pack.zip теперь сначала скачивается с api.hordeminecraft.ru, а GitHub Release оставлен запасным зеркалом. Это исправляет timeout 10060 у игроков, у которых GitHub не отвечает.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#f02b3e"
+    },
     {
       "tag": "СБОРКА",
       "title": "Pack 5.0.37: RTP и Chunk Loaders",
@@ -112,8 +119,9 @@
     "version": "5.0.37",
     "required": true,
     "mode": "replace",
-    "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
+    "url": "https://api.hordeminecraft.ru/HORDE-pack.zip",
     "urls": [
+      "https://api.hordeminecraft.ru/HORDE-pack.zip",
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack.zip",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack.zip"
     ],
