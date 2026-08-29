@@ -1,8 +1,15 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-29T16:37:00+00:00",
+  "published_at": "2026-08-29T19:45:00+00:00",
   "news": [
+    {
+      "tag": "СЕРВЕР",
+      "title": "RTP до 3000 блоков и Chunk Loaders x32",
+      "text": "Радиус случайной телепортации расширен до 3000 блоков от центра, а лимит Chunk Loaders выставлен на 32 чанка на игрока.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#b9f1ef"
+    },
     {
       "tag": "ЛАУНЧЕР",
       "title": "HORDE Launcher 1.4.14",
