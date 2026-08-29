@@ -1,8 +1,15 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-29T20:45:00+00:00",
+  "published_at": "2026-08-29T21:45:00+00:00",
   "news": [
+    {
+      "tag": "SERVER HOTFIX",
+      "title": "Отключён no_villager_lag после проблем с жителями",
+      "text": "Datapack no_villager_lag отключён: он трогал vanilla-жителей после /reload. В spawn и market обычные villager не добавлялись.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#f02b3e"
+    },
     {
       "tag": "ОПТИМИЗАЦИЯ",
       "title": "Pack 5.0.38: Chunky для предгенерации, Chunk Loaders удалён",
