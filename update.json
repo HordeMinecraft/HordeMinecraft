@@ -1,26 +1,26 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-30T13:52:18.290662+00:00",
+  "published_at": "2026-08-30T19:18:30+00:00",
   "news": [
     {
-      "tag": "ЛАУНЧЕР",
-      "title": "HORDE Launcher 1.4.17: фикс скинов",
-      "text": "Скин, выбранный в лаунчере, теперь отправляется в API и подтягивается сервером при входе игрока. Исправлена ситуация, когда PNG сохранялся только локально и не отображался у других игроков.",
+      "tag": "СБОРКА",
+      "title": "Pack 5.0.40: исправлен запуск после удаления модов",
+      "text": "Исправлен краш сервера и клиента после очистки сборки: убран Apocalyptic Arsenal, а horde_pvp больше не требует Spud's Shops. Обновление обязательно для входа на сервер.",
       "url": "https://hordeminecraft.ru/updates/",
-      "color": "#f02b3e"
+      "color": "#b9f1ef"
     },
     {
       "tag": "SERVER HOTFIX",
-      "title": "RTP из spawn переносит в обычный мир",
-      "text": "Если игрок пишет /rtp в мире spawn, сервер сам ищет безопасную точку в обычном мире в радиусе 3000 блоков и телепортирует туда.",
+      "title": "Market отключён",
+      "text": "Мир horde_pvp:market, market-datapack-и и команды /market, /shop, /shops, /bank, /mechanic отключены. Игроков из market будет возвращать на spawn.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#f02b3e"
     },
     {
-      "tag": "ЛАУНЧЕР",
-      "title": "HORDE Launcher 1.4.16: исправлена ошибка обновления",
-      "text": "Исправлена ошибка cannot access local variable error после сетевого таймаута. Кнопка остановки обновления и процент curl сохранены.",
+      "tag": "DATAPACK",
+      "title": "Очищены хвосты Infectious",
+      "text": "Из серверного tacznpc_structures.json удалены привязки к структурам infectious:*. Новые дома Infectious больше не должны появляться после удаления мода.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#f02b3e"
     },
@@ -47,8 +47,8 @@
     },
     {
       "tag": "СБОРКА",
-      "title": "Pack 5.0.38",
-      "text": "Обновление обязательно для входа на сервер: нажмите Проверить в лаунчере, чтобы получить сборку без Chunk Loaders и с Chunky.",
+      "title": "Pack 5.0.40",
+      "text": "Нажмите Проверить в лаунчере. Сборка очищает удалённые JAR, убирает сломанную зависимость магазина игроков и синхронизирует клиент с сервером.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#b9f1ef"
     },
@@ -74,15 +74,15 @@
     "sha256": "cb8a24acdd89d6951ead5eb2d4e139ea9b9777ff679f075dee8ec1b98be391e9"
   },
   "pack": {
-    "version": "5.0.38",
+    "version": "5.0.40",
     "required": true,
     "mode": "replace",
-    "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.38.zip",
+    "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.40.zip",
     "urls": [
-      "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.38.zip",
-      "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack-5.0.38.zip"
+      "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.40.zip",
+      "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack-5.0.40.zip"
     ],
-    "size": 371968323,
-    "sha256": "c76ebe17c1e6399c9a72f45cfdc3e91a1e54f6adc3520961f2d17571c9801723"
+    "size": 347866460,
+    "sha256": "d141da71c2c2947a118091fb2a35b7410f662618d006d9db2bc44083e5fee2e0"
   }
 }
