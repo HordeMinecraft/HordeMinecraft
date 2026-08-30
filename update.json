@@ -1,12 +1,12 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-30T19:18:30+00:00",
+  "published_at": "2026-08-31T00:29:30+00:00",
   "news": [
     {
       "tag": "СБОРКА",
-      "title": "Pack 5.0.40: исправлен запуск после удаления модов",
-      "text": "Исправлен краш сервера и клиента после очистки сборки: убран Apocalyptic Arsenal, а horde_pvp больше не требует Spud's Shops. Обновление обязательно для входа на сервер.",
+      "title": "Pack 5.0.41: исправлен запуск после удаления модов",
+      "text": "Исправлен запуск после очистки сборки: убран Apocalyptic Arsenal, horde_pvp больше не требует Spud's Shops, добавлен XaeroLib для Xaero Minimap/World Map. Обновление обязательно для входа на сервер.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#b9f1ef"
     },
@@ -47,8 +47,8 @@
     },
     {
       "tag": "СБОРКА",
-      "title": "Pack 5.0.40",
-      "text": "Нажмите Проверить в лаунчере. Сборка очищает удалённые JAR, убирает сломанную зависимость магазина игроков и синхронизирует клиент с сервером.",
+      "title": "Pack 5.0.41",
+      "text": "Нажмите Проверить в лаунчере. Сборка очищает удалённые JAR, убирает сломанные зависимости и синхронизирует клиент с сервером.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#b9f1ef"
     },
@@ -74,15 +74,15 @@
     "sha256": "cb8a24acdd89d6951ead5eb2d4e139ea9b9777ff679f075dee8ec1b98be391e9"
   },
   "pack": {
-    "version": "5.0.40",
+    "version": "5.0.41",
     "required": true,
     "mode": "replace",
-    "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.40.zip",
+    "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.41.zip",
     "urls": [
-      "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.40.zip",
-      "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack-5.0.40.zip"
+      "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.41.zip",
+      "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack-5.0.41.zip"
     ],
-    "size": 347866460,
-    "sha256": "d141da71c2c2947a118091fb2a35b7410f662618d006d9db2bc44083e5fee2e0"
+    "size": 348335343,
+    "sha256": "3dcb368ff2deca93ebac46576d34909fddbb826cd939fac7b00ca28ed6fa5f85"
   }
 }
