@@ -1,8 +1,15 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-29T22:20:00+00:00",
+  "published_at": "2026-08-30T13:15:00+00:00",
   "news": [
+    {
+      "tag": "SERVER HOTFIX",
+      "title": "RTP из spawn переносит в обычный мир",
+      "text": "Если игрок пишет /rtp в мире spawn, сервер сам ищет безопасную точку в обычном мире в радиусе 3000 блоков и телепортирует туда.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#f02b3e"
+    },
     {
       "tag": "ЛАУНЧЕР",
       "title": "HORDE Launcher 1.4.16: исправлена ошибка обновления",
@@ -20,7 +27,7 @@
     {
       "tag": "ОПТИМИЗАЦИЯ",
       "title": "Pack 5.0.38: Chunky для предгенерации, Chunk Loaders удалён",
-      "text": "Добавлен Chunky для предварительной генерации мира, Chunk Loaders и его библиотеки убраны. /rtp запрещён в мире spawn.",
+      "text": "Добавлен Chunky для предварительной генерации мира, Chunk Loaders и его библиотеки убраны. После hotfix /rtp из spawn переносит в обычный мир.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#f02b3e"
     },
