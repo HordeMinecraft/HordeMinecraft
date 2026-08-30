@@ -23,6 +23,40 @@ function showCopyToast() {
 document.addEventListener("DOMContentLoaded", () => {
   if (window.lucide) window.lucide.createIcons();
 
+  const rulesNoticeKey = "horde_rules_notice_accepted_20260830";
+  const showRulesNotice = () => {
+    try {
+      if (localStorage.getItem(rulesNoticeKey) === "yes") return;
+    } catch {}
+    const notice = document.createElement("section");
+    notice.className = "rules-notice";
+    notice.setAttribute("role", "dialog");
+    notice.setAttribute("aria-modal", "true");
+    notice.setAttribute("aria-labelledby", "rules-notice-title");
+    notice.innerHTML = `
+      <div class="rules-notice-card">
+        <p class="section-label">ПЕРЕД ИГРОЙ</p>
+        <h2 id="rules-notice-title">Ознакомьтесь с правилами HORDE</h2>
+        <p>Играя на проекте, вы соглашаетесь с правилами сервера и пользовательским соглашением. Честная игра, уважение к другим и отсутствие токсичности — база выживания.</p>
+        <div class="rules-notice-actions">
+          <a class="secondary-button" href="/faq/">Правила</a>
+          <a class="secondary-button" href="/agreement/">Соглашение</a>
+          <button class="download-button" type="button" data-rules-accept>Я ознакомился</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(notice);
+    const accept = notice.querySelector("[data-rules-accept]");
+    accept?.focus();
+    accept?.addEventListener("click", () => {
+      try {
+        localStorage.setItem(rulesNoticeKey, "yes");
+      } catch {}
+      notice.remove();
+    });
+  };
+  showRulesNotice();
+
   const copyButton = document.querySelector("[data-copy-ip]");
   copyButton?.addEventListener("click", async () => {
     try {

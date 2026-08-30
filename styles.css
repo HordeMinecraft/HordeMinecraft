@@ -2946,6 +2946,49 @@ footer {
   transform: translateY(0);
 }
 
+.rules-notice {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: end center;
+  padding: 22px;
+  background: linear-gradient(180deg, rgba(5, 6, 9, 0.2), rgba(5, 6, 9, 0.82));
+}
+
+.rules-notice-card {
+  width: min(100%, 620px);
+  padding: 24px;
+  border: 1px solid rgba(255, 106, 26, 0.38);
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(17, 19, 24, 0.98), rgba(31, 10, 14, 0.98)),
+    var(--bg-raised);
+  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.56);
+}
+
+.rules-notice-card h2 {
+  margin: 8px 0 10px;
+  color: #fff;
+}
+
+.rules-notice-card p {
+  color: var(--muted);
+}
+
+.rules-notice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.rules-notice-actions .download-button,
+.rules-notice-actions .secondary-button {
+  min-height: 44px;
+  justify-content: center;
+}
+
 :focus-visible {
   outline: 3px solid var(--cyan);
   outline-offset: 3px;
