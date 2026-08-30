@@ -1,8 +1,15 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-08-30T13:15:00+00:00",
+  "published_at": "2026-08-30T13:52:18.290662+00:00",
   "news": [
+    {
+      "tag": "ЛАУНЧЕР",
+      "title": "HORDE Launcher 1.4.17: фикс скинов",
+      "text": "Скин, выбранный в лаунчере, теперь отправляется в API и подтягивается сервером при входе игрока. Исправлена ситуация, когда PNG сохранялся только локально и не отображался у других игроков.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#f02b3e"
+    },
     {
       "tag": "SERVER HOTFIX",
       "title": "RTP из spawn переносит в обычный мир",
@@ -54,7 +61,7 @@
     }
   ],
   "launcher": {
-    "version": "1.4.16",
+    "version": "1.4.17",
     "required": true,
     "url": "https://hordeminecraft.ru/HORDE.exe",
     "urls": [
@@ -63,8 +70,8 @@
       "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE.exe",
       "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE.exe"
     ],
-    "size": 47668930,
-    "sha256": "34fae9a900c890a695b34ff89a94fe6280edcb0c5a64fa0f106efccf4c3d3b06"
+    "size": 47669097,
+    "sha256": "cb8a24acdd89d6951ead5eb2d4e139ea9b9777ff679f075dee8ec1b98be391e9"
   },
   "pack": {
     "version": "5.0.38",
