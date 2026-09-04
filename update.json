@@ -1,26 +1,26 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-09-03T20:28:51.406758+00:00",
+  "published_at": "2026-09-04T11:11:05.690827+00:00",
   "news": [
     {
       "tag": "СБОРКА",
-      "title": "Pack 5.0.42: новый приват FTB Chunks",
-      "text": "Open Parties and Claims заменён на FTB Chunks. Обновление обязательно: нажмите «Проверить» в лаунчере перед входом на сервер.",
+      "title": "Pack 5.0.44: CustomNPCs и приват",
+      "text": "Обновлён CustomNPCs до новой сборки, обновлена подсказка привата под FTB Chunks и удалены старые /openpac-книги со спавна. Обновление обязательно.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#b9f1ef"
     },
     {
-      "tag": "СЕРВЕР",
-      "title": "Вайп обычного мира",
-      "text": "Обычный мир HORDE пересоздан для чистого старта. Spawn, отдельные служебные измерения и серверные настройки не удалялись.",
+      "tag": "ПРИВАТ",
+      "title": "Как теперь приватить",
+      "text": "Открывайте карту FTB Chunks клавишей M, затем Claim Chunks: ЛКМ занять чанк, ПКМ снять. Группы игроков — через FTB Teams.",
       "url": "https://hordeminecraft.ru/updates/",
-      "color": "#f02b3e"
+      "color": "#7cff7c"
     },
     {
-      "tag": "АККАУНТЫ",
-      "title": "Очищены сохранённые инвентари LoginSystem",
-      "text": "Старые сохранённые инвентари LoginSystem очищены вместе с вайпом мира, чтобы не переносить старое содержимое в новый старт.",
+      "tag": "СЕРВЕР",
+      "title": "Nether будет очищен после стопа",
+      "text": "Файлы Nether подготовлены к вайпу: удаление DIM-1 безопасно выполнить только когда сервер остановлен, чтобы мир не пересоздался во время игры.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#f0c66d"
     }
@@ -39,15 +39,15 @@
     "sha256": "cb8a24acdd89d6951ead5eb2d4e139ea9b9777ff679f075dee8ec1b98be391e9"
   },
   "pack": {
-    "version": "5.0.42",
+    "version": "5.0.44",
     "required": true,
     "mode": "replace",
-    "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.42.zip",
+    "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.44.zip",
     "urls": [
-      "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.42.zip",
-      "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack-5.0.42.zip"
+      "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.44.zip",
+      "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack-5.0.44.zip"
     ],
-    "size": 347930053,
-    "sha256": "f86253f47e970a1cb93ab5eb4046b5eed5bed9bed288c7f74cb42ccb719f5ac7"
+    "size": 368269105,
+    "sha256": "dac5f5f248e09dfce54214029423ca796061b281e2ba2f3773410a1ba9c865dc"
   }
 }
