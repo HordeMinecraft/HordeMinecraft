@@ -3685,3 +3685,49 @@ footer {
     border-radius: 16px;
   }
 }
+
+/* HORDE September 2026: readable survival design across all pages. */
+:root { --bg:#0d1419; --bg-raised:#152027; --bg-soft:#1b2931; --text:#f4f3ec; --muted:#b4c0c4; --line:#34434a; --red:#d8553e; --red-bright:#ed7055; --cyan:#b6d9cb; --yellow:#e8c18a; }
+body { background:radial-gradient(ellipse at 90% 0%,#223c40 0,transparent 42rem),#0d1419; color:var(--text); font-family:"Segoe UI",Arial,sans-serif; font-size:16px; line-height:1.7; }
+body::before { display:none; }
+p,li { line-height:1.75; }
+.site-header { background:rgba(13,20,25,.96); border-bottom:1px solid var(--line); box-shadow:0 6px 28px #0002; }
+.nav-shell { gap:20px; }
+.nav-links { gap:16px; }
+.nav-links a,.nav-community-button { font-family:inherit; text-transform:none; font-size:14px; letter-spacing:0; }
+.brand img,.footer-brand img { box-shadow:none; border-color:var(--line); }
+.download-button,.nav-download { background:#d8553e; border:1px solid #ef8766; box-shadow:0 6px 22px #0003; border-radius:10px; text-shadow:none; }
+.download-button:hover,.nav-download:hover { background:#e76a4d; box-shadow:0 8px 24px #0004; }
+.secondary-button,.server-copy { border-radius:10px; border-color:#758b91; background:#152027dd; color:#f4f3ec; }
+.hero { min-height:660px; padding:66px 0; background-image:linear-gradient(90deg,rgba(9,17,23,.94),rgba(9,17,23,.62) 60%,rgba(9,17,23,.25)),url("assets/horde-hero-survivors.webp"); border-bottom:1px solid var(--line); }
+.hero::before,.hero::after { display:none; }
+.hero-inner { width:min(calc(100% - 48px),1180px); padding:0; border:0; border-radius:0; background:transparent; box-shadow:none; backdrop-filter:none; }
+.hero-sigil { display:none; }
+.hero-brand { font-family:Impact,"Arial Black",sans-serif; font-size:clamp(64px,8vw,108px); color:#f4f3ec; text-shadow:none; letter-spacing:2px; -webkit-text-stroke:0; background:none; -webkit-text-fill-color:#f4f3ec; }
+.hero-title-tail { font-family:"Segoe UI",Arial,sans-serif; font-size:clamp(26px,3.5vw,44px); font-weight:700; text-transform:none; letter-spacing:-.025em; line-height:1.2; max-width:700px; color:#f4f3ec; text-shadow:none; }
+.hero-kicker { display:none; }
+.hero-copy { max-width:620px; font-size:19px; color:#d0dadd; line-height:1.7; }
+.hero-actions { margin-top:28px; gap:14px; }
+.hero-meta { margin-top:24px; gap:18px; flex-wrap:wrap; }
+.hero-menu-strip { margin-top:28px; max-width:700px; gap:10px; }
+.hero-menu-strip a { min-height:44px; border-radius:8px; background:#18262dcc; border:1px solid #41545a; box-shadow:none; font:600 14px "Segoe UI",sans-serif; color:#e3e9e8; }
+h2,.page-hero h1 { font-family:"Segoe UI",Arial,sans-serif; letter-spacing:-.025em; line-height:1.2; text-transform:none; }
+h2 { font-size:clamp(28px,3.5vw,42px); }
+h3 { font-family:"Segoe UI",Arial,sans-serif; line-height:1.35; }
+.section-label,.eyebrow { color:#e8c18a; font:700 12px "Segoe UI",sans-serif; letter-spacing:.13em; }
+.content-section,.features-section,.launcher-showcase { padding-block:64px; }
+.content-card,.feature,.page-panel,.guide-card,.faq-list details { background:#152027; border:1px solid #34434a; border-radius:14px; box-shadow:none; }
+.content-card,.feature { padding:28px; }
+.content-card p,.feature p,.page-lead,.intro-copy { color:var(--muted); }
+a.content-card { color:var(--text); text-decoration:none; transition:transform .18s,border-color .18s; }
+a.content-card:hover { transform:translateY(-4px); border-color:#90b5a7; }
+.play-styles .content-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+.play-styles h2 { margin-bottom:30px; }
+.play-number { color:#e8c18a; font-size:12px; font-weight:700; letter-spacing:.08em; }
+.card-link { display:block; margin-top:24px; color:#b6d9cb; font-weight:600; }
+.faq-list summary { padding:20px; font-size:17px; line-height:1.5; }
+.faq-list details p { padding-inline:20px; }
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible { outline:3px solid #f2cc8f; outline-offset:4px; }
+@media(max-width:1100px) { .nav-shell { flex-wrap:wrap; padding-block:12px; } .nav-links { flex-wrap:wrap; gap:10px 16px; } }
+@media(max-width:700px) { .hero { min-height:0; padding:40px 0; } .hero-inner { width:calc(100% - 32px); } .hero-copy { font-size:17px; } .hero-actions { flex-direction:column; align-items:stretch; } .hero-menu-strip { grid-template-columns:repeat(2,minmax(0,1fr)); } .content-section,.features-section,.launcher-showcase { padding-block:40px; } .play-styles .content-grid { grid-template-columns:1fr; } .content-card,.feature { padding:22px; } }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }

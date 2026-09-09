@@ -1,8 +1,15 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-09-08T19:08:34.053028+00:00",
+  "published_at": "2026-09-09T15:31:31.851343+00:00",
   "news": [
+    {
+      "tag": "НОВОЕ",
+      "title": "Онлайн сервера и обновлённый сайт",
+      "text": "Лаунчер показывает число игроков с обновлением раз в минуту. На сайте обновлены оформление, гайды и правила привата FTB Chunks.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#b6d9cb"
+    },
     {
       "tag": "ЛАУНЧЕР",
       "title": "HORDE 1.4.18: удобнее перед вылазкой",
@@ -40,16 +47,16 @@
     }
   ],
   "launcher": {
-    "version": "1.4.18",
+    "version": "1.4.19",
     "required": true,
-    "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-1.4.18.exe",
+    "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-1.4.19.exe",
     "urls": [
-      "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-1.4.18.exe",
-      "https://hordeminecraft.ru/HORDE-1.4.18.exe",
-      "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-1.4.18.exe"
+      "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-1.4.19.exe",
+      "https://hordeminecraft.ru/HORDE-1.4.19.exe",
+      "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-1.4.19.exe"
     ],
-    "size": 47912694,
-    "sha256": "21541338d98888ebf86b52085a5a2befb45a5575685b1dcd08f9712c3d9937c0"
+    "size": 47915072,
+    "sha256": "e8acaf3d78ac45ee5e9a56c1b776754c2defcd07e07d13b66678251087f32890"
   },
   "pack": {
     "version": "5.0.46",
