@@ -539,3 +539,83 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   buildDonateMessage();
 });
+
+// Responsive navigation, screenshot viewer and public Minecraft status.
+function hordeStatusView(data, now = Date.now()) {
+  const checkedAt = Number(data?.debug?.cachetime) * 1000;
+  if (!Number.isFinite(checkedAt) || checkedAt > now + 60000 || now - checkedAt > 600000) throw new Error('Stale status');
+  if (data.online === false) return { state: 'unavailable', count: 'Сервер не отвечает', note: 'Проверим снова автоматически', checkedAt };
+  const players = data?.players;
+  if (data.online !== true || !Number.isInteger(players?.online) || !Number.isInteger(players?.max) || players.online < 0 || players.max < 0 || players.online > 100000 || players.max > 100000) throw new Error('Invalid player count');
+  return { state: 'online', count: `${players.online} / ${players.max} игроков в мире`, note: 'Данные мониторинга · задержка до 5 минут', checkedAt };
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const header = document.querySelector('.site-header');
+  const menu = header?.querySelector('.nav-links');
+  const toggle = header?.querySelector('.mobile-menu-toggle');
+  if (header && menu && toggle) {
+    menu.id ||= 'primary-links';
+    toggle.setAttribute('aria-controls', menu.id);
+    header.classList.add('mobile-nav-ready');
+    const setMenu = (open, focus = false) => {
+      header.classList.toggle('menu-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+      if (focus) toggle.focus();
+    };
+    toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
+    menu.addEventListener('click', event => { if (event.target.closest('a')) setMenu(false); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && header.classList.contains('menu-open')) setMenu(false, true); });
+    document.addEventListener('click', event => { if (!header.contains(event.target)) setMenu(false); });
+    window.matchMedia('(max-width:900px)').addEventListener('change', () => setMenu(false));
+  }
+  const shots = document.querySelectorAll('.gallery-shot');
+  if (shots.length) {
+    const viewer = document.createElement('dialog');
+    viewer.className = 'image-viewer';
+    viewer.setAttribute('aria-label', 'Просмотр скриншота');
+    const bar = document.createElement('div'); bar.className = 'viewer-bar';
+    const title = document.createElement('strong');
+    const close = document.createElement('button'); close.type = 'button'; close.textContent = 'Закрыть ×';
+    const image = document.createElement('img');
+    bar.append(title, close); viewer.append(bar, image); document.body.append(viewer);
+    close.addEventListener('click', () => viewer.close());
+    viewer.addEventListener('click', event => { if (event.target === viewer) { const r = viewer.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) viewer.close(); } });
+    shots.forEach(shot => {
+      const photo = shot.querySelector('img'); if (!photo) return;
+      const button = document.createElement('button'); button.type = 'button';
+      const label = shot.querySelector('figcaption')?.textContent || photo.alt;
+      button.setAttribute('aria-label', `Увеличить: ${label}`);
+      photo.before(button); button.append(photo);
+      button.addEventListener('click', () => { image.src = photo.currentSrc || photo.src; image.alt = photo.alt; title.textContent = label; viewer.showModal(); });
+    });
+    const hint = document.createElement('p'); hint.className = 'gallery-hint'; hint.textContent = 'Нажмите на кадр, чтобы рассмотреть детали.';
+    document.querySelector('.server-gallery')?.before(hint);
+  }
+  const status = document.querySelector('[data-server-status]');
+  if (!status) return;
+  let pending = false;
+  let lastAttempt = 0;
+  const paint = view => {
+    status.dataset.state = view.state;
+    status.querySelector('[data-online-count]').textContent = view.count;
+    status.querySelector('[data-online-note]').textContent = view.note;
+    status.title = view.checkedAt ? `Проверено мониторингом: ${new Date(view.checkedAt).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}` : 'Повторная проверка раз в минуту';
+  };
+  const refresh = async () => {
+    if (pending || document.hidden || Date.now() - lastAttempt < 55000) return;
+    pending = true; lastAttempt = Date.now();
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+    try {
+      const response = await fetch('https://api.mcsrvstat.us/3/213.152.43.80:25855', { signal: controller.signal, credentials: 'omit', referrerPolicy: 'no-referrer' });
+      if (!response.ok) throw new Error('Status unavailable');
+      paint(hordeStatusView(await response.json()));
+    } catch {
+      paint({ state: 'unavailable', count: 'Онлайн временно недоступен', note: 'Можно попробовать войти через лаунчер' });
+    } finally { clearTimeout(timeout); pending = false; }
+  };
+  refresh();
+  setInterval(refresh, 60000);
+  document.addEventListener('visibilitychange', refresh);
+});

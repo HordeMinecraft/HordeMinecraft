@@ -27,7 +27,7 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=20260823">
   <link rel="preload" as="image" href="assets/horde-hero-survivors.webp" type="image/webp" media="(min-width: 701px)">
   <link rel="preload" as="image" href="assets/horde-hero-mobile.webp" type="image/webp" media="(max-width: 700px)">
-  <link rel="stylesheet" href="styles.css?v=20260909b">
+  <link rel="stylesheet" href="styles.css?v=20260909e">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -135,7 +135,7 @@
   }
   </script>
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
-  <script src="script.js" defer></script>
+  <script src="script.js?v=20260909e" defer></script>
 </head>
 <body class="home-page">
   <header class="site-header">
@@ -144,33 +144,14 @@
         <img src="assets/horde-avatar.webp" alt="" width="42" height="42">
         <span>HORDE</span>
       </a>
-      <div class="nav-links">
-        <a href="#about">О сервере</a>
-        <a href="/launcher/">Лаунчер</a>
-        <a href="/mods/">Моды</a>
-        <a href="/guides/">Гайды</a>
-        <a href="/auth/">Кабинет</a>
-        <a href="/zombie-apocalypse/">Зомби</a>
-        <div class="nav-community">
-          <button class="nav-community-button" type="button" aria-expanded="false">
-            <span>Сообщество</span>
-            <i data-lucide="chevron-down" aria-hidden="true"></i>
-          </button>
-          <div class="community-menu" aria-label="Ссылки сообщества">
-            <a class="community-tile" href="https://vk.com/hordeminecraft" target="_blank" rel="noopener noreferrer"><span>VK</span><strong>ВКонтакте</strong></a>
-            <a class="community-tile" href="/updates/"><span>UP</span><strong>Обновления</strong></a>
-            <a class="community-tile" href="/guides/"><span>?</span><strong>Гайды</strong></a>
-          </div>
-        </div>
-        <a href="/updates/">Обновления</a>
-        <a href="#start">Как начать</a>
-        <a href="#faq">Вопросы</a>
-      <a href="/donate/">Донат</a></div>
-      <a class="nav-download" href="https://hordeminecraft.ru/HORDE.exe">
+      <div class="nav-links" id="primary-links">
+        <a href="#about">Мир HORDE</a><a href="#start">Как начать</a><a href="/guides/">Гайды</a><a href="/faq/">Правила</a><a href="/updates/">Новости</a><a href="/auth/">Кабинет</a>
+      </div>
+      <a class="nav-download" href="https://hordeminecraft.ru/HORDE.exe" aria-label="Скачать лаунчер для Windows">
         <i data-lucide="download" aria-hidden="true"></i>
         <span>Скачать</span>
       </a>
-    </nav>
+    <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-label="Открыть меню"><span aria-hidden="true">☰</span> Меню</button></nav>
   </header>
 
   <main id="top">
@@ -184,17 +165,18 @@
           </div>
         </div>
         <p class="eyebrow">MINECRAFT 1.20.1 · FORGE</p>
-        <h1 id="hero-title"><span class="hero-brand">HORDE</span><span class="hero-title-tail">Свой мир. Своя команда. Твоя история.</span></h1>
+        <h1 id="hero-title"><span class="hero-brand">HORDE</span><span class="hero-title-tail">Построй свой дом.<br>Переживи ночь.</span></h1>
         <p class="hero-kicker">Выживание, которое объединяет</p>
-        <p class="hero-copy">Стройте уютное убежище, исследуйте заброшенные города или отправляйтесь на вылазку с друзьями. Здесь найдётся дело и новичкам, и опытным выжившим.</p>
+        <p class="hero-subtitle">Твой Minecraft. По ту сторону привычного.</p><p class="hero-copy">Стройте уютное убежище, исследуйте заброшенные города или отправляйтесь на вылазку с друзьями. Здесь найдётся дело и новичкам, и опытным выжившим.</p>
+        <div class="server-live" data-server-status data-state="loading" role="status" aria-live="polite"><span class="status-dot" aria-hidden="true"></span><div><strong data-online-count>Проверяем онлайн…</strong><small data-online-note>Узнаём, сколько игроков в мире</small></div><span class="status-caption">HORDE / JAVA</span></div>
         <div class="hero-actions">
           <a class="download-button" href="https://hordeminecraft.ru/HORDE.exe">
             <i data-lucide="download" aria-hidden="true"></i>
             <span>СКАЧАТЬ ЛАУНЧЕР</span>
           </a>
-          <a class="secondary-button" href="/zombie-apocalypse/">
-            <i data-lucide="crosshair" aria-hidden="true"></i>
-            <span>УЗНАТЬ О СЕРВЕРЕ</span>
+          <a class="secondary-button" href="#start">
+            <i data-lucide="arrow-down" aria-hidden="true"></i>
+            <span>КАК НАЧАТЬ ИГРАТЬ</span>
           </a>
         </div>
         <div class="hero-meta">
@@ -206,13 +188,8 @@
           <span class="auto-update"><i data-lucide="refresh-cw" aria-hidden="true"></i> Автообновление</span>
           <span class="auto-update"><i data-lucide="package-check" aria-hidden="true"></i> Сборка 5.0.46</span>
         </div>
-        <div class="hero-menu-strip" aria-label="Быстрые разделы">
-          <a href="/launcher/">Начать играть</a>
-          <a href="/donate/">Магазин</a>
-          <a href="/guides/">Гайды</a>
-          <a href="/faq/">Правила</a>
-        </div>
-      </div><figure class="hero-art"><img src="assets/horde-hero-survivors.webp" alt="Команда выживших перед вылазкой в мир HORDE" width="1672" height="941" fetchpriority="high"><figcaption><span class="art-label">ДНЕВНИК ВЫЖИВШИХ / 01</span><strong>Большой мир.<br>Лучше вместе.</strong><a href="#world">Заглянуть в мир <span aria-hidden="true">↗</span></a></figcaption></figure></div>
+
+      </div><figure class="hero-art"><img src="assets/horde-hero-survivors.webp" alt="Штаб выживших в мире HORDE" width="1672" height="941" fetchpriority="high"><figcaption><span class="art-label">ТВОЯ СЛЕДУЮЩАЯ ВЫЛАЗКА</span><strong>Большой мир.<br>Лучше вместе.</strong><a href="#world">Заглянуть в мир <span aria-hidden="true">↗</span></a></figcaption></figure></div>
     </section>
 
 <section class="content-section play-styles"><div class="section-shell"><p class="section-label">ТВОЙ СПОСОБ ИГРАТЬ</p><h2>У каждого своя роль.<br>У всех — общий мир.</h2><div class="content-grid"><a class="content-card" href="/guides/"><img class="play-image" src="assets/horde-screen-safezone-patrol.webp" alt="" loading="lazy"><span class="play-number">01 / ОБУСТРОЙСЯ</span><h3>Создавай свой дом</h3><p>Защищённая база, запасы и механизмы. Начни с малого и построй место, куда хочется возвращаться.</p><span class="card-link">Гайды по выживанию →</span></a><a class="content-card" href="/zombie-apocalypse/"><img class="play-image" src="assets/horde-screen-ruins-day.webp" alt="" loading="lazy"><span class="play-number">02 / ИССЛЕДУЙ</span><h3>Открой неизвестное</h3><p>Заброшенные города, бункеры и опасные ночи. Собирай снаряжение и выбирай свой маршрут.</p><span class="card-link">Познакомиться с миром →</span></a><a class="content-card" href="/quests-npc/"><img class="play-image" src="assets/horde-screen-bunker-npc.webp" alt="" loading="lazy"><span class="play-number">03 / ОБЪЕДИНЯЙСЯ</span><h3>Найди своё дело</h3><p>Торговцы, задания и общая база. Исследовать и переживать трудности интереснее вместе.</p><span class="card-link">NPC и задания →</span></a></div></div></section>
@@ -223,6 +200,29 @@
           <h2>Сервер Minecraft с модами и настоящим выживанием</h2>
         </div>
         <p class="intro-copy">HORDE превращает Minecraft Java 1.20.1 в мир зомби-апокалипсиса. Исследуйте разрушенные города, больницы, лаборатории и военные объекты, добывайте патроны и лекарства, стройте защищённую базу и держитесь вместе во время ночной орды.</p>
+      </div>
+    </section>
+
+    <section class="start-section" id="start">
+      <div class="section-shell">
+        <div class="section-heading">
+          <p class="section-label">ПЕРВЫЙ ЗАПУСК</p>
+          <h2>Три шага до первой вылазки</h2>
+        </div>
+        <ol class="steps">
+          <li>
+            <span class="step-number">01</span>
+            <div><h3>Скачайте лаунчер Minecraft</h3><p>Один EXE для Windows. Java, Forge и моды отдельно устанавливать не нужно.</p></div>
+          </li>
+          <li>
+            <span class="step-number">02</span>
+            <div><h3>Введите ник</h3><p>Выберите PNG-скин при желании и запустите игру без лицензии или через официальный аккаунт.</p></div>
+          </li>
+          <li>
+            <span class="step-number">03</span>
+            <div><h3>Зарегистрируйтесь</h3><p>Используйте <code>/register пароль пароль</code>. При следующих входах — <code>/login пароль</code>.</p></div>
+          </li>
+        </ol><a class="text-action" href="/guides/kak-nachat-igrat/">Подробная инструкция для первого входа <span aria-hidden="true">↗</span></a>
       </div>
     </section>
 
@@ -258,9 +258,9 @@
       </div>
     </section>
 
-    <section class="features-section">
+    <section class="features-section" id="features">
       <div class="section-shell">
-        <div class="feature-grid">
+        <div class="section-heading"><p class="section-label">БОЛЬШЕ, ЧЕМ ВЫЖИВАНИЕ</p><h2>Каждая вылазка — новая история.</h2></div><div class="feature-grid">
           <article class="feature">
             <i data-lucide="crosshair" aria-hidden="true"></i>
             <h3>Огнестрельное оружие</h3>
@@ -320,18 +320,19 @@
       </div>
     </section>
 
-    <section class="content-section">
+    <section class="content-section directory-section">
       <div class="section-shell">
         <p class="section-label">БЫСТРЫЕ РАЗДЕЛЫ</p>
-        <h2>Что есть на сервере HORDE</h2>
+        <h2>Всё нужное — под рукой.</h2>
         <div class="content-grid">
           <a class="content-card" href="/launcher/"><h3>Лаунчер</h3><p>Скачать HORDE.exe, установить Forge 1.20.1, моды и автообновления без ручной настройки.</p></a>
           <a class="content-card" href="/zombie-apocalypse/"><h3>Зомби-апокалипсис</h3><p>Разрушенные города, орды, мутанты, вылазки, базы и survival после катастрофы.</p></a>
           <a class="content-card" href="/mods/"><h3>Моды сборки</h3><p>TacZ, Create, CustomNPCs, TacZ NPCs и другие моды HORDE.</p></a>
           <a class="content-card" href="/guides/"><h3>Гайды выжившего</h3><p>Старт, приваты, донат, команды, фракции и советы для первой ночи.</p></a>
-          <a class="content-card" href="/auth/"><h3>Личный кабинет</h3><p>Тест будущей авторизации сайта и лаунчера по нику Minecraft без ручного ввода /login.</p></a>
+          <a class="content-card" href="/auth/"><h3>Личный кабинет</h3><p>Профиль игрока, скин и возможности личного кабинета.</p></a>
           <a class="content-card" href="/guns/"><h3>Оружие TacZ</h3><p>Патроны, прицелы, рукоятки, приклады, дула и торговец модулями.</p></a>
           <a class="content-card" href="/quests-npc/"><h3>NPC и фракции</h3><p>Проводник, торговцы, скупщик, союзные защитники и враждебные группы.</p></a>
+          <a class="content-card" href="/donate/"><h3>Поддержать проект</h3><p>Привилегии и условия поддержки сервера HORDE.</p></a>
         </div>
       </div>
     </section>
@@ -351,35 +352,12 @@
       </div>
     </section>
 
-    <section class="world-section" id="world">
-      <div class="section-shell">
-        <div class="section-heading">
-          <p class="section-label">ИСТОРИИ ВЫЖИВШИХ</p>
-          <h2>Выживание в Minecraft, где каждый выход — риск</h2>
-        </div>
-        <div class="scene-grid">
-          <figure class="scene-card">
-            <img src="assets/horde-screen-safezone-patrol.webp" alt="Патруль HORDE внутри защищённой зоны Minecraft" loading="lazy">
-            <figcaption><strong>Безопасная зона</strong><span>Даже в штабе чувствуется тревога: торговцы, патрули и оружие всегда рядом.</span></figcaption>
-          </figure>
-          <figure class="scene-card">
-            <img src="assets/horde-screen-anomaly-car.webp" alt="Аномалия возле машины на сервере Minecraft HORDE" loading="lazy">
-            <figcaption><strong>Аномалии Зоны</strong><span>Фиолетовый разлом рядом с машиной — хороший повод идти медленно и держать болты под рукой.</span></figcaption>
-          </figure>
-          <figure class="scene-card">
-            <img src="assets/horde-screen-bunker-npc.webp" alt="NPC и склад внутри базы HORDE" loading="lazy">
-            <figcaption><strong>NPC и торговля</strong><span>Проводники, торговцы и будущие квесты держат мир живым между ночными ордами.</span></figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <section class="gallery-section" id="gallery">
+    <section class="gallery-section" id="world"><span id="gallery"></span>
       <div class="section-shell">
         <div class="gallery-heading">
           <div>
             <p class="section-label">СКРИНШОТЫ СЕРВЕРА</p>
-            <h2>Города, рейды и выживание HORDE</h2>
+            <h2>Один мир. Сотни маршрутов.</h2>
           </div>
           <a class="vk-link gallery-vk" href="https://vk.com/hordeminecraft" target="_blank" rel="noopener noreferrer">
             <i data-lucide="external-link" aria-hidden="true"></i>
@@ -396,29 +374,6 @@
           <figure class="gallery-shot wide"><img src="assets/horde-screen-anomaly-car.webp" alt="Фиолетовая аномалия рядом с машиной на сервере HORDE" loading="lazy" width="1600" height="900"><figcaption>Аномалия у машины</figcaption></figure>
           <figure class="gallery-shot wide"><img src="assets/horde-screen-forest-patrol.webp" alt="Патруль у леса и кирпичных руин HORDE" loading="lazy" width="1600" height="900"><figcaption>Лесной патруль</figcaption></figure>
         </div>
-      </div>
-    </section>
-
-    <section class="start-section" id="start">
-      <div class="section-shell">
-        <div class="section-heading">
-          <p class="section-label">ПЕРВЫЙ ЗАПУСК</p>
-          <h2>Как скачать лаунчер и зайти на сервер</h2>
-        </div>
-        <ol class="steps">
-          <li>
-            <span class="step-number">01</span>
-            <div><h3>Скачайте лаунчер Minecraft</h3><p>Один EXE для Windows. Java, Forge и моды отдельно устанавливать не нужно.</p></div>
-          </li>
-          <li>
-            <span class="step-number">02</span>
-            <div><h3>Введите ник</h3><p>Выберите PNG-скин при желании и запустите игру без лицензии или через официальный аккаунт.</p></div>
-          </li>
-          <li>
-            <span class="step-number">03</span>
-            <div><h3>Зарегистрируйтесь</h3><p>Используйте <code>/register пароль пароль</code>. При следующих входах — <code>/login пароль</code>.</p></div>
-          </li>
-        </ol>
       </div>
     </section>
 
@@ -443,7 +398,7 @@
           </details>
           <details>
             <summary>Что нового в HORDE?</summary>
-            <p>Обновление от 13 августа 2026 добавляет систему 30 игровых рангов HORDE по наигранному времени. PvP не влияет на ранги, а донатные и staff-префиксы не перетираются.</p>
+            <p>В лаунчере появился онлайн сервера, обновлены красная луна и продолжительность дня. Подробности — в <a href="/updates/">журнале обновлений</a>.</p>
           </details>
           <details>
             <summary>Есть ли на сервере оружие и NPC?</summary>
@@ -465,7 +420,7 @@
       <div class="section-shell download-layout">
         <div>
           <p class="section-label">ГОТОВЫ ВЫЖИВАТЬ?</p>
-          <h2>Скачать лаунчер Minecraft HORDE на ПК</h2>
+          <h2>Твоя история начинается здесь.</h2>
           <p>Фирменный лаунчер установит Minecraft 1.20.1, Forge, серверную сборку модов и русские ресурсы. Следующие обновления придут автоматически без повторного скачивания EXE.</p>
         </div>
         <div class="download-panel">
@@ -488,7 +443,7 @@
       <p>213.152.43.80:25855 · Minecraft Forge 1.20.1</p>
       <p>© <span data-year></span> HORDE</p>
     </div>
-    <p class="section-shell legal-note">HORDE — независимый проект сообщества Minecraft и не связан с Mojang Studios или Microsoft.</p>
+    <nav class="section-shell footer-links" aria-label="Полезные ссылки"><a href="/launcher/">Лаунчер</a><a href="/mods/">Моды</a><a href="/donate/">Поддержать проект</a><a href="/faq/">Правила</a><a href="/agreement/">Соглашение</a><a href="https://vk.com/hordeminecraft">ВКонтакте ↗</a></nav><p class="section-shell legal-note">HORDE — независимый проект сообщества Minecraft и не связан с Mojang Studios или Microsoft.</p>
   </footer>
 
   <div class="copy-toast" role="status" aria-live="polite" data-copy-toast>IP сервера скопирован</div>

@@ -16,10 +16,10 @@
   <link rel="icon" href="/assets/favicon.ico?v=20260823" sizes="any">
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=20260823">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=20260823">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles.css?v=20260909e">
   <script src="/auth/config.js" defer></script>
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
-  <script src="/script.js" defer></script>
+  <script src="/script.js?v=20260909e" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -35,8 +35,8 @@
         <a href="/donate/">Донат</a>
         <a href="/auth/" aria-current="page">Кабинет</a>
       </div>
-      <a class="nav-download" href="/HORDE.exe" download>Скачать лаунчер</a>
-    </nav>
+      <a class="nav-download" href="/HORDE.exe" download aria-label="Скачать лаунчер для Windows"><i data-lucide="download" aria-hidden="true"></i><span>Скачать</span></a>
+    <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-label="Открыть меню"><span aria-hidden="true">☰</span> Меню</button></nav>
   </header>
 
   <main class="auth-page">
