@@ -1,8 +1,15 @@
 {
   "schema": 1,
   "channel": "stable",
-  "published_at": "2026-09-09T15:31:31.851343+00:00",
+  "published_at": "2026-09-12T21:11:37.723948+00:00",
   "news": [
+    {
+      "tag": "ОБНОВЛЕНИЕ",
+      "title": "Сборка 5.0.47: баланс PvP и Zombie Island",
+      "text": "Урон TaCZ −20%, оружие и броня в сундуках реже, крафт кевлара и бронепластин дороже. Защита лимита привата, запрет /home на 30 секунд после PvP, удаление Soulbound из торговли жителей. Изменения включатся после перезапуска сервера; обновите сборку.",
+      "url": "https://hordeminecraft.ru/updates/",
+      "color": "#e47770"
+    },
     {
       "tag": "НОВОЕ",
       "title": "Онлайн сервера и обновлённый сайт",
@@ -30,20 +37,6 @@
       "text": "Исправлена привязка контекста прав при возрождении. Обновите сборку через лаунчер. Серверная часть применяется после перезапуска; диагностика лагов полёта продолжается.",
       "url": "https://hordeminecraft.ru/updates/",
       "color": "#b9f1ef"
-    },
-    {
-      "tag": "СБОРКА",
-      "title": "Pack 5.0.44: CustomNPCs и приват",
-      "text": "Обновлён CustomNPCs до новой сборки, обновлена подсказка привата под FTB Chunks и удалены старые /openpac-книги со спавна. Обновление обязательно.",
-      "url": "https://hordeminecraft.ru/updates/",
-      "color": "#b9f1ef"
-    },
-    {
-      "tag": "ПРИВАТ",
-      "title": "Как теперь приватить",
-      "text": "Открывайте карту FTB Chunks клавишей M, затем Claim Chunks: ЛКМ занять чанк, ПКМ снять. Группы игроков — через FTB Teams.",
-      "url": "https://hordeminecraft.ru/updates/",
-      "color": "#7cff7c"
     }
   ],
   "launcher": {
@@ -59,15 +52,14 @@
     "sha256": "e8acaf3d78ac45ee5e9a56c1b776754c2defcd07e07d13b66678251087f32890"
   },
   "pack": {
-    "version": "5.0.46",
+    "version": "5.0.47",
     "required": true,
     "mode": "replace",
-    "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.46.zip",
+    "url": "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.47.zip",
     "urls": [
-      "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.46.zip",
-      "https://github.com/deniswww127-lab/HORDE/releases/download/minecraft/HORDE-pack-5.0.46.zip"
+      "https://github.com/HordeMinecraft/HORDE/releases/download/minecraft/HORDE-pack-5.0.47.zip"
     ],
-    "size": 369563044,
-    "sha256": "f445011ba79824120d83ab3cb7937bbd675785a298d40896c1d09f5de8e6efa9"
+    "size": 370314207,
+    "sha256": "47bb9da212c32a3e371b5dfcb1a01da0d96a0795fc01a4f5616d56109a4a9852"
   }
 }
